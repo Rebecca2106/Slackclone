@@ -2,4 +2,9 @@
     height: calc(100vh - 48px);
     width: 20vw;
     background: var(--light-color);
+    transition: all 125ms ease-in-out;
+}
+
+.show {
+    transform: translateX(-20vw);
 }

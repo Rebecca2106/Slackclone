@@ -6,6 +6,10 @@
     height: 48px;
     background: var(--light-color);
 
+    .menu {
+        cursor: pointer;
+    }
+
     .user-info-box {
         display: flex;
         align-items: center;
@@ -15,6 +19,7 @@
             height: 32px;
             object-fit: cover;
             border-radius: 32%;
+            cursor: pointer;
         }
     }
 }

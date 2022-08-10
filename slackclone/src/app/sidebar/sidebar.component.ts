@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UiChangeService } from '../services/ui-change.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -6,10 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
-
-  constructor() { }
+  
+  constructor(public uiService: UiChangeService) { }
 
   ngOnInit(): void {
-  }
 
+  }
+  
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FireauthService } from 'src/services/fireauth.service';
+import { FireauthService } from '../services/fireauth.service';
+import { UiChangeService } from '../services/ui-change.service';
 
 @Component({
   selector: 'app-header',
@@ -8,14 +9,10 @@ import { FireauthService } from 'src/services/fireauth.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(public fs: FireauthService) {
+  constructor(public uiService: UiChangeService, public fs: FireauthService) {
   }
 
   ngOnInit(): void {
-  }
-
-  toggleSidebar() {
-    console.log('test');
   }
 
 }
