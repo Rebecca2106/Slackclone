@@ -18,18 +18,21 @@ export class AuthGuard implements CanActivate {
 
     if (!this.fs.userData) {
       this.openSnackBar();
+      this.router.navigate(['login']);
       return false;
     }
+
     return true;
+
   }
- 
-    openSnackBar() {
-      this._snackBar.open(this.msg, '', {
-        duration: 3000,
-        // here specify the position
-        verticalPosition: 'bottom',
-        horizontalPosition: 'center',
-        panelClass: ['access-denied']
-      });
-    }
+
+  openSnackBar() {
+    this._snackBar.open(this.msg, '', {
+      duration: 3000,
+      // here specify the position
+      verticalPosition: 'bottom',
+      horizontalPosition: 'center',
+      panelClass: ['access-denied']
+    });
+  }
 }

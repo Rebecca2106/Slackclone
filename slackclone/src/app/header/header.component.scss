@@ -1,0 +1,20 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 48px;
+    background: var(--light-color);
+
+    .user-info-box {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+
+        .userImg {
+            height: 32px;
+            object-fit: cover;
+            border-radius: 32%;
+        }
+    }
+}

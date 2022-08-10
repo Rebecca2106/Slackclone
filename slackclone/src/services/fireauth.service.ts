@@ -14,8 +14,12 @@ export class FireauthService {
     // Setting logged in user
     this.auth.authState.subscribe((user) => {
       this.userData = user;
+      console.log('User', this.userData);
+      
       if (!user) {
         this.router.navigate(['login']);
+      } else {
+        this.router.navigate(['']);
       }
     });
   }

@@ -1,4 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+    --dark-color: #24252B;
+    --light-color: #FFDB58;
+}
+
 html,
 body {
     height: 100%;
@@ -9,7 +14,7 @@ body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
     background: rgb(255, 253, 253);
-    background: linear-gradient(360deg, rgba(255, 253, 253, 1) 0%, rgb(26,50,74) 100%);
+    background: linear-gradient(360deg, rgba(255, 253, 253, 1) 0%, var(--dark-color) 100%);
 }
 
 .access-denied {
@@ -17,5 +22,7 @@ body {
     color: white;
     white-space: pre-wrap;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.padding-6 {
+    padding: 6px;
+}

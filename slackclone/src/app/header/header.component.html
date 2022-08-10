@@ -1,1 +1,13 @@
-<p>header works!</p>
+<div class="header">
+    <div>
+        <mat-icon aria-hidden="false" class="padding-6" (click)="toggleSidebar()">menu</mat-icon>
+    </div>
+    <div *ngIf="fs.auth.user | async as user" class="user-info-box">
+        <div>Hello {{ user.displayName }} {{ user.email }}!</div>
+        <img src="/assets/img/avatar.png" [matMenuTriggerFor]="menu" class="userImg padding-6">
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item>Change profile photo</button>
+            <button mat-menu-item (click)="fs.logout()">Logout</button>
+        </mat-menu>
+    </div>
+</div>

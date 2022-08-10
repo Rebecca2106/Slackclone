@@ -21,6 +21,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { ChatareaComponent } from './chatarea/chatarea.component';
 import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     ReactiveFormsModule,
     MatCardModule,
     BrowserAnimationsModule,
-    MatButtonModule
+    MatButtonModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]
