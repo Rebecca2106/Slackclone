@@ -19,12 +19,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularFireModule } from '@angular/fire/compat';
 import { MatButtonModule } from '@angular/material/button';
 import { ChatareaComponent } from './chatarea/chatarea.component';
+import { HeaderComponent } from './header/header.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    ChatareaComponent
+    ChatareaComponent,
+    HeaderComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,
