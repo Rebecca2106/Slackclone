@@ -1,1 +1,7 @@
 <p>chatarea works!</p>
+<div>
+    <div *ngIf="fs.auth.user | async as user" class="user-info-box">
+      <div>Hello {{ user.displayName }} {{ user.email }}!</div>
+      <button mat-raised-button (click)="fs.logout()" class="logout-btn">Logout</button>
+    </div>
+  </div>

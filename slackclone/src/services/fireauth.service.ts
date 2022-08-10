@@ -13,8 +13,6 @@ export class FireauthService {
 
     // Setting logged in user
     this.auth.authState.subscribe((user) => {
-      console.log(user);
-      
       this.userData = user;
       if (!user) {
         this.router.navigate(['login']);
@@ -52,7 +50,7 @@ export class FireauthService {
       let resp = await this.auth.signInWithEmailAndPassword(email, password);
       if (resp.user) {
         this.userData = resp.user;
-        this.router.navigate(['login']);
+        this.router.navigate(['']);
       }
     }
     catch (error) {
@@ -69,7 +67,7 @@ export class FireauthService {
       });
       if (resp.user) {
         this.userData = resp.user;
-        this.router.navigate(['login']);
+        this.router.navigate(['']);
       }
     }
     catch (error) {
