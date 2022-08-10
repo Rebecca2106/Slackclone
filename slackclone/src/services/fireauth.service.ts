@@ -38,7 +38,7 @@ export class FireauthService {
       let resp = await this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
       if (resp.user) {
         this.userData = resp.user;
-        this.router.navigate(['/dashboard'], { skipLocationChange: true });
+        this.router.navigate(['']);
       }
     }
     catch (error) {
@@ -52,7 +52,7 @@ export class FireauthService {
       let resp = await this.auth.signInWithEmailAndPassword(email, password);
       if (resp.user) {
         this.userData = resp.user;
-        this.router.navigate(['/dashboard'], { skipLocationChange: true });
+        this.router.navigate(['login']);
       }
     }
     catch (error) {
@@ -69,7 +69,7 @@ export class FireauthService {
       });
       if (resp.user) {
         this.userData = resp.user;
-        this.router.navigate(['/dashboard'], { skipLocationChange: true });
+        this.router.navigate(['login']);
       }
     }
     catch (error) {
