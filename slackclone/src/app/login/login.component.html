@@ -1,1 +1,31 @@
-<p>login works!</p>
+<mat-card class="login-card">
+    <img src="./assets/img/logo.png" alt="LOGO">
+    <div class="login-mail-container">
+        <mat-card-title>Login</mat-card-title>
+        <form [formGroup]="loginForm" (ngSubmit)="fs.loginMail(this.loginForm.value.email, loginForm.value.pwd)">
+            <div>
+                <mat-form-field appearance="outline">
+                    <mat-label>Enter your email</mat-label>
+                    <input matInput placeholder="example@example.com" formControlName="email" required>
+                    <mat-error *ngIf="loginForm.get('email')">{{getErrorMessage()}}</mat-error>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field appearance="outline">
+                    <mat-label>Enter your password</mat-label>
+                    <input matInput [type]="hide ? 'password' : 'text'" formControlName="pwd" required>
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+            <button [disabled]="!loginForm.valid" mat-raised-button color="primary" type="submit" class="btl-login-mail">Login</button>
+        </form>
+    </div>
+    <div class="other-auth-area">
+        <h3><span>OR</span></h3>
+        <button mat-raised-button (click)="fs.loginGoogle()"><mat-icon>account_circle</mat-icon>Login with Google</button>
+        <button mat-raised-button (click)="fs.loginGuest()">Login as Guest</button>
+    </div>
+</mat-card>

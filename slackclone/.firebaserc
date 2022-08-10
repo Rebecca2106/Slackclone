@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "slackwebclone": {
+      "hosting": {
+        "slackclone": [
+          "slackwebclone"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "slackwebclone"
+  }
+}
