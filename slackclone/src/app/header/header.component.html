@@ -1,6 +1,6 @@
 <div class="header">
     <div>
-        <mat-icon aria-hidden="false" class="padding-6" (click)="uiService.toggleSidebar()" class="menu">menu</mat-icon>
+        <mat-icon aria-hidden="false" class="padding-6" (click)="uiService.toggleSidebar()" class="menu padding-6">menu</mat-icon>
     </div>
     <div *ngIf="fs.auth.user | async as user" class="user-info-box">
         <div>Hello {{ user.displayName }} {{ user.email }}!</div>

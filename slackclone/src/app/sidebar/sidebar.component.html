@@ -1,5 +1,27 @@
 <div class="channels" [class.show]="!uiService.showSidebar">
+    <div class="padding-6">
+        <mat-accordion>
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Channels
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <p># weitere Channels</p>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
 
-    Channels
-    Directmessages
+    <div class="padding-6">
+        <mat-accordion>
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Directmessages
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <p>Bild Chatpartner</p>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
 </div>
