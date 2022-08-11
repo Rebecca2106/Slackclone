@@ -17,15 +17,14 @@
         </mat-form-field>
     </div>
     <div>
-        <h4>Profile image</h4>
-        <img src="/assets/img/avatar.png" class="profile-image"><br>
-        <input
-        style="display: none"
-        type="file"
-        accept=".png,.jpg"
-        #fileInput/>
-        <button mat-stroked-button (click)="fileInput.click()" class="btn-upload">upload image</button>
-        <span>delete image</span>
+        <h4 class="mb-6">Profile image</h4>
+        <img src="/assets/img/avatar.png" class="profile-image mb-6"><br>
+        <input style="display: none" type="file" accept=".png,.jpg" #fileInput />
+        <div class="ctrl-btn">
+            <button mat-stroked-button (click)="fileInput.click()" class="mb-6">upload image</button>
+            <span class="span-blue">delete image</span>
+        </div>
+
     </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
