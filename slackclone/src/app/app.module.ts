@@ -26,13 +26,10 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { ChatMainComponent } from './chat-main/chat-main.component';
 import { ChatThreadComponent } from './chat-thread/chat-thread.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
-<<<<<<< HEAD
 import { ProfileComponent } from './profile/profile.component';
-=======
 import { MatDialogModule } from '@angular/material/dialog';
 import { ProfileDialogComponent } from './profile-dialog/profile-dialog.component';
 
->>>>>>> f72dff1d36e0586fdfd258ead6e642b54829c51d
 
 @NgModule({
   declarations: [
@@ -43,11 +40,8 @@ import { ProfileDialogComponent } from './profile-dialog/profile-dialog.componen
     SidebarComponent,
     ChatMainComponent,
     ChatThreadComponent,
-<<<<<<< HEAD
-    ProfileComponent
-=======
-    ProfileDialogComponent
->>>>>>> f72dff1d36e0586fdfd258ead6e642b54829c51d
+    ProfileComponent,
+    ProfileDialogComponent,
   ],
   imports: [
     BrowserModule,
