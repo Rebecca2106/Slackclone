@@ -7,7 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: ChatareaComponent,
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1607601db2bb6e51a14013b191ec6fd8d664dbf4
   },
   {
     path: 'login',

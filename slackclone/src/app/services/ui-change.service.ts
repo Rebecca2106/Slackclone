@@ -11,6 +11,8 @@ export class UiChangeService {
 
   toggleSidebar() {
     this.showSidebar = !this.showSidebar;
+    
+    console.log(this.showSidebar);
   }
   
 }
