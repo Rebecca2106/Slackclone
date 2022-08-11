@@ -1,0 +1,34 @@
+<h2 mat-dialog-title>Change Profile</h2>
+<mat-dialog-content class="mat-typography">
+    <div class="profile-data">
+        <h4>Fullname</h4>
+        <mat-form-field appearance="outline">
+            <input matInput>
+        </mat-form-field>
+
+        <h4>Nickname</h4>
+        <mat-form-field appearance="outline">
+            <input matInput>
+        </mat-form-field>
+
+        <h4>My Job</h4>
+        <mat-form-field appearance="outline">
+            <input matInput>
+        </mat-form-field>
+    </div>
+    <div>
+        <h4>Profile image</h4>
+        <img src="/assets/img/avatar.png" class="profile-image"><br>
+        <input
+        style="display: none"
+        type="file"
+        accept=".png,.jpg"
+        #fileInput/>
+        <button mat-stroked-button (click)="fileInput.click()" class="btn-upload">upload image</button>
+        <span>delete image</span>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button mat-dialog-close (click)="saveProfile()" cdkFocusInitial color="green">Save</button>
+</mat-dialog-actions>
