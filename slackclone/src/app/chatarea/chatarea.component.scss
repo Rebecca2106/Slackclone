@@ -1,5 +1,22 @@
 .chat-flex {
     display: flex;
     width: 100vw;
-    align-items: stretch;
+}
+
+.collapsed{
+    width: 0;
+    display: none;
+}
+
+.expand{
+    display: flex;
+    width: 20vw;
+}
+
+.chat_main_wrapper{
+    flex: auto;
+}
+
+.chat_thread_wrapper{
+    width: 30vh;
 }

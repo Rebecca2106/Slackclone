@@ -1,6 +1,6 @@
 <app-header></app-header>
 <div class="chat-flex">
-    <app-sidebar [class.expand]="!uiService.showSidebar"></app-sidebar>
-    <app-chat-main></app-chat-main>
-    <app-chat-thread></app-chat-thread>
+    <app-sidebar  [ngClass]="{'expand': !uiService.showSidebar, 'collapsed': uiService.showSidebar}"></app-sidebar>
+    <app-chat-main class="chat_main_wrapper"></app-chat-main>
+    <app-chat-thread class="chat_thread_wrapper"></app-chat-thread>
 </div>
