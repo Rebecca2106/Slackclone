@@ -6,7 +6,7 @@
         <div>Hello {{ user.displayName }} {{ user.email }}!</div>
         <img src="/assets/img/avatar.png" [matMenuTriggerFor]="menu" class="userImg padding-6">
         <mat-menu #menu="matMenu">
-            <button mat-menu-item>Change profile photo</button>
+            <button mat-menu-item (click)="openDialog()">Profile</button>
             <button mat-menu-item (click)="fs.logout()">Logout</button>
         </mat-menu>
     </div>

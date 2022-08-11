@@ -1,0 +1,24 @@
+.mat-green {
+    background-color: #007a5a;
+    color: #fff;
+}
+
+
+.mat-typography {
+    display: flex;
+    gap: 46px;
+
+    h4 {
+        margin: 0;
+    }
+
+    .profile-image {
+        height: auto;
+        width: 170px;
+        object-fit: cover;
+    }
+
+    .btn-upload {
+        width: 100%;
+    }
+}
