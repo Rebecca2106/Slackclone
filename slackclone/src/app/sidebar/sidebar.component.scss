@@ -5,13 +5,8 @@
     height: calc(100vh - 48px);
     width: 20vw;
     background: var(--light-color);
-    transition: all 125ms ease-in-out;
 
     mat-expansion-panel {
         background: var(--light-color);
     }
-}
-
-.show {
-    transform: translateX(-20vw);
 }

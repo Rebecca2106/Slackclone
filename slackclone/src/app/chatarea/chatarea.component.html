@@ -1,2 +1,6 @@
 <app-header></app-header>
-<app-sidebar></app-sidebar>
+<div class="chat-flex">
+    <app-sidebar [class.expand]="!uiService.showSidebar"></app-sidebar>
+    <app-chat-main></app-chat-main>
+    <app-chat-thread></app-chat-thread>
+</div>

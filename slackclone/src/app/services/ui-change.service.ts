@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -11,4 +12,5 @@ export class UiChangeService {
   toggleSidebar() {
     this.showSidebar = !this.showSidebar;
   }
+  
 }

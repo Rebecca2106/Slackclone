@@ -23,6 +23,9 @@ import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { ChatMainComponent } from './chat-main/chat-main.component';
+import { ChatThreadComponent } from './chat-thread/chat-thread.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,9 @@ import { MatExpansionModule } from '@angular/material/expansion';
     LoginComponent,
     ChatareaComponent,
     HeaderComponent,
-    SidebarComponent
+    SidebarComponent,
+    ChatMainComponent,
+    ChatThreadComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +56,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
     BrowserAnimationsModule,
     MatButtonModule,
     MatMenuModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatSidenavModule
   ],
   providers: [],
   bootstrap: [AppComponent]

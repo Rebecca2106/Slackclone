@@ -9,6 +9,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class FireauthService {
   userData: any;
+  test = "test";
   constructor(public auth: AngularFireAuth, public router: Router,  private _errorBar: MatSnackBar) {
 
     // Setting logged in user

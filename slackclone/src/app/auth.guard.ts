@@ -15,6 +15,7 @@ export class AuthGuard implements CanActivate {
     _next: ActivatedRouteSnapshot,
     _state: RouterStateSnapshot
   ): boolean {
+    console.log('Authguard', this.fs.userData);
     
     if (!this.fs.userData) {
       this.openSnackBar();

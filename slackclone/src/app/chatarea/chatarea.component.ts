@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UiChangeService } from '../services/ui-change.service';
 
 @Component({
   selector: 'app-chatarea',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChatareaComponent implements OnInit {
 
-  constructor() {
+  constructor(public uiService: UiChangeService) { 
   }
 
   ngOnInit(): void {
