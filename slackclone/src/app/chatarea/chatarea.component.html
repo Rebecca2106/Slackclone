@@ -1,6 +1,8 @@
 <app-header></app-header>
-<div class="chat-flex">
-    <app-sidebar  [ngClass]="{'expand': !uiService.showSidebar, 'collapsed': uiService.showSidebar}"></app-sidebar>
+<div class="chat-flex" (mouseup)="this.resizing = false" (mousemove)="onResizing($event)" >
+    <app-sidebar class="sidebar_wrapper" [ngStyle]="{'left': uiService.showSidebar ? '-' + this.sidebarWidth + 'px' : '0px', width: this.sidebarWidth  + 'px' }" ></app-sidebar>
+    <div class="resize_bar" (mousedown)="startResize($event)"  [ngStyle]="{'width': !uiService.showSidebar ? this.sidebarWidth + 5 + 'px' : '0px'}" ></div>
     <app-chat-main class="chat_main_wrapper"></app-chat-main>
-    <app-chat-thread class="chat_thread_wrapper"></app-chat-thread>
+    <app-chat-thread *ngIf="uiService.thread" class="side_component_wrapper"></app-chat-thread>
+    <app-profile *ngIf="uiService.profile" class="side_component_wrapper"></app-profile>
 </div>

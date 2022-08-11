@@ -26,6 +26,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { ChatMainComponent } from './chat-main/chat-main.component';
 import { ChatThreadComponent } from './chat-thread/chat-thread.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     HeaderComponent,
     SidebarComponent,
     ChatMainComponent,
-    ChatThreadComponent
+    ChatThreadComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

@@ -1,22 +1,28 @@
 .chat-flex {
     display: flex;
     width: 100vw;
+    position: relative;
+    height: calc(100vh - 48px);
 }
 
-.collapsed{
-    width: 0;
-    display: none;
+.sidebar_wrapper{
+    position: absolute;
+    box-sizing: border-box;
+    display: flex; 
 }
 
-.expand{
-    display: flex;
-    width: 20vw;
+.resize_bar{
+    height: 100%;
+
+    background-color: black;
+    cursor: col-resize;
 }
 
 .chat_main_wrapper{
     flex: auto;
 }
 
-.chat_thread_wrapper{
-    width: 30vh;
+.side_component_wrapper{
+    width: 300px;
 }
+

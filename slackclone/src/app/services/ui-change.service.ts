@@ -6,13 +6,23 @@ import { Injectable } from '@angular/core';
 })
 export class UiChangeService {
   showSidebar:boolean = true;
+  profile:boolean = false;
+  thread:boolean = true;
 
   constructor() { }
 
   toggleSidebar() {
-    this.showSidebar = !this.showSidebar;
-    
-    console.log(this.showSidebar);
+    this.showSidebar = !this.showSidebar; 
+  }
+
+  toggleProfile() {
+    if(!this.profile){
+      this.thread = false;
+    }
+    this.profile = !this.profile; 
   }
   
+  toggleThread() {
+    this.thread = !this.thread; 
+  }
 }
