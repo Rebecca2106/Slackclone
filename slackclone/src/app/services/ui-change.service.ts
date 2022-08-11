@@ -6,8 +6,8 @@ import { Injectable } from '@angular/core';
 })
 export class UiChangeService {
   showSidebar:boolean = true;
-  profile:boolean = false;
-  thread:boolean = true;
+  profile:boolean = true;
+  thread:boolean = false;
 
   constructor() { }
 
@@ -23,6 +23,9 @@ export class UiChangeService {
   }
   
   toggleThread() {
+    if(!this.thread){
+      this.profile = false;
+    }
     this.thread = !this.thread; 
   }
 }

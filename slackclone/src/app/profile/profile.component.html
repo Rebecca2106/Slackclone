@@ -1,9 +1,47 @@
 <div class="profile_wrapper">
 
-    <img height="200px" src="/assets/img/avatar.png" alt="">
-    <h1>NAME</h1>
-    <p>position</p>
-    <p>rufname</p>
-    <p>email</p>
-
+    <div class="profile_header">
+        <p>profile</p>
+        <span (click)="uiService.toggleProfile()" class="material-icons">close</span>
     </div>
+
+     <div class="icon_edit">
+        <span  class="material-icons">edit</span>
+     </div>
+    
+
+    <img class="img_profile" src="/assets/img/avatar.png" alt="">
+
+    <h1>Mike Swazzlebee</h1>
+
+    <div class="profile_element">
+        <p>position</p>
+        <p>Leitung von allem</p>
+    </div>
+    <div class="profile_element">
+        <p>callname</p>
+        <p>miko</p>
+    </div>
+
+    <hr>
+
+    <h2>Contact</h2>
+
+    <div class="contact_element">
+        <span class="material-icons">email</span>
+        <div>
+            <p>email</p>
+            <p>qwe@qwe</p>
+        </div>
+    </div>
+    <div class="contact_element">
+        <span class="material-icons">phone</span>
+        <div>
+            <p>phone</p>
+            <p>234234234234</p>
+        </div>
+    </div>
+
+
+
+</div>
