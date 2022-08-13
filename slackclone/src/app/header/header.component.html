@@ -2,8 +2,8 @@
     <div>
         <mat-icon aria-hidden="false" class="padding-6" class="menu padding-6" (click)="uiService.toggleSidebar()">menu</mat-icon>
     </div>
-    <div *ngIf="fs.auth.user | async as user" class="user-info-box">
-        <div>Hello {{ user.displayName }} {{ user.email }}!</div>
+    <div *ngIf="fs.loggedIn && fs.user" class="user-info-box">
+        <div>Hello {{ fs.user[0].fullname }} {{ fs.user[0].email }}!</div>
         <img src="/assets/img/avatar.png" [matMenuTriggerFor]="menu" class="userImg padding-6">
         <mat-menu #menu="matMenu">
             <button mat-menu-item (click)="uiService.toggleProfile()">open profile</button> 

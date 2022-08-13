@@ -1,19 +1,19 @@
 <h2 mat-dialog-title>Change Profile</h2>
-<mat-dialog-content class="mat-typography">
+<mat-dialog-content class="mat-typography" *ngIf="user">
     <div class="profile-data">
         <h4>Fullname</h4>
         <mat-form-field appearance="outline">
-            <input matInput>
+            <input matInput [(ngModel)]="user.fullname">
         </mat-form-field>
 
         <h4>Nickname</h4>
         <mat-form-field appearance="outline">
-            <input matInput>
+            <input matInput  [(ngModel)]="user.nickname">
         </mat-form-field>
 
         <h4>My Job</h4>
         <mat-form-field appearance="outline">
-            <input matInput>
+            <input matInput  [(ngModel)]="user.job">
         </mat-form-field>
     </div>
     <div>
@@ -29,5 +29,5 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
     <button mat-button mat-dialog-close>Cancel</button>
-    <button mat-button mat-dialog-close (click)="saveProfile()" cdkFocusInitial color="green">Save</button>
+    <button mat-button (click)="saveProfile()" cdkFocusInitial color="green">Save</button>
 </mat-dialog-actions>

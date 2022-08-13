@@ -15,15 +15,12 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  
   }
 
-  
   openDialog() {
-    const dialogRef = this.dialog.open(ProfileDialogComponent);
+  const dialog = this.dialog.open(ProfileDialogComponent);
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
   }
 
 }

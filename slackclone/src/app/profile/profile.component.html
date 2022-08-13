@@ -1,4 +1,4 @@
-<div class="profile_wrapper">
+<div class="profile_wrapper" *ngIf="fs.user">
 
     <div class="profile_header">
         <p>profile</p>
@@ -12,15 +12,15 @@
 
     <img class="img_profile" src="/assets/img/avatar.png" alt="">
 
-    <h1>Mike Swazzlebee</h1>
+    <h1>Mike Swazzlebee -- woher soll das Feld kommen?</h1>
 
     <div class="profile_element">
-        <p>position</p>
-        <p>Leitung von allem</p>
+        <p>My Job</p>
+        <p>{{ fs.user[0].job }}</p>
     </div>
     <div class="profile_element">
-        <p>callname</p>
-        <p>miko</p>
+        <p>Fullname</p>
+        <p>{{ fs.user[0].fullname }}</p>
     </div>
 
     <hr>
@@ -31,14 +31,14 @@
         <span class="material-icons">email</span>
         <div>
             <p>email</p>
-            <p>qwe@qwe</p>
+            <p>{{ fs.user[0].email }}</p>
         </div>
     </div>
     <div class="contact_element">
         <span class="material-icons">phone</span>
         <div>
             <p>phone</p>
-            <p>234234234234</p>
+            <p>{{ fs.user[0].phone }}</p>
         </div>
     </div>
 
