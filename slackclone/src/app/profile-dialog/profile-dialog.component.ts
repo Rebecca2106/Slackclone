@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialogRef } from '@angular/material/dialog';
 import { User } from 'src/models/user.class';
@@ -27,10 +27,6 @@ export class ProfileDialogComponent implements OnInit {
           this.user = new User(user[0]);
         })
       }
-  }
-
-  ngOnDestroy(): void {
-    this.userSub.unsubscribe();
   }
 
   saveProfile() {  

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FireauthService } from '../services/fireauth.service';
 import { UiChangeService } from '../services/ui-change.service';
 
