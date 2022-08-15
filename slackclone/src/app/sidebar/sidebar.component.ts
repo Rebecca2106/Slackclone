@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { UiChangeService } from '../services/ui-change.service';
 import {MatAccordion} from '@angular/material/expansion';
 
@@ -9,6 +9,7 @@ import {MatAccordion} from '@angular/material/expansion';
 })
 export class SidebarComponent implements OnInit {
   panelOpenState = true;
+  @Input() togglePosition
 
   constructor(public uiService: UiChangeService) { }
 

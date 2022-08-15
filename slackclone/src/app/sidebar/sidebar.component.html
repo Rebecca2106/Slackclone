@@ -1,6 +1,6 @@
 <div class="channels">
     <div class="padding-6">
-        <mat-accordion>
+        <mat-accordion [togglePosition]="'before'">
             <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true">
                 <mat-expansion-panel-header>
                     <mat-panel-title>
@@ -13,7 +13,7 @@
     </div>
 
     <div class="padding-6">
-        <mat-accordion>
+        <mat-accordion [togglePosition]="'before'">
             <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true">
                 <mat-expansion-panel-header>
                     <mat-panel-title>
