@@ -3,7 +3,7 @@ export class User {
     fullname: string;
     nickname: string;
     job: string;
-    image: File;
+    image: string;
     email: string;
     phone: string;
 
