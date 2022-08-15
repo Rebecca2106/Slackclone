@@ -1,8 +1,27 @@
 <app-header></app-header>
-<div class="chat-flex" (mouseup)="this.resizing = false" (mousemove)="onResizing($event)" >
-    <app-sidebar class="sidebar_wrapper" [ngStyle]="{'left': uiService.showSidebar ? '-' + this.sidebarWidth + 'px' : '0px', width: this.sidebarWidth  + 'px' }" ></app-sidebar>
-    <div class="resize_bar" (mousedown)="startResize($event)"  [ngStyle]="{'width': !uiService.showSidebar ? this.sidebarWidth + 5 + 'px' : '0px'}" ></div>
-    <app-chat-main class="chat_main_wrapper"></app-chat-main>
-    <app-chat-thread *ngIf="uiService.thread" class="side_component_wrapper"></app-chat-thread>
-    <app-profile *ngIf="uiService.profile" class="side_component_wrapper"></app-profile>
+<div class="chat-flex" (mouseup)="stopResize()" (mousemove)="onResizing($event)">
+    <app-sidebar class="sidebar_wrapper z_index_10"
+        [ngStyle]="{'left': !uiService.showSidebar ? '-' + this.leftSidebar.width + 'px' : '0px', width: this.leftSidebar.width  + 'px' }"
+        [ngClass]="{'transition': this.checkScreenWidth()}">
+    </app-sidebar>
+    <div class="resize_bar"
+        [ngClass]="{'pos_abs': this.leftSidebar.positionAbsolute, 'd_none': this.checkScreenWidth()}"
+        (mousedown)="startResize($event, 'left')"
+        [ngStyle]="{'width': uiService.showSidebar ? this.leftSidebar.width + 5 + 'px' : '0px'}"></div>
+    <app-chat-main class="chat_main_wrapper" [ngStyle]="{'width': this.midContentWidth + 'px'}"></app-chat-main>
+
+
+    <div class="sidebar_wrapper "
+        [ngStyle]="{'right': (!uiService.profile && !uiService.thread)  ? '-' + this.rightSidebar.width + 'px' : '0px', width: this.rightSidebar.width  + 'px' }"
+        [ngClass]="{'transition': this.checkScreenWidth()}">
+        <app-profile *ngIf="uiService.profile" class="side_component_wrapper"></app-profile>
+        <app-chat-thread *ngIf="uiService.thread" class="side_component_wrapper"></app-chat-thread>
+    </div>
+    <div class="resize_bar" (mousedown)="startResize($event, 'right')"
+        [ngClass]="{'pos_abs_right': this.rightSidebar.positionAbsolute, 'd_none': this.checkScreenWidth()}"
+        [ngStyle]="{'width': (uiService.profile || uiService.thread) ? this.rightSidebar.width + 5 + 'px' : '0px'}">
+    </div>
+
+
+
 </div>
