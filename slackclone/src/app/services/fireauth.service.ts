@@ -11,8 +11,9 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
   providedIn: 'root'
 })
 export class FireauthService {
+  newUser: User;
   user: User;
-  userData: any;
+  authUserData: any;
   uid: string;
   loggedIn: boolean = false;
   userSub: any;
@@ -22,7 +23,7 @@ export class FireauthService {
     
     // Setting logged in user
     this.auth.authState.subscribe((user) => {
-      this.userData = user;
+      this.authUserData = user;
 
       if (!user) {
         this.router.navigate(['login']);
@@ -32,8 +33,8 @@ export class FireauthService {
       } else {
         this.loggedIn = true;
         console.log('User logged in:', this.loggedIn);
-        this.uid = this.userData.uid;
-        this.checkUser(this.uid, this.userData.email);
+        this.uid = this.authUserData.uid;
+        this.checkUser(this.uid, this.authUserData.email);
         this.router.navigate(['']);
       }
     });
@@ -55,21 +56,30 @@ export class FireauthService {
   }
 
   async addUser(uid: string, email: string) {
-    let newUser = new User();
-    newUser.uid = uid;
-    if (email) {
-      newUser.email = email;
-    }
-    if(this.isGuest){
-      newUser.fullname = 'Guest';
-      this.isGuest = false;
-    }
+    this.newUser = new User();
+    this.newUser.uid = uid;
+    this.checkForMail(email);
+    this.checkForGuest();
+  
     await this.firestore
       .collection('users')
-      .add(newUser.toJSON())
+      .add(this.newUser.toJSON())
       .then(() => {
         console.log('Added new user with UID:', uid);
       });
+  }
+
+  checkForMail(email) {
+    if (email) {
+      this.newUser.email = email;
+    }
+  }
+
+  checkForGuest() {
+    if(this.isGuest){
+      this.newUser.fullname = 'Guest';
+      this.isGuest = false;
+    }
   }
 
   openErrorBar(err) {
@@ -87,7 +97,7 @@ export class FireauthService {
     try {
       let resp = await this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
       if (resp.user) {
-        this.userData = resp.user;
+        this.authUserData = resp.user;
         this.router.navigate(['']);
       }
     }
@@ -101,7 +111,7 @@ export class FireauthService {
     try {
       let resp = await this.auth.signInWithEmailAndPassword(email, password);
       if (resp.user) {
-        this.userData = resp.user;
+        this.authUserData = resp.user;
         this.router.navigate(['']);
       }
     }
@@ -116,7 +126,7 @@ export class FireauthService {
       let resp = await this.auth.signInAnonymously();
       if (resp.user) {
         this.isGuest = true;
-        this.userData = resp.user;
+        this.authUserData = resp.user;
         this.router.navigate(['']);
       }
     }
