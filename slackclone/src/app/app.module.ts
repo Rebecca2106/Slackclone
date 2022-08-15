@@ -29,6 +29,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { ProfileComponent } from './profile/profile.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ProfileDialogComponent } from './profile-dialog/profile-dialog.component';
+import { AddChannelComponent } from './add-channel/add-channel.component';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { ProfileDialogComponent } from './profile-dialog/profile-dialog.componen
     ChatThreadComponent,
     ProfileComponent,
     ProfileDialogComponent,
+    AddChannelComponent,
   ],
   imports: [
     BrowserModule,

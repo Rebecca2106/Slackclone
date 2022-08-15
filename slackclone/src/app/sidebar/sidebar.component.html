@@ -1,11 +1,12 @@
 <div class="channels">
     <div class="padding-6">
         <mat-accordion [togglePosition]="'before'">
-            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true">
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true"> 
                 <mat-expansion-panel-header>
                     <mat-panel-title>
-                        Channels
+                        Channels         
                     </mat-panel-title>
+                    <span (click)="openDialog()" class="material-icons">add</span>
                 </mat-expansion-panel-header>
                 <p># weitere Channels</p>
             </mat-expansion-panel>
