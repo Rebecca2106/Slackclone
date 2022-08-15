@@ -1,8 +1,8 @@
 <div class="channels">
     <div class="padding-6">
-        <mat-accordion [togglePosition]="'before'" (mouseenter) ="mouseEnter()" (mouseleave) ="mouseLeave()">
-            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true"> 
-                <mat-expansion-panel-header>
+        <mat-accordion [togglePosition]="'before'">
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true" > 
+                <mat-expansion-panel-header (mouseenter) ="mouseEnter()" (mouseleave) ="mouseLeave()">
                     <mat-panel-title>
                         Channels         
                     </mat-panel-title>
