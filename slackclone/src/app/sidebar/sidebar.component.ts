@@ -15,6 +15,7 @@ export class SidebarComponent implements OnInit {
   @Input() togglePosition;
   iconVisible1 = false;
   iconVisible2 = false;
+  allChannels= [];
   
 
   constructor(public uiService: UiChangeService, public dialog: MatDialog) { }
@@ -22,7 +23,18 @@ export class SidebarComponent implements OnInit {
   openDialog(): void {
     const dialogRef = this.dialog.open(AddChannelComponent, {
       width: '350px',
-    });}
+    });
+  
+    dialogRef.afterClosed().subscribe(Channel_name => {
+      console.log('The dialog was closed', Channel_name);
+      if (Channel_name) {
+        this.allChannels.push('#' + Channel_name);
+        console.log(this.allChannels)
+        
+      }
+    });
+
+  }
 
     mouseEnter(iconPosition) {
       console.log(iconPosition);

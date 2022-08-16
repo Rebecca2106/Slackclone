@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-channel.component.scss']
 })
 export class AddChannelComponent implements OnInit {
+  Channel_name: string ='';
 
   constructor() { }
 

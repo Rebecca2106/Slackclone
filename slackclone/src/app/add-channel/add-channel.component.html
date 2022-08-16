@@ -4,9 +4,9 @@
     <h4>Name</h4>
     <mat-form-field appearance="fill">
         <mat-label># Whatever</mat-label>
-        <input matInput value="#"> 
+        <input matInput [(ngModel)]="Channel_name" value="#"> 
     </mat-form-field>
 </div>
 <div mat-dialog-actions>
-    <button mat-button cdkFocusInitial>Create</button>
+    <button mat-button [disabled]="Channel_name.length==0" [mat-dialog-close]="Channel_name" cdkFocusInitial>Create</button>
 </div>

@@ -9,6 +9,7 @@
                     <span (click)="openDialog()" class="material-icons" *ngIf="iconVisible1">add</span>
                 </mat-expansion-panel-header>
                 <p># weitere Channels</p>
+                <p *ngFor=" let channel of allChannels ">{{channel}}</p>
             </mat-expansion-panel>
         </mat-accordion>
     </div>
