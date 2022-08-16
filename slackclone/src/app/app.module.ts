@@ -32,6 +32,10 @@ import { ProfileDialogComponent } from './profile-dialog/profile-dialog.componen
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AddChannelComponent } from './add-channel/add-channel.component';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+
+
+
 
 
 @NgModule({
@@ -70,7 +74,9 @@ import { AddChannelComponent } from './add-channel/add-channel.component';
     MatSidenavModule,
     MatDialogModule,
     AngularFireStorageModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    CKEditorModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
