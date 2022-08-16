@@ -28,7 +28,7 @@ export class SidebarComponent implements OnInit {
     dialogRef.afterClosed().subscribe(Channel_name => {
       console.log('The dialog was closed', Channel_name);
       if (Channel_name) {
-        this.allChannels.push('#' + Channel_name);
+        this.allChannels.push('# ' + Channel_name);
         console.log(this.allChannels)
         
       }
