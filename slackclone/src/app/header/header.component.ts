@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FireauthService } from '../services/fireauth.service';
 import { UiChangeService } from '../services/ui-change.service';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { connectDatabaseEmulator } from '@firebase/database';
 
 @Component({
   selector: 'app-header',
@@ -20,12 +19,13 @@ export class HeaderComponent implements OnInit {
 
   connectFB() {
     if (this.fs.user) {
-      this.firestore
+      let sub = this.firestore
         .collection('users', ref => ref.where('uid', '==', this.fs.uid))
         .valueChanges({ idField: 'docID' })
         .subscribe((user: any) => {
           this.docID = user[0].docID;
-        })
+          sub.unsubscribe();
+        })  
     }
   }
 
