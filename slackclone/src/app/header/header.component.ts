@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FireauthService } from '../services/fireauth.service';
 import { UiChangeService } from '../services/ui-change.service';
-import { MatDialog } from '@angular/material/dialog';
-import { ProfileDialogComponent } from '../profile-dialog/profile-dialog.component';
 
 @Component({
   selector: 'app-header',
@@ -11,16 +9,11 @@ import { ProfileDialogComponent } from '../profile-dialog/profile-dialog.compone
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(public uiService: UiChangeService, public fs: FireauthService, public dialog: MatDialog) {
+  constructor(public uiService: UiChangeService, public fs: FireauthService) {
   }
 
   ngOnInit(): void {
   
-  }
-
-  openDialog() {
-  const dialog = this.dialog.open(ProfileDialogComponent);
-
   }
 
 }

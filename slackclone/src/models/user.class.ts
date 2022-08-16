@@ -6,6 +6,8 @@ export class User {
     image: string;
     email: string;
     phone: string;
+    onlineState: boolean;
+    stateText: string;
 
 
     constructor(obj?: any) {
@@ -16,6 +18,8 @@ export class User {
         this.image = obj ? obj.image : '';
         this.email = obj ? obj.email : '';
         this.phone = obj ? obj.phone : '';
+        this.onlineState = obj ? obj.onlineState : false;
+        this.stateText = obj ? obj.stateText : '';
     }
 
     public toJSON() {
@@ -26,7 +30,9 @@ export class User {
             job: this.job,
             image: this.image,
             email: this.email,
-            phone: this.phone
+            phone: this.phone,
+            onlineState: this.onlineState,
+            stateText: this.stateText
         }
     }
 }

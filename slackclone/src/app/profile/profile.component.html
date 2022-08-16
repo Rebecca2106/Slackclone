@@ -5,22 +5,22 @@
         <span (click)="uiService.toggleProfile()" class="material-icons">close</span>
     </div>
 
-     <div class="icon_edit">
+     <div class="icon_edit" (click)="openDialog()">
         <span  class="material-icons">edit</span>
      </div>
     
     <img *ngIf="fs.user.image; let url" [src]="url" class="img_profile">
     <img *ngIf="!fs.user.image" src="/assets/img/avatar.png" class="img_profile">
 
-    <h1>Mike Swazzlebee -- woher soll das Feld kommen?</h1>
+    <h1>{{ fs.user.fullname }}</h1>
 
     <div class="profile_element">
         <p>My Job</p>
         <p>{{ fs.user.job }}</p>
     </div>
     <div class="profile_element">
-        <p>Fullname</p>
-        <p>{{ fs.user.fullname }}</p>
+        <p>Nickname</p>
+        <p>{{ fs.user.nickname }}</p>
     </div>
 
     <hr>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ProfileDialogComponent } from '../profile-dialog/profile-dialog.component';
 import { FireauthService } from '../services/fireauth.service';
 import { UiChangeService } from '../services/ui-change.service';
 
@@ -9,10 +11,14 @@ import { UiChangeService } from '../services/ui-change.service';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(public uiService: UiChangeService, public fs: FireauthService) { }
+  constructor(public uiService: UiChangeService, public fs: FireauthService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
 
+  }
+
+  openDialog() {
+    const dialog = this.dialog.open(ProfileDialogComponent);
   }
 
 }
