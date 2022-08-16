@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Channel } from 'src/models/channel.class';
 import { AngularFirestore } from '@angular/fire/compat/firestore'
 import { NgForm } from '@angular/forms';
+import {MatDialogRef} from '@angular/material/dialog';
+
 
 
 @Component({
@@ -17,7 +19,7 @@ export class AddChannelComponent implements OnInit {
     info: 'Description'
   }
 
-  constructor(private firestore: AngularFirestore) { }
+  constructor(private firestore: AngularFirestore, public dialogRef: MatDialogRef<AddChannelComponent>) { }
 
   ngOnInit(): void {
   }
@@ -31,5 +33,12 @@ export class AddChannelComponent implements OnInit {
 
     }
     form.resetForm()
+    this.dialogRef.close();
+  }
+
+
+  onNoClick(){
+    this.dialogRef.close();
+
   }
 }
