@@ -3,6 +3,7 @@ export class Channel{
     channelDescription: string;
 
     constructor(obj?: any) {
+        console.log(obj)
         this.channelName = obj ? obj.channelName : '';
         this.channelDescription = obj ? obj.channelDescription : '';
     }

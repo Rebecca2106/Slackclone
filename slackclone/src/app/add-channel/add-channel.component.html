@@ -4,8 +4,9 @@
         <mat-label>Name</mat-label>  
         <span matPrefix># &nbsp;</span>      
         <input 
-        [(ngModel)]="info.channel" 
+        (ngModel)="info.channel" 
         name="channelName" 
+        placeholder="name"
         #channelName="ngModel" 
         matInput
         minlength="3" 
@@ -19,9 +20,10 @@
          <mat-label>Description</mat-label>
       <textarea
         matInput
+        placeholder="description"
         maxlength="120"
         cdkTextareaAutosize
-        [(ngModel)]="info.info"
+        (ngModel)="info.info"
         #channelDescription="ngModel"
         name="channelDescription"
       ></textarea>
