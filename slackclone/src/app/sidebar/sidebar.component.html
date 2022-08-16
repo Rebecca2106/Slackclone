@@ -2,11 +2,11 @@
     <div class="padding-6">
         <mat-accordion [togglePosition]="'before'">
             <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true" > 
-                <mat-expansion-panel-header (mouseenter) ="mouseEnter()" (mouseleave) ="mouseLeave()">
+                <mat-expansion-panel-header (mouseenter) ="mouseEnter('iconVisible1')" (mouseleave) ="mouseLeave('iconVisible1')">
                     <mat-panel-title>
                         Channels         
                     </mat-panel-title>
-                    <span (click)="openDialog()" class="material-icons" *ngIf="iconVisible">add</span>
+                    <span (click)="openDialog()" class="material-icons" *ngIf="iconVisible1">add</span>
                 </mat-expansion-panel-header>
                 <p># weitere Channels</p>
             </mat-expansion-panel>
@@ -16,10 +16,11 @@
     <div class="padding-6">
         <mat-accordion [togglePosition]="'before'">
             <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true">
-                <mat-expansion-panel-header>
+                <mat-expansion-panel-header (mouseenter) ="mouseEnter('iconVisible2')" (mouseleave) ="mouseLeave('iconVisible2')">
                     <mat-panel-title>
                         Directmessages
                     </mat-panel-title>
+                    <span (click)="openDialog()" class="material-icons" *ngIf="iconVisible2">add</span>
                 </mat-expansion-panel-header>
                 <p>Bild Chatpartner</p>
             </mat-expansion-panel>

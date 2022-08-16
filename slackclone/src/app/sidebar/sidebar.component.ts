@@ -13,7 +13,9 @@ import { AddChannelComponent } from '../add-channel/add-channel.component';
 export class SidebarComponent implements OnInit {
   panelOpenState = true;
   @Input() togglePosition;
-  iconVisible = false;
+  iconVisible1 = false;
+  iconVisible2 = false;
+  
 
   constructor(public uiService: UiChangeService, public dialog: MatDialog) { }
 
@@ -22,14 +24,25 @@ export class SidebarComponent implements OnInit {
       width: '350px',
     });}
 
-    mouseEnter() {
-      console.log("mouse enter");
-      this.iconVisible = true;
+    mouseEnter(iconPosition) {
+      console.log(iconPosition);
+      if (iconPosition=="iconVisible1"){
+        this.iconVisible1=true
+      }
+
+    else {
+        this.iconVisible2=true
+      }
     }
 
-    mouseLeave() {
-      console.log("mouse leave");
-      this.iconVisible = false;
+    mouseLeave(iconPosition) {
+      if (iconPosition=="iconVisible1"){
+        this.iconVisible1=false;
+      }
+
+      else{
+        this.iconVisible2=false;
+      }
     }
 
   ngOnInit(): void {
