@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FireauthService } from '../services/fireauth.service';
 import { UiChangeService } from '../services/ui-change.service';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { StatusDialogComponent } from '../status-dialog/status-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-header',
@@ -11,10 +13,14 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 export class HeaderComponent implements OnInit {
   docID: string;
 
-  constructor(public uiService: UiChangeService, public fs: FireauthService, private firestore: AngularFirestore) {
+  constructor(public uiService: UiChangeService, public fs: FireauthService, private firestore: AngularFirestore, public dialog: MatDialog) {
   }
 
   ngOnInit(): void {
+  }
+
+  openStateDialog() {
+    const dialog = this.dialog.open(StatusDialogComponent);
   }
 
   connectFB() {

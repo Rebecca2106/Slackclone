@@ -17,7 +17,7 @@ export class ProfileComponent implements OnInit {
 
   }
 
-  openDialog() {
+  openProfileDialog() {
     const dialog = this.dialog.open(ProfileDialogComponent);
   }
 

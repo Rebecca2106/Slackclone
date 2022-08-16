@@ -5,7 +5,7 @@
         <span (click)="uiService.toggleProfile()" class="material-icons">close</span>
     </div>
 
-     <div class="icon_edit" (click)="openDialog()">
+     <div class="icon_edit" (click)="openProfileDialog()">
         <span  class="material-icons">edit</span>
      </div>
     
@@ -26,6 +26,10 @@
     <div class="profile_element">
         <p *ngIf="fs.user.onlineState" class="online-State"><span class="dot-active"></span>active</p>
         <p *ngIf="!fs.user.onlineState" class="online-State"><span class="dot-away"></span>away</p>
+    </div>
+
+    <div class="profile_element">
+        <p> {{ fs.user.statusText }} </p>
     </div>
 
     <hr>

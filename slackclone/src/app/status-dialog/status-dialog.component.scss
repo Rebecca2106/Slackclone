@@ -1,0 +1,33 @@
+mat-form-field, .mat-label {
+
+    &:hover, &:focus, &:active {
+        background: none;
+    }
+
+}
+
+input {
+    height: 25px;
+}
+
+.mat-list-item-content, .mat-list-option {
+
+    background: none;
+
+    &:hover, &:focus, &:active {
+        background: none;
+    }
+}
+
+.option-2 {
+
+    &:focus {
+        background: rgba(0,0,0,0.2);
+     }
+}
+
+.mat-green {
+    
+    background-color: #007a5a;
+    color: #fff;
+}

@@ -22,12 +22,13 @@ export class ProfileDialogComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.fs.user) {
-      this.firestore
+      let sub = this.firestore
         .collection('users', ref => ref.where('uid', '==', this.fs.uid))
         .valueChanges({ idField: 'docID' })
         .subscribe((user: any) => {
           this.docID = user[0].docID;
           this.user = new User(user[0]);
+          sub.unsubscribe();
         })
     }
   }
