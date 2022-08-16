@@ -27,7 +27,9 @@ export class AddChannelComponent implements OnInit {
     if (form.value) {
       this.Channel = new Channel(form.value);
       console.log(this.Channel)
+      
 
     }
+    form.resetForm()
   }
 }
