@@ -9,8 +9,8 @@
         <span  class="material-icons">edit</span>
      </div>
     
-
-    <img class="img_profile" src="/assets/img/avatar.png" alt="">
+    <img *ngIf="fs.user.image; let url" [src]="url" class="img_profile">
+    <img *ngIf="!fs.user.image" src="/assets/img/avatar.png" class="img_profile">
 
     <h1>Mike Swazzlebee -- woher soll das Feld kommen?</h1>
 

@@ -4,7 +4,9 @@
     </div>
     <div *ngIf="fs.loggedIn && fs.user" class="user-info-box">
         <div>Hello {{ fs.user.fullname }} {{ fs.user.email }}</div>
-        <img src="/assets/img/avatar.png" [matMenuTriggerFor]="menu" class="userImg padding-6">
+        <img *ngIf="fs.user.image; let url" [src]="url" [matMenuTriggerFor]="menu" class="userImg padding-6">
+                <img *ngIf="!fs.user.image" src="/assets/img/avatar.png" [matMenuTriggerFor]="menu" class="userImg padding-6">
+        <!-- <img src="/assets/img/avatar.png" [matMenuTriggerFor]="menu" class="userImg padding-6"> -->
         <mat-menu #menu="matMenu">
             <button mat-menu-item (click)="uiService.toggleProfile()">open profile</button> 
             <button mat-menu-item (click)="openDialog()">Profile</button>
