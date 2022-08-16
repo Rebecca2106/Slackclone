@@ -35,9 +35,13 @@ export class FireauthService {
         console.log('User logged in:', this.loggedIn);
         this.uid = this.authUserData.uid;
         this.checkUser(this.uid, this.authUserData.email);
-        this.router.navigate(['']);
       }
     });
+  }
+
+  hallo(){
+    
+        this.router.navigate(['']);
   }
 
   checkUser(uid: string, email: string) {
@@ -48,9 +52,11 @@ export class FireauthService {
         if (user.length > 0) {
           this.user = user;   
           console.log('Current user:', this.user);
+          this.hallo();
         } else {
           console.log('User not found!');
           await this.addUser(uid, email);
+          this.hallo();
         }
       })
   }
