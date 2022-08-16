@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FireauthService } from '../services/fireauth.service';
 import { UiChangeService } from '../services/ui-change.service';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { connectDatabaseEmulator } from '@firebase/database';
 
 @Component({
   selector: 'app-header',
@@ -8,12 +10,32 @@ import { UiChangeService } from '../services/ui-change.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  docID: string;
 
-  constructor(public uiService: UiChangeService, public fs: FireauthService) {
+  constructor(public uiService: UiChangeService, public fs: FireauthService, private firestore: AngularFirestore) {
   }
 
   ngOnInit(): void {
-  
   }
 
+  connectFB() {
+    if (this.fs.user) {
+      this.firestore
+        .collection('users', ref => ref.where('uid', '==', this.fs.uid))
+        .valueChanges({ idField: 'docID' })
+        .subscribe((user: any) => {
+          this.docID = user[0].docID;
+        })
+    }
+  }
+
+  toggleOnlineState() {
+    if (this.docID) {
+      this.fs.user.onlineState = !this.fs.user.onlineState;
+      this.firestore
+        .collection('users')
+        .doc(this.docID)
+        .update({ "onlineState": this.fs.user.onlineState });
+    }
+  }
 }

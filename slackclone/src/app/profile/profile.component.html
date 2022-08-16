@@ -23,6 +23,11 @@
         <p>{{ fs.user.nickname }}</p>
     </div>
 
+    <div class="profile_element">
+        <p *ngIf="fs.user.onlineState" class="online-State"><span class="dot-active"></span>active</p>
+        <p *ngIf="!fs.user.onlineState" class="online-State"><span class="dot-away"></span>away</p>
+    </div>
+
     <hr>
 
     <h2>Contact</h2>

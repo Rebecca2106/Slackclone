@@ -7,7 +7,7 @@ export class User {
     email: string;
     phone: string;
     onlineState: boolean;
-    stateText: string;
+    statusText: string;
 
 
     constructor(obj?: any) {
@@ -19,7 +19,7 @@ export class User {
         this.email = obj ? obj.email : '';
         this.phone = obj ? obj.phone : '';
         this.onlineState = obj ? obj.onlineState : false;
-        this.stateText = obj ? obj.stateText : '';
+        this.statusText = obj ? obj.statusText : '';
     }
 
     public toJSON() {
@@ -32,7 +32,7 @@ export class User {
             email: this.email,
             phone: this.phone,
             onlineState: this.onlineState,
-            stateText: this.stateText
+            statusText: this.statusText
         }
     }
 }

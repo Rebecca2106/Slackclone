@@ -15,7 +15,6 @@ import { finalize } from 'rxjs/operators';
 export class ProfileDialogComponent implements OnInit {
   user: User;
   docID: string;
-  meta: Observable<any>;
   isUploading: boolean = false;
   uploadPercent: Observable<number>;
 

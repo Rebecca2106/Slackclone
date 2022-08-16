@@ -142,4 +142,5 @@ export class FireauthService {
     this.auth.signOut();
     this.router.navigate(['login']);
   }
+
 }
