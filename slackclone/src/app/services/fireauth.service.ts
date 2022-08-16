@@ -51,7 +51,7 @@ export class FireauthService {
           console.log('Current user:', this.user);
           this.router.navigate(['']);          
         } else {
-          console.log('User not found!');
+          // console.log('User not found!');
           await this.addUser(uid, email);
         }
       })
@@ -68,7 +68,7 @@ export class FireauthService {
       .collection('users')
       .add(this.newUser.toJSON())
       .then(() => {
-        console.log('Added new user with UID:', uid);
+        // console.log('Added new user with UID:', uid);
       });
   }
 
