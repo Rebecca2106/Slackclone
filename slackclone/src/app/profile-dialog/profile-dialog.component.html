@@ -8,21 +8,27 @@
 
         <h4>Nickname</h4>
         <mat-form-field appearance="outline">
-            <input matInput  [(ngModel)]="user.nickname">
+            <input matInput [(ngModel)]="user.nickname">
         </mat-form-field>
 
         <h4>My Job</h4>
         <mat-form-field appearance="outline">
-            <input matInput  [(ngModel)]="user.job">
+            <input matInput [(ngModel)]="user.job">
         </mat-form-field>
     </div>
     <div>
         <h4 class="mb-6">Profile image</h4>
-        <img src="/assets/img/avatar.png" class="profile-image mb-6"><br>
-        <input style="display: none" type="file" accept=".png,.jpg" #fileInput />
+        <div class="img-area">
+            <mat-spinner *ngIf="isUploading"></mat-spinner>
+            <div class="spinner-wrapper" *ngIf="!isUploading">
+                <img *ngIf="user.image; let url" [src]="url" class="profile-image mb-6">
+                <img *ngIf="!user.image" src="/assets/img/avatar.png" class="profile-image mb-6">
+            </div>
+        </div><br>
+        <input style="display: none" type="file" accept=".png,.jpg" #fileInput (change)="upload($event)" />
         <div class="ctrl-btn">
             <button mat-stroked-button (click)="fileInput.click()" class="mb-6">upload image</button>
-            <span class="span-blue">delete image</span>
+            <span *ngIf="user.image" class="span-blue" (click)="deleteImage()">delete image</span>
         </div>
 
     </div>

@@ -1,24 +1,27 @@
 <div class="channels">
     <div class="padding-6">
-        <mat-accordion>
-            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true">
-                <mat-expansion-panel-header>
+        <mat-accordion [togglePosition]="'before'">
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true" > 
+                <mat-expansion-panel-header (mouseenter) ="mouseEnter('iconVisible1')" (mouseleave) ="mouseLeave('iconVisible1')">
                     <mat-panel-title>
-                        Channels
+                        Channels         
                     </mat-panel-title>
+                    <span (click)="openDialog()" class="material-icons" *ngIf="iconVisible1">add</span>
                 </mat-expansion-panel-header>
                 <p># weitere Channels</p>
+                <p *ngFor=" let channel of allChannels ">{{channel}}</p>
             </mat-expansion-panel>
         </mat-accordion>
     </div>
 
     <div class="padding-6">
-        <mat-accordion>
+        <mat-accordion [togglePosition]="'before'">
             <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true">
-                <mat-expansion-panel-header>
+                <mat-expansion-panel-header (mouseenter) ="mouseEnter('iconVisible2')" (mouseleave) ="mouseLeave('iconVisible2')">
                     <mat-panel-title>
                         Directmessages
                     </mat-panel-title>
+                    <span (click)="openDialog()" class="material-icons" *ngIf="iconVisible2">add</span>
                 </mat-expansion-panel-header>
                 <p>Bild Chatpartner</p>
             </mat-expansion-panel>

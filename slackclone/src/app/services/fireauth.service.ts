@@ -24,6 +24,8 @@ export class FireauthService {
     // Setting logged in user
     this.auth.authState.subscribe((user) => {
       this.authUserData = user;
+      console.log(user);
+      
 
       if (!user) {
         this.router.navigate(['login']);
@@ -50,11 +52,15 @@ export class FireauthService {
       .valueChanges()
       .subscribe(async (user: any) => {
         if (user.length > 0) {
-          this.user = user;   
+          this.user = user[0];   
           console.log('Current user:', this.user);
+<<<<<<< HEAD
           this.hallo();
+=======
+          this.router.navigate(['']);          
+>>>>>>> e49773cdd63e9c33c7303cf4d4cb12c12097db6c
         } else {
-          console.log('User not found!');
+          // console.log('User not found!');
           await this.addUser(uid, email);
           this.hallo();
         }
@@ -62,6 +68,7 @@ export class FireauthService {
   }
 
   async addUser(uid: string, email: string) {
+    
     this.newUser = new User();
     this.newUser.uid = uid;
     this.checkForMail(email);
@@ -71,7 +78,7 @@ export class FireauthService {
       .collection('users')
       .add(this.newUser.toJSON())
       .then(() => {
-        console.log('Added new user with UID:', uid);
+        // console.log('Added new user with UID:', uid);
       });
   }
 

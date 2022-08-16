@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { UiChangeService } from '../services/ui-change.service';
 import {MatAccordion} from '@angular/material/expansion';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { AddChannelComponent } from '../add-channel/add-channel.component';
+
 
 @Component({
   selector: 'app-sidebar',
@@ -9,8 +12,50 @@ import {MatAccordion} from '@angular/material/expansion';
 })
 export class SidebarComponent implements OnInit {
   panelOpenState = true;
+  @Input() togglePosition;
+  iconVisible1 = false;
+  iconVisible2 = false;
+  allChannels= [];
+  
 
-  constructor(public uiService: UiChangeService) { }
+  constructor(public uiService: UiChangeService, public dialog: MatDialog) { }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(AddChannelComponent, {
+      width: '350px',
+    });
+  
+    dialogRef.afterClosed().subscribe(Channel_name => {
+      console.log('The dialog was closed', Channel_name);
+      if (Channel_name) {
+        this.allChannels.push('# ' + Channel_name);
+        console.log(this.allChannels)
+        
+      }
+    });
+
+  }
+
+    mouseEnter(iconPosition) {
+      console.log(iconPosition);
+      if (iconPosition=="iconVisible1"){
+        this.iconVisible1=true
+      }
+
+    else {
+        this.iconVisible2=true
+      }
+    }
+
+    mouseLeave(iconPosition) {
+      if (iconPosition=="iconVisible1"){
+        this.iconVisible1=false;
+      }
+
+      else{
+        this.iconVisible2=false;
+      }
+    }
 
   ngOnInit(): void {
 

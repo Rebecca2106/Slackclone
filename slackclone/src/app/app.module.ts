@@ -29,6 +29,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { ProfileComponent } from './profile/profile.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ProfileDialogComponent } from './profile-dialog/profile-dialog.component';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { AddChannelComponent } from './add-channel/add-channel.component';
 
 
 @NgModule({
@@ -42,6 +45,7 @@ import { ProfileDialogComponent } from './profile-dialog/profile-dialog.componen
     ChatThreadComponent,
     ProfileComponent,
     ProfileDialogComponent,
+    AddChannelComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,7 +68,9 @@ import { ProfileDialogComponent } from './profile-dialog/profile-dialog.componen
     MatMenuModule,
     MatExpansionModule,
     MatSidenavModule,
-    MatDialogModule
+    MatDialogModule,
+    AngularFireStorageModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
