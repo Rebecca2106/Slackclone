@@ -24,6 +24,8 @@ export class FireauthService {
     // Setting logged in user
     this.auth.authState.subscribe((user) => {
       this.authUserData = user;
+      console.log(user);
+      
 
       if (!user) {
         this.router.navigate(['login']);
@@ -35,7 +37,6 @@ export class FireauthService {
         console.log('User logged in:', this.loggedIn);
         this.uid = this.authUserData.uid;
         this.checkUser(this.uid, this.authUserData.email);
-        this.router.navigate(['']);
       }
     });
   }
@@ -46,8 +47,9 @@ export class FireauthService {
       .valueChanges()
       .subscribe(async (user: any) => {
         if (user.length > 0) {
-          this.user = user;   
+          this.user = user[0];   
           console.log('Current user:', this.user);
+          this.router.navigate(['']);          
         } else {
           console.log('User not found!');
           await this.addUser(uid, email);
@@ -56,6 +58,7 @@ export class FireauthService {
   }
 
   async addUser(uid: string, email: string) {
+    
     this.newUser = new User();
     this.newUser.uid = uid;
     this.checkForMail(email);
