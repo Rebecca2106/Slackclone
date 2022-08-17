@@ -6,13 +6,13 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from 'src/models/user.class';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Channel } from 'src/models/channel.class';
-
+import { serverTimestamp } from "firebase/firestore";
 
 @Injectable({
   providedIn: 'root'
 })
 export class FireauthService {
-  channel= new Channel;
+  channel = new Channel;
   newUser: User;
   user: User;
   authUserData: any;
@@ -152,14 +152,21 @@ export class FireauthService {
   triggerUpdateLastTimeOnline() {
     this.interval = setInterval(() => {
       if (this.user) {
-        this.user.lastTimeOnline = new Date().getTime();
-        console.log('lastTimeOnline', this.user.lastTimeOnline);
-        this.updateUser();
+        this.updateTimestamp();
       }
     }, 60*1000);
   }
 
-  updateUser() {    
+  async updateTimestamp() {
+    let docRef = this.firestore.collection('users').doc(this.docID);
+
+    // Update the timestamp field with the value from the server
+    docRef.update({
+      lastTimeOnline: firebase.firestore.FieldValue.serverTimestamp()
+    });
+  }
+
+  updateUser() {
     this.firestore
       .collection('users')
       .doc(this.docID)
