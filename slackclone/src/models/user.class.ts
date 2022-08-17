@@ -8,6 +8,7 @@ export class User {
     phone: string;
     onlineState: boolean;
     statusText: string;
+    lastTimeOnline: number;
 
 
     constructor(obj?: any) {
@@ -20,6 +21,7 @@ export class User {
         this.phone = obj ? obj.phone : '';
         this.onlineState = obj ? obj.onlineState : false;
         this.statusText = obj ? obj.statusText : '';
+        this.lastTimeOnline = obj ? obj.lastTimeOnline : '';
     }
 
     public toJSON() {
@@ -32,7 +34,8 @@ export class User {
             email: this.email,
             phone: this.phone,
             onlineState: this.onlineState,
-            statusText: this.statusText
+            statusText: this.statusText,
+            lastTimeOnline: this.lastTimeOnline
         }
     }
 }

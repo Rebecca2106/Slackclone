@@ -1,20 +1,25 @@
-export class Channel{
-    channelName: string;
-    channelDescription: string;
-
+export class Channel {
+    title: string;
+    description: string;
+    created: Object;
+    members: Array<any>;
+    messages: Array<any>;
+ 
     constructor(obj?: any) {
-        console.log(obj)
-        this.channelName = obj ? obj.channelName : '';
-        this.channelDescription = obj ? obj.channelDescription : '';
+        this.title = obj ? obj.title : '';
+        this.description = obj ? obj.description : '';
+        this.created = obj ? obj.created : {"uid": '', "timestamp": null};
+        this.members = obj ? obj.members : [{"uid": '', "read": null, "last_updated": null, "viewed_messages": null}];
+        this.messages = obj ? obj.messages : [{"messageID": null, "threadID": null}];
     }
 
-    toJSON() {
+    public toJSON() {
         return {
-            channelName: this.channelName,
-            channelDescription: this.channelDescription
+            title: this.title,
+            description: this.description,
+            created: this.created,
+            members: this.members,
+            messages: this.messages
         }
     }
-
-
-
 }

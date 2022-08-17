@@ -17,6 +17,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.fs.triggerUpdateLastTimeOnline();
   }
 
   openStateDialog() {
@@ -31,17 +32,14 @@ export class HeaderComponent implements OnInit {
         .subscribe((user: any) => {
           this.docID = user[0].docID;
           sub.unsubscribe();
-        })  
+        })
     }
   }
 
   toggleOnlineState() {
     if (this.docID) {
       this.fs.user.onlineState = !this.fs.user.onlineState;
-      this.firestore
-        .collection('users')
-        .doc(this.docID)
-        .update({ "onlineState": this.fs.user.onlineState });
+      this.fs.updateUser();
     }
   }
 }
