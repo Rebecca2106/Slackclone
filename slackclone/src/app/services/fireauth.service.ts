@@ -5,14 +5,11 @@ import firebase from 'firebase/compat/app';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from 'src/models/user.class';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Channel } from 'src/models/channel.class';
-import { serverTimestamp } from "firebase/firestore";
 
 @Injectable({
   providedIn: 'root'
 })
 export class FireauthService {
-  channel = new Channel;
   newUser: User;
   user: User;
   authUserData: any;
@@ -193,5 +190,4 @@ export class FireauthService {
         // console.log('updated');
       })
   }
-
 }
