@@ -23,15 +23,39 @@ body {
     white-space: pre-wrap;
 }
 
-.padding-6 {
-    padding: 6px;
-}
-
 .span-blue {
     color: #1264a3;
     cursor: pointer;
 
     &:hover {
         text-decoration: underline;
+    }
+}
+
+.flex_cc{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.element_header {
+    box-sizing: border-box;
+    width: 100%;
+    height: 50px;
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 24px;
+    padding-right: 24px;
+
+    >p {
+        margin: 0;
+        font-weight: bold;
+    }
+
+    >span {
+        cursor: pointer;
     }
 }

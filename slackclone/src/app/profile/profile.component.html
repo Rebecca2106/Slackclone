@@ -1,6 +1,6 @@
-<div class="profile_wrapper" >
+<div class="profile_wrapper" [ngStyle]="{'background-color': uiService.bg_light_color, 'color': uiService.font_lowlight_color}">
 
-    <div class="profile_header">
+    <div class="element_header" [ngStyle]="{'border-bottom': '2px solid' + uiService.bg_lighter_color}">
         <p>profile</p>
         <span (click)="uiService.toggleProfile()" class="material-icons">close</span>
     </div>

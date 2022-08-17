@@ -1,29 +1,50 @@
-<div class="channels">
-    <div class="padding-6">
-        <mat-accordion [togglePosition]="'before'">
-            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true" > 
-                <mat-expansion-panel-header (mouseenter) ="mouseEnter('iconVisible1')" (mouseleave) ="mouseLeave('iconVisible1')">
-                    <mat-panel-title>
+<div class="channels" 
+[ngStyle]="{'background-color': uiService.bg_dark_color, 'color': uiService.font_lowlight_color   }">
+
+<div class="element_header" [ngStyle]="{'border-bottom': '2px solid' + uiService.bg_lighter_color}">
+    <p>UnserSchönerSpace</p>
+    <span (click)="uiService.toggleSidebar()" class="material-icons">close</span>
+</div>
+    <div class="accordion_wrapper" >
+        <mat-accordion [togglePosition]="'before'" >
+            <mat-expansion-panel [ngStyle]="{'background-color': uiService.bg_dark_color, 'color': uiService.font_lowlight_color  }" class="sidebar_wrapper_element" (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true" > 
+                <mat-expansion-panel-header class="sidebar_wrapper_header" (mouseenter) ="mouseEnter('iconVisible1')" (mouseleave) ="mouseLeave('iconVisible1')">
+                    <mat-panel-title [ngStyle]="{'color': uiService.font_lowlight_color}">
                         Channels         
                     </mat-panel-title>
-                    <span (click)="openDialog()" class="material-icons add-button" *ngIf="iconVisible1">add</span>
+                    <span [ngStyle]="{'color': uiService.font_lowlight_color}" (click)="openDialog(); $event.stopPropagation()" class="material-icons add-button" *ngIf="iconVisible1">add</span>
                 </mat-expansion-panel-header>
-                <p># weitere Channels</p>
+                <div class="hover accordion_element"> <div class="flex_cc">#</div> Channels</div>
+                <div class="hover accordion_element"> <div class="flex_cc">#</div> Channels</div>
+                <div class="hover accordion_element"> <div class="flex_cc">#</div> Channels</div>
+                <div class="hover accordion_element"> <div class="flex_cc">#</div> Channels</div>
+                <div class="hover accordion_element"> <div class="flex_cc">#</div> Channels</div>
+                <div class="hover accordion_element"> <div class="flex_cc">#</div> Channels</div>
                 <p *ngFor=" let channel of allChannels ">{{channel}}</p>
+                
             </mat-expansion-panel>
+            
         </mat-accordion>
+        
     </div>
-
-    <div class="padding-6">
-        <mat-accordion [togglePosition]="'before'">
-            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true">
-                <mat-expansion-panel-header (mouseenter) ="mouseEnter('iconVisible2')" (mouseleave) ="mouseLeave('iconVisible2')">
-                    <mat-panel-title>
+    <hr class="h_line" [ngStyle]="{'background-color': uiService.bg_lighter_color}">
+    <div class="accordion_wrapper" >
+        
+        <mat-accordion [togglePosition]="'before'" >
+            <mat-expansion-panel [ngStyle]="{'color': uiService.font_lowlight_color}"  class="accordion_wrapper" (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true">
+                <mat-expansion-panel-header class="sidebar_wrapper_header" (mouseenter) ="mouseEnter('iconVisible2')" (mouseleave) ="mouseLeave('iconVisible2')">
+                    <mat-panel-title [ngStyle]="{'color': uiService.font_lowlight_color}">
                         Directmessages
                     </mat-panel-title>
-                    <span (click)="openDialog()" class="material-icons" *ngIf="iconVisible2">add</span>
+                    <span [ngStyle]="{'color': uiService.font_lowlight_color}" (click)="openDialog(); $event.stopPropagation()" class="material-icons" *ngIf="iconVisible2">add</span>
                 </mat-expansion-panel-header>
-                <p>Bild Chatpartner</p>
+                <div class="hover accordion_element"> <div>Bild</div> Chatpartner</div>
+                <div class="hover accordion_element"> <div>Bild</div> Chatpartner</div>
+                <div class="hover accordion_element"> <div>Bild</div> Chatpartner</div>
+
+                <div class="hover accordion_element"> <div>Bild</div> Chatpartner</div>
+                <div class="hover accordion_element"> <div>Bild</div> Chatpartner</div>
+                <div class="hover accordion_element"> <div>Bild</div> Chatpartner</div>
             </mat-expansion-panel>
         </mat-accordion>
     </div>

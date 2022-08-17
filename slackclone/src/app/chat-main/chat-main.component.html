@@ -1,5 +1,9 @@
-<div class="chat-main">
-<p>Chat-Main Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facilis, sunt magni corrupti velit dolore, praesentium quia dolor alias recusandae omnis quibusdam, in eligendi distinctio! Delectus dolore ipsa doloribus magnam nesciunt!</p>
+<div class="chat-main" [ngStyle]="{'background-color': uiService.bg_light_color, 'color': uiService.font_lowlight_color}">
+    <div class="element_header" [ngStyle]="{'border-bottom': '2px solid' + uiService.bg_lighter_color}">
+        <p>CHANNELNAME</p>
+    </div>
+
+    <p>Chat-Main Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facilis, sunt magni corrupti velit dolore, praesentium quia dolor alias recusandae omnis quibusdam, in eligendi distinctio! Delectus dolore ipsa doloribus magnam nesciunt!</p>
 <button (click)="uiService.toggleThread()">open thread</button>
 </div>
 
