@@ -41,10 +41,7 @@ export class FireauthService {
     });
   }
 
-  hallo(){
-    
-        this.router.navigate(['']);
-  }
+
 
   checkUser(uid: string, email: string) {
     this.userSub = this.firestore
@@ -54,15 +51,10 @@ export class FireauthService {
         if (user.length > 0) {
           this.user = user[0];   
           console.log('Current user:', this.user);
-<<<<<<< HEAD
-          this.hallo();
-=======
+
           this.router.navigate(['']);          
->>>>>>> e49773cdd63e9c33c7303cf4d4cb12c12097db6c
-        } else {
-          // console.log('User not found!');
+        } else {6
           await this.addUser(uid, email);
-          this.hallo();
         }
       })
   }
