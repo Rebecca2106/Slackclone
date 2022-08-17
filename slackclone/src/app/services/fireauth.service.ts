@@ -22,6 +22,7 @@ export class FireauthService {
   isGuest = false;
   docID: string;
   interval: any;
+  interval2: any;
 
   constructor(public auth: AngularFireAuth, public router: Router, private _errorBar: MatSnackBar, private firestore: AngularFirestore) {
 
@@ -150,14 +151,31 @@ export class FireauthService {
   }
 
   triggerUpdateLastTimeOnline() {
+    this.setInitalTimeUpdate();
+
     this.interval = setInterval(() => {
       if (this.user) {
         this.updateTimestamp();
       }
-    }, 60*1000);
+    }, 60 * 1000);
   }
 
-  async updateTimestamp() {
+  setInitalTimeUpdate() {
+    this.interval2 = setInterval(() => {
+
+      if (!this.user) {
+        clearInterval(this.interval2);
+        this.setInitalTimeUpdate();
+      }
+
+      if (this.user) {
+        this.updateTimestamp();
+        clearInterval(this.interval2);
+      }
+    }, 1000);
+  }
+
+  updateTimestamp() {
     let docRef = this.firestore.collection('users').doc(this.docID);
 
     // Update the timestamp field with the value from the server
