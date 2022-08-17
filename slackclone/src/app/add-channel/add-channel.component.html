@@ -1,13 +1,39 @@
 <h1 mat-dialog-title>Create new Channel</h1>
-<div mat-dialog-content>
-    <p>Channels are wonderful</p>
+<form (ngSubmit)="onSubmit(f)" #f="ngForm">
     <h4>Name</h4>
     <mat-form-field appearance="fill">
-        <mat-label># Whatever</mat-label>
-        <span matPrefix># &nbsp;</span>
-        <input matInput [(ngModel)]="Channel_name" value="#"> 
+        <mat-label>Name</mat-label>  
+        <span matPrefix># &nbsp;</span>      
+        <input 
+        (ngModel)="info.channel" 
+        name="channelName" 
+        placeholder="name"
+        #channelName="ngModel" 
+        matInput
+        minlength="3" 
+        maxlength="30" 
+        required />
     </mat-form-field>
-</div>
-<div mat-dialog-actions>
-    <button color="primary" mat-button [disabled]="Channel_name.length==0" [mat-dialog-close]="Channel_name" cdkFocusInitial>Create</button>
-</div>
+
+
+    <h4>Describe your wonderful Channel</h4>
+    <mat-form-field appearance="fill">
+         <mat-label>Description</mat-label>
+      <textarea
+        matInput
+        placeholder="description"
+        maxlength="120"
+        cdkTextareaAutosize
+        (ngModel)="info.info"
+        #channelDescription="ngModel"
+        name="channelDescription"
+      ></textarea>
+    </mat-form-field>
+
+    <div mat-dialog-actions>
+        <button type=submit color="primary" mat-button [disabled]="!f.valid"
+            cdkFocusInitial>Create</button>
+        <button mat-button type="button" (click)="onNoClick()">Cancel</button>
+
+    </div>
+</form>

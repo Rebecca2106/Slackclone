@@ -1,4 +1,4 @@
-.profile_wrapper{
+.profile_wrapper {
     background: white;
     width: 100%;
     height: calc(100vh - 48px);
@@ -9,73 +9,103 @@
     align-items: center;
 }
 
-.img_profile{
+.img_profile {
     width: 150px;
     height: 150px;
+    border-radius: 8%;
     object-fit: cover;
 }
 
-.icon_edit{
+.icon_edit {
     position: absolute;
     height: 32px;
     width: 32px;
     top: 74px;
     right: 24px;
-    >span{
+
+    >span {
         cursor: pointer;
     }
 }
 
-h1{
+h1 {
     margin-top: 50px;
 }
 
-h2{
+h2 {
     width: 100%;
     padding-left: 24px;
 
 }
 
-hr{
+hr {
     width: 100%;
     background-color: grey;
 }
 
-.profile_element{
-        width: 100%;
-        padding-left: 24px;
-        >:first-child{
-            font-size: 12px;
-            margin: 0;
-        }
-        >:nth-child(2){
-            font-size: 18px;
-           
-        }    
+.profile_element {
+    width: 100%;
+    padding-left: 24px;
+
+    >:first-child {
+        font-size: 12px;
+        margin: 0;
+    }
+
+    >:nth-child(2) {
+        font-size: 18px;
+
+    }
+
+    .dot-active {
+        height: 10px;
+        width: 10px;
+        background-color: #007a5a;
+        border-radius: 50%;
+        display: inline-block;
+    }
+
+    .dot-away {
+        height: 10px;
+        width: 10px;
+        border: 1px solid grey;
+        background-color: rgb(245, 245, 245);
+        border-radius: 50%;
+        display: inline-block;
+    }
+
+    .online-State {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
 }
 
-.contact_element{
+.contact_element {
     display: flex;
     flex-direction: row;
     align-items: center;
     width: 100%;
     padding-left: 24px;
     margin-bottom: 12px;
-    >div{
+
+    >div {
         padding-left: 12px;
-        >:first-child{
+
+        >:first-child {
             font-size: 12px;
             margin: 0;
         }
-        >:nth-child(2){
+
+        >:nth-child(2) {
             font-size: 18px;
             margin: 0;
-        }  
+        }
     }
-      
+
 }
 
-.profile_header{
+.profile_header {
     background-color: var(--light-color);
     box-sizing: border-box;
     width: 100%;
@@ -89,13 +119,12 @@ hr{
     padding-left: 24px;
     padding-right: 24px;
 
-    >p{
+    >p {
         margin: 0;
         font-weight: bold;
     }
 
-    >span{
+    >span {
         cursor: pointer;
     }
 }
-

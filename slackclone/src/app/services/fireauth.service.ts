@@ -5,12 +5,14 @@ import firebase from 'firebase/compat/app';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from 'src/models/user.class';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Channel } from 'src/models/channel.class';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class FireauthService {
+  channel= new Channel;
   newUser: User;
   user: User;
   authUserData: any;
@@ -18,20 +20,20 @@ export class FireauthService {
   loggedIn: boolean = false;
   userSub: any;
   isGuest = false;
+  docID: string;
+  interval: any;
 
   constructor(public auth: AngularFireAuth, public router: Router, private _errorBar: MatSnackBar, private firestore: AngularFirestore) {
-    
+
     // Setting logged in user
     this.auth.authState.subscribe((user) => {
       this.authUserData = user;
-      console.log(user);
-      
 
       if (!user) {
         this.router.navigate(['login']);
         this.loggedIn = false;
         console.log('User logged in:', this.loggedIn);
-        
+
       } else {
         this.loggedIn = true;
         console.log('User logged in:', this.loggedIn);
@@ -46,26 +48,30 @@ export class FireauthService {
   checkUser(uid: string, email: string) {
     this.userSub = this.firestore
       .collection('users', ref => ref.where('uid', '==', uid))
-      .valueChanges()
+      .valueChanges({ idField: 'docID' })
       .subscribe(async (user: any) => {
         if (user.length > 0) {
-          this.user = user[0];   
+          this.user = new User(user[0]);
+          this.docID = user[0].docID;
           console.log('Current user:', this.user);
 
+
           this.router.navigate(['']);          
-        } else {6
+        
+        } else {
+          // console.log('User not found!');
           await this.addUser(uid, email);
         }
       })
   }
 
   async addUser(uid: string, email: string) {
-    
+
     this.newUser = new User();
     this.newUser.uid = uid;
     this.checkForMail(email);
     this.checkForGuest();
-  
+
     await this.firestore
       .collection('users')
       .add(this.newUser.toJSON())
@@ -81,7 +87,7 @@ export class FireauthService {
   }
 
   checkForGuest() {
-    if(this.isGuest){
+    if (this.isGuest) {
       this.newUser.fullname = 'Guest';
       this.isGuest = false;
     }
@@ -144,6 +150,28 @@ export class FireauthService {
   logout() {
     this.userSub.unsubscribe();
     this.auth.signOut();
+    clearInterval(this.interval);
     this.router.navigate(['login']);
   }
+
+  triggerUpdateLastTimeOnline() {
+    this.interval = setInterval(() => {
+      if (this.user) {
+        this.user.lastTimeOnline = new Date().getTime();
+        console.log('lastTimeOnline', this.user.lastTimeOnline);
+        this.updateUser();
+      }
+    }, 60*1000);
+  }
+
+  updateUser() {    
+    this.firestore
+      .collection('users')
+      .doc(this.docID)
+      .update(this.user.toJSON())
+      .then(() => {
+        // console.log('updated');
+      })
+  }
+
 }

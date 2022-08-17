@@ -1,15 +1,25 @@
 <div class="header">
     <div>
-        <mat-icon aria-hidden="false" class="padding-6" class="menu padding-6" (click)="uiService.toggleSidebar()">menu</mat-icon>
+        <mat-icon aria-hidden="false" class="padding-6" class="menu padding-6" (click)="uiService.toggleSidebar()">menu
+        </mat-icon>
     </div>
     <div *ngIf="fs.loggedIn && fs.user" class="user-info-box">
-        <div>Hello {{ fs.user.fullname }} {{ fs.user.email }}</div>
-        <img *ngIf="fs.user.image; let url" [src]="url" [matMenuTriggerFor]="menu" class="userImg padding-6">
-                <img *ngIf="!fs.user.image" src="/assets/img/avatar.png" [matMenuTriggerFor]="menu" class="userImg padding-6">
-        <!-- <img src="/assets/img/avatar.png" [matMenuTriggerFor]="menu" class="userImg padding-6"> -->
+        <div>Hello {{ fs.user.fullname }}</div>
+        <div *ngIf="fs.user.statusText" class="status-chip" (click)="openStateDialog()">{{ fs.user.statusText }}</div>
+        <div class="preview-image-wrapper">
+            <img *ngIf="fs.user.image; let url" [src]="url" [matMenuTriggerFor]="menu" class="userImg padding-6"
+                (click)="connectFB()">
+            <img *ngIf="!fs.user.image" src="/assets/img/avatar.png" [matMenuTriggerFor]="menu"
+                class="userImg padding-6" (click)="connectFB()">
+            <span *ngIf="fs.user.onlineState" class="dot-active"></span>
+            <span *ngIf="!fs.user.onlineState" class="dot-away"></span>
+        </div>
         <mat-menu #menu="matMenu">
-            <button mat-menu-item (click)="uiService.toggleProfile()">open profile</button> 
-            <button mat-menu-item (click)="openDialog()">Profile</button>
+            <button mat-menu-item (click)="uiService.toggleProfile()">Open profile</button>
+            <button mat-menu-item (click)="openStateDialog()">Set status</button>
+            <button mat-menu-item (click)="toggleOnlineState()">
+                Set <span *ngIf="!fs.user.onlineState">active</span><span *ngIf="fs.user.onlineState">away</span>
+            </button>
             <button mat-menu-item (click)="fs.logout()">Logout</button>
         </mat-menu>
     </div>

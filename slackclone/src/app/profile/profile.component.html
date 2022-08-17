@@ -5,14 +5,14 @@
         <span (click)="uiService.toggleProfile()" class="material-icons">close</span>
     </div>
 
-     <div class="icon_edit">
+     <div class="icon_edit" (click)="openProfileDialog()">
         <span  class="material-icons">edit</span>
      </div>
     
     <img *ngIf="fs.user.image; let url" [src]="url" class="img_profile">
     <img *ngIf="!fs.user.image" src="/assets/img/avatar.png" class="img_profile">
 
-    <h1>Mike Swazzlebee -- woher soll das Feld kommen?</h1>
+    <h1>{{ fs.user.fullname }}</h1>
 
     <div class="profile_element">
         <p>My Job</p>
@@ -20,8 +20,21 @@
         <p>{{ fs.user.job }}</p>
     </div>
     <div class="profile_element">
-        <p>Fullname</p>
-        <p>{{ fs.user.fullname }}</p>
+        <p>Nickname</p>
+        <p>{{ fs.user.nickname }}</p>
+    </div>
+
+    <div class="profile_element">
+        <p *ngIf="fs.user.onlineState" class="online-State"><span class="dot-active"></span>active</p>
+        <p *ngIf="!fs.user.onlineState" class="online-State"><span class="dot-away"></span>away</p>
+    </div>
+
+    <div class="profile_element">
+        <p> {{ fs.user.statusText }} </p>
+    </div>
+
+    <div class="profile_element">
+        <p>🕑 {{ fs.user.lastTimeOnline | date:'medium' }} </p>
     </div>
 
     <hr>

@@ -1,0 +1,19 @@
+<h2 mat-dialog-title>Set a status</h2>
+<mat-selection-list [multiple]="false" #states>
+    <mat-list-option disableRipple="true" value="customOption">
+        <mat-form-field appearance="fill">
+            <mat-label>What's your status?</mat-label>
+            <input matInput maxlength="20" [(ngModel)]="individualState">
+            <button *ngIf="individualState" matSuffix mat-icon-button aria-label="Clear" (click)="individualState=''">
+                <mat-icon>close</mat-icon>
+              </button>
+        </mat-form-field>
+    </mat-list-option>
+    <mat-list-option *ngFor="let state of typesOfStates" [value]="state" class="option-2">
+        {{state}}
+    </mat-list-option>
+</mat-selection-list>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button cdkFocusInitial color="green" (click)="getStatus(states.selectedOptions.selected[0]?.value)">Save</button>
+</mat-dialog-actions>

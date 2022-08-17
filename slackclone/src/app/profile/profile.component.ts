@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ProfileDialogComponent } from '../profile-dialog/profile-dialog.component';
 import { FireauthService } from '../services/fireauth.service';
 import { UiChangeService } from '../services/ui-change.service';
 
@@ -17,7 +19,8 @@ export class ProfileComponent implements OnInit {
 
   docID: string;
 
-  constructor(public uiService: UiChangeService,public fs: FireauthService, private firestore: AngularFirestore, ) { }
+  constructor(public uiService: UiChangeService,public fs: FireauthService, private firestore: AngularFirestore, public dialog: MatDialog ) { }
+
 
   ngOnInit(): void {
     console.log("halooooooo:" + this.fs.user);
@@ -30,6 +33,10 @@ export class ProfileComponent implements OnInit {
           this.user = new User(user[0]);
         })
       
+  }
+
+  openProfileDialog() {
+    const dialog = this.dialog.open(ProfileDialogComponent);
   }
 
 }

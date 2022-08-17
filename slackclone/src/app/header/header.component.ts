@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FireauthService } from '../services/fireauth.service';
 import { UiChangeService } from '../services/ui-change.service';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { StatusDialogComponent } from '../status-dialog/status-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { ProfileDialogComponent } from '../profile-dialog/profile-dialog.component';
 
 @Component({
   selector: 'app-header',
@@ -10,17 +11,35 @@ import { ProfileDialogComponent } from '../profile-dialog/profile-dialog.compone
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  docID: string;
 
-  constructor(public uiService: UiChangeService, public fs: FireauthService, public dialog: MatDialog) {
+  constructor(public uiService: UiChangeService, public fs: FireauthService, private firestore: AngularFirestore, public dialog: MatDialog) {
   }
 
   ngOnInit(): void {
-  
+    this.fs.triggerUpdateLastTimeOnline();
   }
 
-  openDialog() {
-  const dialog = this.dialog.open(ProfileDialogComponent);
-
+  openStateDialog() {
+    const dialog = this.dialog.open(StatusDialogComponent);
   }
 
+  connectFB() {
+    if (this.fs.user) {
+      let sub = this.firestore
+        .collection('users', ref => ref.where('uid', '==', this.fs.uid))
+        .valueChanges({ idField: 'docID' })
+        .subscribe((user: any) => {
+          this.docID = user[0].docID;
+          sub.unsubscribe();
+        })
+    }
+  }
+
+  toggleOnlineState() {
+    if (this.docID) {
+      this.fs.user.onlineState = !this.fs.user.onlineState;
+      this.fs.updateUser();
+    }
+  }
 }

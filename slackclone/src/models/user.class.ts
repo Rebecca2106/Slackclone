@@ -6,6 +6,9 @@ export class User {
     image: string;
     email: string;
     phone: string;
+    onlineState: boolean;
+    statusText: string;
+    lastTimeOnline: number;
 
 
     constructor(obj?: any) {
@@ -16,6 +19,9 @@ export class User {
         this.image = obj ? obj.image : '';
         this.email = obj ? obj.email : '';
         this.phone = obj ? obj.phone : '';
+        this.onlineState = obj ? obj.onlineState : false;
+        this.statusText = obj ? obj.statusText : '';
+        this.lastTimeOnline = obj ? obj.lastTimeOnline : '';
     }
 
     public toJSON() {
@@ -26,7 +32,10 @@ export class User {
             job: this.job,
             image: this.image,
             email: this.email,
-            phone: this.phone
+            phone: this.phone,
+            onlineState: this.onlineState,
+            statusText: this.statusText,
+            lastTimeOnline: this.lastTimeOnline
         }
     }
 }

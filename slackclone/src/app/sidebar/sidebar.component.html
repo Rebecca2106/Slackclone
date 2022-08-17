@@ -6,7 +6,7 @@
                     <mat-panel-title>
                         Channels         
                     </mat-panel-title>
-                    <span (click)="openDialog()" class="material-icons" *ngIf="iconVisible1">add</span>
+                    <span (click)="openDialog()" class="material-icons add-button" *ngIf="iconVisible1">add</span>
                 </mat-expansion-panel-header>
                 <p># weitere Channels</p>
                 <p *ngFor=" let channel of allChannels ">{{channel}}</p>
