@@ -8,7 +8,7 @@ export class User {
     phone: string;
     onlineState: boolean;
     statusText: string;
-    lastTimeOnline: number;
+    lastTimeOnline: any;
 
 
     constructor(obj?: any) {
