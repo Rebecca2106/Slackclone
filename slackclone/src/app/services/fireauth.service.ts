@@ -12,16 +12,18 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 export class FireauthService {
   newUser: User;
   user: User;
+  newUsername: string;
   authUserData: any;
   uid: string;
   loggedIn: boolean = false;
   userSub: any;
   isGuest = false;
+  isNewUser = false;
   docID: string;
   interval: any;
   interval2: any;
 
-  constructor(public auth: AngularFireAuth, public router: Router, private _errorBar: MatSnackBar, private firestore: AngularFirestore) {
+  constructor(public auth: AngularFireAuth, public router: Router, private _SnackBar: MatSnackBar, private firestore: AngularFirestore) {
 
     // Setting logged in user
     this.auth.authState.subscribe((user) => {
@@ -41,8 +43,6 @@ export class FireauthService {
     });
   }
 
-
-
   checkUser(uid: string, email: string) {
     this.userSub = this.firestore
       .collection('users', ref => ref.where('uid', '==', uid))
@@ -52,8 +52,6 @@ export class FireauthService {
           this.user = new User(user[0]);
           this.docID = user[0].docID;
           console.log('Current user:', this.user);
-
-
           this.router.navigate(['']);          
         
         } else {
@@ -69,6 +67,7 @@ export class FireauthService {
     this.newUser.uid = uid;
     this.checkForMail(email);
     this.checkForGuest();
+    this.checkForNewUser();
 
     await this.firestore
       .collection('users')
@@ -91,13 +90,44 @@ export class FireauthService {
     }
   }
 
+  checkForNewUser() {
+    if (this.isNewUser) {
+      this.newUser.fullname = this.newUsername;
+      this.newUsername = '';
+      this.isNewUser = false;
+    }
+  }
+
   openErrorBar(err) {
-    this._errorBar.open(err, '', {
+    this._SnackBar.open(err, '', {
       duration: 3000,
       // here specify the position
       verticalPosition: 'bottom',
       horizontalPosition: 'center',
       panelClass: ['access-denied']
+    });
+  }
+
+  openSuccessBar(data) {
+    this._SnackBar.open(data, '', {
+      duration: 3000,
+      // here specify the position
+      verticalPosition: 'bottom',
+      horizontalPosition: 'center',
+      panelClass: ['success']
+    });
+  }
+
+  //SignUp
+  signUp(email:string, password: string, username: string) {
+    this.auth.createUserWithEmailAndPassword(email, password)
+    .then(() => {
+      this.isNewUser = true;
+      this.newUsername = username;
+      this.openSuccessBar('User account successfully created.');
+    })
+    .catch(error => {
+      this.openErrorBar(error);
     });
   }
 
