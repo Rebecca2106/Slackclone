@@ -1,12 +1,33 @@
-<div class="chat-main" [ngStyle]="{'background-color': uiService.bg_light_color, 'color': uiService.font_lowlight_color}">
+<div class="chat-main"
+    [ngStyle]="{'background-color': uiService.bg_light_color, 'color': uiService.font_lowlight_color}">
     <div class="element_header" [ngStyle]="{'border-bottom': '2px solid' + uiService.bg_lighter_color}">
         <p>CHANNELNAME</p>
     </div>
 
-    <p>Chat-Main Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facilis, sunt magni corrupti velit dolore, praesentium quia dolor alias recusandae omnis quibusdam, in eligendi distinctio! Delectus dolore ipsa doloribus magnam nesciunt!</p>
-<button (click)="uiService.toggleThread()">open thread</button>
+    <p>Chat-Main Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facilis, sunt magni corrupti velit dolore,
+        praesentium quia dolor alias recusandae omnis quibusdam, in eligendi distinctio! Delectus dolore ipsa doloribus
+        magnam nesciunt!</p>
+    <button (click)="uiService.toggleThread()">open thread</button>
 </div>
 
 <div class="editor">
-<ckeditor [editor]="Editor" data="<p>Sorry der andere geht nicht!</p>"></ckeditor>
+    <editor
+    apiKey="tcf6s96vi3ln7h1sgtod2tzjhnfnrgsypmimricsl27j6wc9"
+    [init]="{ height: 200,
+        menubar: false,
+        selector: '',
+        base_url: '/tinymce',
+        suffix: '.min',
+        plugins: [
+          'advlist autolink lists link image charmap print preview anchor',
+          'searchreplace visualblocks code fullscreen',
+          'insertdatetime media table paste code help wordcount', 'emoticons'
+        ],
+        toolbar:
+          'undo redo | formatselect | bold italic backcolor | \
+          alignleft aligncenter alignright alignjustify | \
+          bullist numlist outdent indent | removeformat | emoticons ',
+          emoticons_database: 'emojis'
+      }">
+</editor>
 </div>

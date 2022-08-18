@@ -32,12 +32,11 @@ import { ProfileDialogComponent } from './profile-dialog/profile-dialog.componen
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AddChannelComponent } from './add-channel/add-channel.component';
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { StatusDialogComponent } from './status-dialog/status-dialog.component';
 import { MatListModule } from '@angular/material/list';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
-
+import { EditorModule, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
 
 
 @NgModule({
@@ -78,12 +77,12 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatDialogModule,
     AngularFireStorageModule,
     MatProgressSpinnerModule,
-    CKEditorModule,
     MatListModule,
     MatSelectModule,
-    MatTabsModule
+    MatTabsModule,
+    EditorModule
   ],
-  providers: [],
+  providers: [{ provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
