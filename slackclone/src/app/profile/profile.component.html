@@ -1,4 +1,4 @@
-<div class="profile_wrapper" [ngStyle]="{'background-color': uiService.bg_light_color, 'color': uiService.font_lowlight_color}">
+<div class="profile_wrapper" [ngStyle]="{'background-color': uiService.bg_light_color, 'color': uiService.font_lowlight_color}" *ngIf="fs.user">
 
     <div class="element_header" [ngStyle]="{'border-bottom': '2px solid' + uiService.bg_lighter_color}">
         <p>profile</p>
@@ -8,6 +8,7 @@
      <div class="icon_edit" (click)="openProfileDialog()">
         <span  class="material-icons">edit</span>
      </div>
+    
     
     <img *ngIf="fs.user.image; let url" [src]="url" class="img_profile">
     <img *ngIf="!fs.user.image" src="/assets/img/avatar.png" class="img_profile">

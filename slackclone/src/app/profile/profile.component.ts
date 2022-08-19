@@ -19,19 +19,11 @@ export class ProfileComponent implements OnInit {
 
   docID: string;
 
-  constructor(public uiService: UiChangeService,public fs: FireauthService, private firestore: AngularFirestore, public dialog: MatDialog ) { }
+  constructor(public uiService: UiChangeService, public fs: FireauthService, private firestore: AngularFirestore, public dialog: MatDialog ) { }
 
 
   ngOnInit(): void {
-    console.log("halooooooo:" + this.fs.user);
-
-      this.firestore
-        .collection('users', ref => ref.where('uid', '==', this.fs.uid))
-        .valueChanges({ idField: 'docID' })
-        .subscribe((user: any) => {
-          this.docID = user[0].docID;          
-          this.user = new User(user[0]);
-        })
+    
       
   }
 
