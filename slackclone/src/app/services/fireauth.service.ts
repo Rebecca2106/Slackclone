@@ -208,7 +208,7 @@ export class FireauthService {
   }
 
   updateTimestamp() {
-    let docRef = this.firestore.collection('users').doc(this.docID);
+    let docRef = this.firestore.collection('users').doc('this.docID');
 
     // Update the timestamp field with the value from the server
     docRef.update({
