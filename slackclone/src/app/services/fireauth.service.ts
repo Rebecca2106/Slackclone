@@ -189,12 +189,12 @@ export class FireauthService {
       if (this.user) {
         this.updateTimestamp();
       }
-    }, 60 * 1000);
+    }, 1 * 1000);
   }
 
   setInitalTimeUpdate() {
     this.interval2 = setInterval(() => {
-
+      
       if (!this.user) {
         clearInterval(this.interval2);
         this.setInitalTimeUpdate();
@@ -208,7 +208,7 @@ export class FireauthService {
   }
 
   updateTimestamp() {
-    let docRef = this.firestore.collection('users').doc('this.docID');
+    let docRef = this.firestore.collection('users').doc(this.docID);
 
     // Update the timestamp field with the value from the server
     docRef.update({
