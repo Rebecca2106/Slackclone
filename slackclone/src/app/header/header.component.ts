@@ -30,7 +30,7 @@ export class HeaderComponent implements OnInit {
         .collection('users', ref => ref.where('uid', '==', this.fs.uid))
         .valueChanges({ idField: 'docID' })
         .subscribe((user: any) => {
-          this.docID = user[0].docID;
+          this.docID = user[0].docID;         
           sub.unsubscribe();
         })
     }

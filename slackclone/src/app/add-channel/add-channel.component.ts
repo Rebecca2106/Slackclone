@@ -7,8 +7,6 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { FireauthService } from '../services/fireauth.service';
 import firebase from 'firebase/compat/app';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-import { MatChipInputEvent } from '@angular/material/chips';
-import { Observable } from 'rxjs';
 
 
 @Component({
