@@ -1,8 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { UiChangeService } from '../services/ui-change.service';
-import {MatAccordion} from '@angular/material/expansion';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MatAccordion } from '@angular/material/expansion';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AddChannelComponent } from '../add-channel/add-channel.component';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import firebase from 'firebase/compat/app';
+import { FireauthService } from '../services/fireauth.service';
 
 
 @Component({
@@ -15,10 +18,11 @@ export class SidebarComponent implements OnInit {
   @Input() togglePosition;
   iconVisible1 = false;
   iconVisible2 = false;
-  allChannels= [];
-  
+  channelCollection: Array<any>;
+  filteredChannelList: Array<any>;
 
-  constructor(public uiService: UiChangeService, public dialog: MatDialog) { }
+
+  constructor(public uiService: UiChangeService, public dialog: MatDialog, private firestore: AngularFirestore, public fs: FireauthService) { }
 
   openDialog(): void {
     const dialogRef = this.dialog.open(AddChannelComponent, {
@@ -27,29 +31,40 @@ export class SidebarComponent implements OnInit {
 
   }
 
-    mouseEnter(iconPosition) {
-      console.log(iconPosition);
-      if (iconPosition=="iconVisible1"){
-        this.iconVisible1=true
-      }
+  mouseEnter(iconPosition) {
+    console.log(iconPosition);
+    if (iconPosition == "iconVisible1") {
+      this.iconVisible1 = true
+    }
 
     else {
-        this.iconVisible2=true
-      }
+      this.iconVisible2 = true
+    }
+  }
+
+  mouseLeave(iconPosition) {
+    if (iconPosition == "iconVisible1") {
+      this.iconVisible1 = false;
     }
 
-    mouseLeave(iconPosition) {
-      if (iconPosition=="iconVisible1"){
-        this.iconVisible1=false;
-      }
-
-      else{
-        this.iconVisible2=false;
-      }
+    else {
+      this.iconVisible2 = false;
     }
+  }
 
   ngOnInit(): void {
-
+    this.firestore
+      .collection('channels', ref => ref.orderBy("title"))
+      .valueChanges()
+      .subscribe((channels: any) => {
+        this.channelCollection = channels;
+        console.log('channels', this.channelCollection);
+        this.filterChannelByUid();
+      })
   }
-  
+
+  filterChannelByUid() {
+    this.filteredChannelList = this.channelCollection.filter(d => d.members.some(e => e.uid == this.fs.uid));
+  }
+
 }

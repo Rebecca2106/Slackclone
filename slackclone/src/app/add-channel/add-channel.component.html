@@ -1,39 +1,67 @@
-<h1 mat-dialog-title>Create new Channel</h1>
+<h1 mat-dialog-title>Create new channel</h1>
 <form (ngSubmit)="onSubmit(f)" #f="ngForm">
     <h4>Name</h4>
     <mat-form-field appearance="fill">
         <mat-label>Name</mat-label>  
         <span matPrefix># &nbsp;</span>      
         <input 
-        (ngModel)="info.channel" 
-        name="channelName" 
+        ngModel
+        name="title"
         placeholder="name"
-        #channelName="ngModel" 
         matInput
         minlength="3" 
         maxlength="30" 
         required />
     </mat-form-field>
 
-
-    <h4>Describe your wonderful Channel</h4>
+    <h4>Describe your channel</h4>
     <mat-form-field appearance="fill">
          <mat-label>Description</mat-label>
       <textarea
-        matInput
+        ngModel
+        name="description"
         placeholder="description"
+        matInput
         maxlength="120"
-        cdkTextareaAutosize
-        (ngModel)="info.info"
-        #channelDescription="ngModel"
-        name="channelDescription"
-      ></textarea>
+        cdkTextareaAutosize >
+    </textarea>
     </mat-form-field>
 
+    <h4>Channel members</h4>
+    <mat-form-field appearance="fill">
+        <mat-label>Add members</mat-label>
+        <mat-chip-list #chipList>
+          <mat-chip
+            *ngFor="let member of showedMembers"
+            (removed)="remove(member)">
+            {{member.name}}
+            <button matChipRemove>
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip>
+          <input
+            placeholder="New member..."
+            #memberInput
+            [formControl]="memberCtrl"
+            [matAutocomplete]="auto"
+            [matChipInputFor]="chipList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            (ngModelChange)="startSearch($event)">
+        </mat-chip-list>
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+          <mat-option *ngFor="let user of filteredUsers" [value]="user.uid">
+            {{user.fullname}} <span *ngIf="user.email">({{user.email}})</span>
+            <span *ngIf="!user.fullname && !user.email">{{user.uid}}</span>
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+    
+
     <div mat-dialog-actions>
-        <button type=submit color="primary" mat-button [disabled]="!f.valid"
-            cdkFocusInitial>Create</button>
+        <button type=submit color="primary" mat-button [disabled]="!f.valid">Create</button>
         <button mat-button type="button" (click)="onNoClick()">Cancel</button>
 
     </div>
 </form>
+
