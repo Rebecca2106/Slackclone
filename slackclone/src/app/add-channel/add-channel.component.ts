@@ -9,8 +9,6 @@ import firebase from 'firebase/compat/app';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
-
 
 
 @Component({
@@ -49,12 +47,11 @@ export class AddChannelComponent implements OnInit {
 
   startSearch(e) {
     let filterValue = '';
+
     if (e) {
       filterValue = e.toLowerCase();
     }
-      console.log(this.allmembers);
-      this.filteredUsers = this.allmembers.filter(a => a.fullname.toLowerCase().includes(filterValue));
-    
+    this.filteredUsers = this.allmembers.filter(a => a.fullname.toLowerCase().includes(filterValue));
   }
 
   remove(member: string): void {
@@ -64,27 +61,30 @@ export class AddChannelComponent implements OnInit {
       this.showedMembers.splice(index, 1);
       this.members.splice(index, 1);
     }
-
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
-    this.membersObj = {
-      uid: event.option.value,
-      read: null,
-      last_updated: null,
-      viewed_messages: null
-    }
-    this.members.push(this.membersObj);
-    this.showedMembers.push(this.membersObj = {name: event.option.viewValue});
-    this.memberInput.nativeElement.value = '';
-    this.memberCtrl.setValue(null);
-    console.log('s', this.showedMembers);
-    console.log('m', this.members);
-    
+    if ((event.option.value !== this.fs.uid) && this.isElementInMembersArray(event)==-1) {
 
+      this.membersObj = {
+        uid: event.option.value,
+        read: null,
+        last_updated: null,
+        viewed_messages: null
+      }
+
+      this.members.push(this.membersObj);
+      this.showedMembers.push(this.membersObj = { name: event.option.viewValue });
+      this.memberInput.nativeElement.value = '';
+      this.memberCtrl.setValue(null);
+    }
   }
 
-  setOwnUserToMembers(){
+  isElementInMembersArray(event) {
+    return this.members.map(e => e.uid).indexOf(event.option.value);
+  }
+
+  setOwnUserToMembers() {
     this.membersObj = {
       uid: this.fs.uid,
       read: null,
