@@ -19,10 +19,30 @@ export class SidebarComponent implements OnInit {
   iconVisible1 = false;
   iconVisible2 = false;
   channelCollection: Array<any>;
+  dmCollection: Array<any>;
   filteredChannelList: Array<any>;
 
-
   constructor(public uiService: UiChangeService, public dialog: MatDialog, private firestore: AngularFirestore, public fs: FireauthService) { }
+
+  ngOnInit(): void {
+    this.firestore
+      .collection('channels', ref => ref.orderBy("title"))
+      .valueChanges()
+      .subscribe((channels: any) => {
+        this.channelCollection = channels;
+        console.log('channels', this.channelCollection);
+        this.filterChannelByUid();
+      })
+
+      this.firestore
+      .collection('dms', ref=> ref.where("memberUids", "array-contains", this.fs.uid))
+      .valueChanges()
+      .subscribe((dms: any) => {
+        this.dmCollection = dms;
+        console.log('dms', this.dmCollection);
+      })
+
+  }
 
   openDialog(): void {
     const dialogRef = this.dialog.open(AddChannelComponent, {
@@ -50,17 +70,6 @@ export class SidebarComponent implements OnInit {
     else {
       this.iconVisible2 = false;
     }
-  }
-
-  ngOnInit(): void {
-    this.firestore
-      .collection('channels', ref => ref.orderBy("title"))
-      .valueChanges()
-      .subscribe((channels: any) => {
-        this.channelCollection = channels;
-        console.log('channels', this.channelCollection);
-        this.filterChannelByUid();
-      })
   }
 
   filterChannelByUid() {

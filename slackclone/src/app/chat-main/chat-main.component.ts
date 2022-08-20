@@ -8,7 +8,7 @@ import { UiChangeService } from '../services/ui-change.service';
 })
 export class ChatMainComponent implements OnInit {
 
-    constructor(public uiService: UiChangeService) { 
+  constructor(public uiService: UiChangeService) { 
   }
 
   ngOnInit(): void {
