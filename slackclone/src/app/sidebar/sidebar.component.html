@@ -17,15 +17,13 @@
                         Channels
                     </mat-panel-title>
                     <span [ngStyle]="{'color': uiService.font_lowlight_color}"
-                        (click)="openDialog(); $event.stopPropagation()" class="material-icons add-button"
+                        (click)="openChannelDialog(); $event.stopPropagation()" class="material-icons add-button"
                         *ngIf="iconVisible1">add</span>
                 </mat-expansion-panel-header>
                 <div class="hover accordion_element" *ngFor=" let channel of filteredChannelList ">
                     <div class="flex_cc">#</div>{{ channel.title }}
                 </div>
-
             </mat-expansion-panel>
-
         </mat-accordion>
 
     </div>
@@ -41,27 +39,17 @@
                         Directmessages
                     </mat-panel-title>
                     <span [ngStyle]="{'color': uiService.font_lowlight_color}"
-                        (click)="openDialog(); $event.stopPropagation()" class="material-icons"
+                        (click)="openChatDialog(); testClick(); $event.stopPropagation()" class="material-icons"
                         *ngIf="iconVisible2">add</span>
                 </mat-expansion-panel-header>
-                <div class="hover accordion_element">
-                    <div>Bild</div> Chatpartner
+                <div class="hover accordion_element" *ngFor=" let chat of this.chatService.dmCollection ">
+                    <div>Bild</div> {{getOtherUsersNames(chat.members)}}
+                </div>
+                <div class="hover accordion_element" >
+                    <div>Bild</div> chat
                 </div>
                 <div class="hover accordion_element">
-                    <div>Bild</div> Chatpartner
-                </div>
-                <div class="hover accordion_element">
-                    <div>Bild</div> Chatpartner
-                </div>
-
-                <div class="hover accordion_element">
-                    <div>Bild</div> Chatpartner
-                </div>
-                <div class="hover accordion_element">
-                    <div>Bild</div> Chatpartner
-                </div>
-                <div class="hover accordion_element">
-                    <div>Bild</div> Chatpartner
+                    
                 </div>
             </mat-expansion-panel>
         </mat-accordion>

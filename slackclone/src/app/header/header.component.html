@@ -4,12 +4,6 @@
         </mat-icon>
     </div>
 
-    <button>dark</button>
-    <button>light</button>
-    <button>yellow</button>
-    <button>red</button>
-    <button>blue</button>
-    <button>green</button>
     <div *ngIf="fs.loggedIn && fs.user" class="user-info-box">
         <div>Hello {{ fs.user.fullname }}</div>
         <div *ngIf="fs.user.statusText" class="status-chip" (click)="openStateDialog()">{{ fs.user.statusText }}</div>
