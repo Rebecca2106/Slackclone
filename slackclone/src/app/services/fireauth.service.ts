@@ -159,21 +159,6 @@ export class FireauthService {
     }
   }
 
-  // Sign in as Guest
-  async loginGuest() {
-    try {
-      let resp = await this.auth.signInAnonymously();
-      if (resp.user) {
-        this.isGuest = true;
-        this.authUserData = resp.user;
-        this.router.navigate(['']);
-      }
-    }
-    catch (error) {
-      this.openErrorBar(error);
-    }
-  }
-
   //Logout
   logout() {
     this.userSub.unsubscribe();
