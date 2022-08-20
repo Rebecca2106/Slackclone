@@ -44,7 +44,7 @@ export class AddChatComponent implements OnInit {
       })
   }
 
-  startSearch(e) {
+  startSearch(e?) {
     let filterValue = '';
 
     if (e) {

@@ -46,7 +46,8 @@
             [matAutocomplete]="auto"
             [matChipInputFor]="chipList"
             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-            (ngModelChange)="startSearch($event)">
+            (ngModelChange)="startSearch($event)"
+            (focus)="startSearch()">
         </mat-chip-list>
         <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
           <mat-option *ngFor="let user of filteredUsers" [value]="user.uid">

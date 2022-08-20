@@ -43,7 +43,7 @@ export class AddChannelComponent implements OnInit {
       })
   }
 
-  startSearch(e) {
+  startSearch(e?) {
     let filterValue = '';
 
     if (e) {
