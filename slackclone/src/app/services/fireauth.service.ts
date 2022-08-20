@@ -31,7 +31,6 @@ export class FireauthService {
   uid: string;
   loggedIn: boolean = false;
   userSub: any;
-  isGuest = false;
   isNewUser = false;
   docID: string;
   interval: any;
@@ -82,7 +81,6 @@ export class FireauthService {
     this.newUser = new User();
     this.newUser.uid = uid;
     this.checkForMail(email);
-    this.checkForGuest();
     this.checkForNewUser();
 
     await this.firestore
@@ -96,13 +94,6 @@ export class FireauthService {
   checkForMail(email) {
     if (email) {
       this.newUser.email = email;
-    }
-  }
-
-  checkForGuest() {
-    if (this.isGuest) {
-      this.newUser.fullname = 'Guest';
-      this.isGuest = false;
     }
   }
 
