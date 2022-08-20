@@ -3,9 +3,12 @@ import { UiChangeService } from '../services/ui-change.service';
 import { MatAccordion } from '@angular/material/expansion';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AddChannelComponent } from '../add-channel/add-channel.component';
+import { AddChatComponent } from '../add-chat/add-chat.component';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import firebase from 'firebase/compat/app';
 import { FireauthService } from '../services/fireauth.service';
+import { FirebaseChatService } from 'src/app/services/firebase-chat.service';
+
 
 
 @Component({
@@ -21,8 +24,12 @@ export class SidebarComponent implements OnInit {
   channelCollection: Array<any>;
   dmCollection: Array<any>;
   filteredChannelList: Array<any>;
+  sortedChatList: Array<any>;
+  constructor(public uiService: UiChangeService,public chatService: FirebaseChatService, public dialog: MatDialog, private firestore: AngularFirestore, public fs: FireauthService) { }
 
-  constructor(public uiService: UiChangeService, public dialog: MatDialog, private firestore: AngularFirestore, public fs: FireauthService) { }
+  testClick(){
+    
+  }
 
   ngOnInit(): void {
     this.firestore
@@ -32,27 +39,28 @@ export class SidebarComponent implements OnInit {
         this.channelCollection = channels;
         console.log('channels', this.channelCollection);
         this.filterChannelByUid();
+        console.log();
+        
       })
 
-      this.firestore
-      .collection('dms', ref=> ref.where("memberUids", "array-contains", this.fs.uid))
-      .valueChanges()
-      .subscribe((dms: any) => {
-        this.dmCollection = dms;
-        console.log('dms', this.dmCollection);
-      })
-
+      this.chatService.subscribeChats();
   }
 
-  openDialog(): void {
+  openChannelDialog(): void {
     const dialogRef = this.dialog.open(AddChannelComponent, {
       width: '350px',
     });
 
   }
 
+  openChatDialog(): void {
+    const dialogRef = this.dialog.open(AddChatComponent, {
+      width: '350px',
+    });
+
+  }
+
   mouseEnter(iconPosition) {
-    console.log(iconPosition);
     if (iconPosition == "iconVisible1") {
       this.iconVisible1 = true
     }
@@ -73,7 +81,17 @@ export class SidebarComponent implements OnInit {
   }
 
   filterChannelByUid() {
-    this.filteredChannelList = this.channelCollection.filter(d => d.members.some(e => e.uid == this.fs.uid));
+    this.filteredChannelList = this.channelCollection.filter(d => d.members.some(e => e.uid == this.fs.user.uid));
+  }
+
+  getOtherUsersNames(list){
+    let filteredlist = []
+    list.forEach(element => {
+      if(element.uid != this.fs.user.uid){
+        filteredlist.push(element.uid);
+      }
+    });
+    return filteredlist;
   }
 
 }

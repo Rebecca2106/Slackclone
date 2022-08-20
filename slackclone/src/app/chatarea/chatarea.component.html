@@ -1,5 +1,5 @@
 <app-header></app-header>
-<div class="chat-flex" (mouseup)="stopResize()" (mousemove)="onResizing($event)">
+<div *ngIf="fs.user" class="chat-flex" (mouseup)="stopResize()" (mousemove)="onResizing($event)">
     <app-sidebar class="sidebar_wrapper z_index_10"
         [ngStyle]="{'left': !uiService.showSidebar ? '-' + this.leftSidebar.width + 'px' : '0px', width: this.leftSidebar.width  + 'px', 'background-color': uiService.bg_light_color }"
         [ngClass]="{'transition': this.checkScreenWidth()}">
@@ -21,7 +21,4 @@
         [ngClass]="{'pos_abs_right': this.rightSidebar.positionAbsolute, 'd_none': this.checkScreenWidth()}"
         [ngStyle]="{'width': (uiService.profile || uiService.thread) ? this.rightSidebar.width + 5 + 'px' : '0px'}">
     </div>
-
-
-
 </div>

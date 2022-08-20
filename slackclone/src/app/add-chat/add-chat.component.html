@@ -1,0 +1,40 @@
+<h1 mat-dialog-title>Create new chat</h1>
+<form (ngSubmit)="onSubmit(f)" #f="ngForm">
+    <h4>Chat members</h4>
+    <mat-form-field appearance="fill">
+        <mat-label>Add members</mat-label>
+        <mat-chip-list #chipList>
+          <mat-chip
+            *ngFor="let member of showedMembers"
+            (removed)="remove(member)">
+            {{member.name}}
+            <button matChipRemove>
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip>
+          <input
+            placeholder="New member..."
+            #memberInput
+            [formControl]="memberCtrl"
+            [matAutocomplete]="auto"
+            [matChipInputFor]="chipList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            (ngModelChange)="startSearch($event)">
+        </mat-chip-list>
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+          <mat-option *ngFor="let user of filteredUsers" [value]="user.uid">
+            {{user.fullname}} <span *ngIf="user.email">({{user.email}})</span>
+            <span *ngIf="!user.fullname && !user.email">{{user.uid}}</span>
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+    
+
+    <mat-dialog-actions align="end">
+        <button mat-button type="button" (click)="onNoClick()">Cancel</button>
+        <button type=submit [class.mat-green]="f.valid" mat-button [disabled]="!f.valid">Create</button>
+
+    </mat-dialog-actions>
+
+</form>

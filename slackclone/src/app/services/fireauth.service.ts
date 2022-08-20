@@ -5,11 +5,25 @@ import firebase from 'firebase/compat/app';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from 'src/models/user.class';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+
+
+
+
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class FireauthService {
+
+
+
+
+
+
+
+
   newUser: User;
   user: User;
   newUsername: string;
@@ -24,24 +38,25 @@ export class FireauthService {
   interval2: any;
 
   constructor(public auth: AngularFireAuth, public router: Router, private _SnackBar: MatSnackBar, private firestore: AngularFirestore) {
-
-    // Setting logged in user
-    this.auth.authState.subscribe((user) => {
-      this.authUserData = user;
-
-      if (!user) {
-        this.router.navigate(['login']);
-        this.loggedIn = false;
-        console.log('User logged in:', this.loggedIn);
-
-      } else {
-        this.loggedIn = true;
-        console.log('User logged in:', this.loggedIn);
-        this.uid = this.authUserData.uid;
-        this.checkUser(this.uid, this.authUserData.email);
-      }
+    const auth1 = getAuth();
+    onAuthStateChanged(auth1, (user1) => {
+    console.log("heyhoooo:",user1);
+    
+    if (!user1) {
+      this.router.navigate(['login']);
+      this.loggedIn = false;
+    } else {
+      this.authUserData = user1;
+      this.loggedIn = true;
+      this.checkUser(this.authUserData.uid, this.authUserData.email);
+    }
     });
+
   }
+
+
+  
+
 
   checkUser(uid: string, email: string) {
     this.userSub = this.firestore
@@ -54,11 +69,12 @@ export class FireauthService {
           console.log('Current user:', this.user);
           this.router.navigate(['']);          
         
-        } else {
-          // console.log('User not found!');
+        } else {  // BLA unnötig oder für signup
+          console.log('User not found!');
           await this.addUser(uid, email);
         }
       })
+      
   }
 
   async addUser(uid: string, email: string) {

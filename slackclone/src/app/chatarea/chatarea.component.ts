@@ -1,5 +1,6 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { UiChangeService } from '../services/ui-change.service';
+import { FireauthService } from '../services/fireauth.service';
 
 @Component({
   selector: 'app-chatarea',
@@ -31,14 +32,43 @@ export class ChatareaComponent implements OnInit {
   currentXPosition = 0;
 
 
-  constructor(public uiService: UiChangeService) {
+  constructor(public uiService: UiChangeService, public fs: FireauthService) {
   }
 
   ngOnInit(): void {
     this.evaluateWidth();
     this.updateMidContentWidth();
-    
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
