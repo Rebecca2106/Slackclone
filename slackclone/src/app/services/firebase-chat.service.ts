@@ -4,6 +4,11 @@ import { FireauthService } from '../services/fireauth.service';
 import { DM } from 'src/models/dm.class';
 import firebase from 'firebase/compat/app';
 import { collection, query, where, doc, getDoc, getDocs } from "firebase/firestore";
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+import { FirebaseMainService } from 'src/app/services/firebase-main.service';
+
+// import firebase from 'firebase/app';
 
 
 
@@ -16,18 +21,18 @@ import { collection, query, where, doc, getDoc, getDocs } from "firebase/firesto
 })
 export class FirebaseChatService {
     dmCollection: Array<any>;
-
-    constructor(private firestore: AngularFirestore, public fs: FireauthService) { }
     chat: DM;
 
+    constructor(public fb: FirebaseMainService ,private firestore: AngularFirestore, public fs: FireauthService) { }
+
+
+
     ngOnInit(): void {
-
-
     }
 
-    subscribeChats() {
+    async subscribeChats() {
         this.firestore
-            .collection('dms', ref => ref.where("memberUids", "array-contains", this.fs.user.uid))
+            .collection( 'dms', ref => ref.where("memberUids", "array-contains", this.fs.user.uid))
             .valueChanges()
             .subscribe((dms: any) => {
 

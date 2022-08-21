@@ -8,6 +8,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import firebase from 'firebase/compat/app';
 import { FireauthService } from '../services/fireauth.service';
 import { FirebaseChatService } from 'src/app/services/firebase-chat.service';
+import { FirebaseChannelService } from 'src/app/services/firebase-channel.service';
 
 
 
@@ -23,27 +24,29 @@ export class SidebarComponent implements OnInit {
   iconVisible2 = false;
   channelCollection: Array<any>;
   dmCollection: Array<any>;
-  filteredChannelList: Array<any>;
-  sortedChatList: Array<any>;
-  constructor(public uiService: UiChangeService,public chatService: FirebaseChatService, public dialog: MatDialog, private firestore: AngularFirestore, public fs: FireauthService) { }
+  filteredChannelList: Array<any>; 
+  constructor(public uiService: UiChangeService,public channelService: FirebaseChannelService, public chatService: FirebaseChatService, public dialog: MatDialog, private firestore: AngularFirestore, public fs: FireauthService) { }
 
   testClick(){
     
   }
 
   ngOnInit(): void {
-    this.firestore
-      .collection('channels', ref => ref.orderBy("title"))
-      .valueChanges()
-      .subscribe((channels: any) => {
-        this.channelCollection = channels;
-        console.log('channels', this.channelCollection);
-        this.filterChannelByUid();
-        console.log();
-        
-      })
+    
+    this.channelService.subscribeChannels();
+    this.chatService.subscribeChats();
+  }
 
-      this.chatService.subscribeChats();
+
+  //weg?
+  getOtherUsersNames(list){
+    let filteredlist = []
+    list.forEach(element => {
+      if(element.uid != this.fs.user.uid){
+        filteredlist.push(element.uid);
+      }
+    });
+    return filteredlist;
   }
 
   openChannelDialog(): void {
@@ -78,20 +81,6 @@ export class SidebarComponent implements OnInit {
     else {
       this.iconVisible2 = false;
     }
-  }
-
-  filterChannelByUid() {
-    this.filteredChannelList = this.channelCollection.filter(d => d.members.some(e => e.uid == this.fs.user.uid));
-  }
-
-  getOtherUsersNames(list){
-    let filteredlist = []
-    list.forEach(element => {
-      if(element.uid != this.fs.user.uid){
-        filteredlist.push(element.uid);
-      }
-    });
-    return filteredlist;
   }
 
 }

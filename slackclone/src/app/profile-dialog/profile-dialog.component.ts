@@ -23,7 +23,7 @@ export class ProfileDialogComponent implements OnInit {
   ngOnInit(): void {
     if (this.fs.user) {
       let sub = this.firestore
-        .collection('users', ref => ref.where('uid', '==', this.fs.uid))
+        .collection('users', ref => ref.where('uid', '==', this.fs.user.uid))
         .valueChanges({ idField: 'docID' })
         .subscribe((user: any) => {
           this.docID = user[0].docID;
@@ -46,7 +46,7 @@ export class ProfileDialogComponent implements OnInit {
   upload(event: any) {
     this.isUploading = true;
     const file = event.target.files[0];
-    const filePath = `${this.fs.uid}_profileimage`;
+    const filePath = `${this.fs.user.uid}_profileimage`;
     const fileRef = this.storage.ref(filePath);
     const task = this.storage.upload(filePath, file);
 
