@@ -37,8 +37,8 @@ export class ChannelEditDialogComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.channelService.getChannelforDocID(this.data.docID);
     this.fb.getAllUsersOrderedByFullname();
+    this.channelService.getChannelforDocID(this.data.docID);
     console.log(this.channelService.showedMembers);
     
   }

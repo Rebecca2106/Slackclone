@@ -17,14 +17,22 @@ export class FirebaseMainService {
   constructor(private firestore: AngularFirestore) { }
 
   async getUserFromId(id) {
-    const usersRef = collection(this.db, "users");
+    return new Promise(async resolve => {
+      const usersRef = collection(this.db, "users");
 
-    const q = query(usersRef, where("uid", "==", id));
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {return doc.data()});
-    // querySnapshot.forEach((doc) => { console.log('AAAAAAAAAAAAAAAAAAA', doc.id, " => ", doc.data()); });
-
+      const q = query(usersRef, where("uid", "==", id));
+      const querySnapshot = await getDocs(q);
+      // querySnapshot.forEach((doc) => {return [doc.data()]});
+      querySnapshot.forEach((doc) => {
+        console.log('Result', doc.id, " => ", doc.data());
+        resolve(doc.data());
+      });
+    })
   }
+
+
+
+
 
   getAllUsersOrderedByFullname() {
     this.firestore

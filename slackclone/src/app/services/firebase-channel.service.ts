@@ -7,7 +7,7 @@ import { getFirestore } from "firebase/firestore";
 import { FirebaseMainService } from 'src/app/services/firebase-main.service';
 import { environment } from 'src/environments/environment';
 import { Channel } from 'src/models/channel.class';
-import { TestBed } from '@angular/core/testing';
+import { take} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -41,8 +41,9 @@ export class FirebaseChannelService {
     this.firestore
       .collection('channels')
       .doc(id)
-      .valueChanges()
+      .valueChanges().pipe(take(1))
       .subscribe((channel: any) => {
+        this.showedMembers = [];
         console.log('channel', channel);
         this.channelDetails = channel;
         console.log('Members', channel.members);
@@ -51,9 +52,12 @@ export class FirebaseChannelService {
           console.log('Member-ID', e.uid);
           let result = await this.fb.getUserFromId(e.uid);
           console.log("ich will das result", result);
-        })
+          this.showedMembers.push(result);
+          console.log("showedMembers",  this.showedMembers);
+        });
 
-      });
+      })
+   
   }
 
 }
