@@ -32,7 +32,7 @@
         <mat-label>Add members</mat-label>
         <mat-chip-list #chipList>
           <mat-chip
-            *ngFor="let member of showedMembers"
+            *ngFor="let member of channelService.showedMembers"
             (removed)="remove(member)">
             {{member.name}}
             <button matChipRemove>
@@ -50,7 +50,7 @@
             (focus)="startSearch()">
         </mat-chip-list>
         <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-          <mat-option *ngFor="let user of filteredUsers" [value]="user.uid">
+          <mat-option *ngFor="let user of fb.allmembers" [value]="user.uid">
             {{user.fullname}} <span *ngIf="user.email">({{user.email}})</span>
             <span *ngIf="!user.fullname && !user.email">{{user.uid}}</span>
           </mat-option>

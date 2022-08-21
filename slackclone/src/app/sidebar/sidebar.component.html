@@ -21,7 +21,9 @@
                         *ngIf="iconVisible1">add</span>
                 </mat-expansion-panel-header>
                 <div class="hover accordion_element" *ngFor=" let channel of this.channelService.channelCollection ">
-                    <div class="flex_cc">#</div>{{ channel.title }}
+                    <div class="flex_cc"># </div>
+                    <div class="flex_channel">{{ channel.title }}</div>
+                    <div class="material-icons" (click)="editChannel(channel.docID)">edit</div>
                 </div>
             </mat-expansion-panel>
         </mat-accordion>
@@ -45,11 +47,11 @@
                 <div class="hover accordion_element" *ngFor=" let chat of this.chatService.dmCollection ">
                     <div>Bild</div> {{getOtherUsersNames(chat.members)}}
                 </div>
-                <div class="hover accordion_element" >
+                <div class="hover accordion_element">
                     <div>Bild</div> chat
                 </div>
                 <div class="hover accordion_element">
-                    
+
                 </div>
             </mat-expansion-panel>
         </mat-accordion>

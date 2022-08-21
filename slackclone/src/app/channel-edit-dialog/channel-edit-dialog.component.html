@@ -1,13 +1,40 @@
-<h1 mat-dialog-title>Create new chat</h1>
+<h1 mat-dialog-title>Edit channel</h1>
 <form (ngSubmit)="onSubmit(f)" #f="ngForm">
-    <h4>Chat members</h4>
+    <h4>Name</h4>
+    <mat-form-field appearance="fill">
+        <mat-label>Name</mat-label>  
+        <span matPrefix># &nbsp;</span>      
+        <input 
+        [(ngModel)]="channelService.channelDetails.title"
+        name="title"
+        placeholder="name"
+        matInput
+        minlength="3" 
+        maxlength="30" 
+        required />
+    </mat-form-field>
+
+    <h4>Describe your channel</h4>
+    <mat-form-field appearance="fill">
+         <mat-label>Description</mat-label>
+      <textarea
+        [(ngModel)]="channelService.channelDetails.description"
+        name="description"
+        placeholder="description"
+        matInput
+        maxlength="120"
+        cdkTextareaAutosize >
+    </textarea>
+    </mat-form-field>
+
+    <h4>Channel members</h4>
     <mat-form-field appearance="fill">
         <mat-label>Add members</mat-label>
         <mat-chip-list #chipList>
           <mat-chip
             *ngFor="let member of channelService.showedMembers"
             (removed)="remove(member)">
-            {{member.name}}
+            {{member}}
             <button matChipRemove>
               <mat-icon>cancel</mat-icon>
             </button>
@@ -39,3 +66,4 @@
     </mat-dialog-actions>
 
 </form>
+

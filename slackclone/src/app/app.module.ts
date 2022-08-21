@@ -40,6 +40,7 @@ import { EditorModule, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { AddChatComponent } from './add-chat/add-chat.component';
+import { ChannelEditDialogComponent } from './channel-edit-dialog/channel-edit-dialog.component';
 
 
 
@@ -57,6 +58,7 @@ import { AddChatComponent } from './add-chat/add-chat.component';
     AddChannelComponent,
     StatusDialogComponent,
     AddChatComponent,
+    ChannelEditDialogComponent,
   ],
   imports: [
     BrowserModule,

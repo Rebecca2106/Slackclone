@@ -1,5 +1,5 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Channel } from 'src/models/channel.class';
 import { AngularFirestore } from '@angular/fire/compat/firestore'
 import { FormControl, NgForm } from '@angular/forms';
@@ -7,6 +7,8 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { FireauthService } from '../services/fireauth.service';
 import firebase from 'firebase/compat/app';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { FirebaseMainService } from '../services/firebase-main.service';
+import { FirebaseChannelService } from '../services/firebase-channel.service';
 
 
 @Component({
@@ -14,7 +16,7 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
   templateUrl: './add-channel.component.html',
   styleUrls: ['./add-channel.component.scss']
 })
-export class AddChannelComponent implements OnInit {
+export class AddChannelComponent implements OnInit, OnDestroy {
   channel: Channel;
   createdData = {
     uid: this.fs.user.uid,
@@ -23,24 +25,21 @@ export class AddChannelComponent implements OnInit {
   membersObj = {};
   separatorKeysCodes: number[] = [ENTER, COMMA];
   memberCtrl = new FormControl('');
-  showedMembers: Array<any> = [];
   members: Array<any> = [];
-  allmembers: Array<any> = [];
   filteredUsers: Array<any> = [];
 
   @ViewChild('memberInput') memberInput: ElementRef<HTMLInputElement>;
 
-  constructor(private firestore: AngularFirestore, public dialogRef: MatDialogRef<AddChannelComponent>, public fs: FireauthService) {
+  constructor(private firestore: AngularFirestore, public dialogRef: MatDialogRef<AddChannelComponent>, public fs: FireauthService, public fb: FirebaseMainService, public channelService: FirebaseChannelService) {
 
   }
 
   ngOnInit(): void {
-    this.firestore
-      .collection('users', ref => ref.orderBy("fullname"))
-      .valueChanges()
-      .subscribe((users: any) => {
-        this.allmembers = users;
-      })
+    this.fb.getAllUsersOrderedByFullname();
+  }
+
+  ngOnDestroy(): void {
+    this.channelService.showedMembers = [];
   }
 
   startSearch(e?) {
@@ -49,14 +48,14 @@ export class AddChannelComponent implements OnInit {
     if (e) {
       filterValue = e.toLowerCase();
     }
-    this.filteredUsers = this.allmembers.filter(a => a.fullname.toLowerCase().includes(filterValue));
+    this.filteredUsers = this.fb.allmembers.filter(a => a.fullname.toLowerCase().includes(filterValue));
   }
 
   remove(member: string): void {
-    const index = this.showedMembers.indexOf(member);
+    const index = this.channelService.showedMembers.indexOf(member);
 
     if (index >= 0) {
-      this.showedMembers.splice(index, 1);
+      this.channelService.showedMembers.splice(index, 1);
       this.members.splice(index, 1);
     }
   }
@@ -72,7 +71,9 @@ export class AddChannelComponent implements OnInit {
       }
 
       this.members.push(this.membersObj);
-      this.showedMembers.push(this.membersObj = { name: event.option.viewValue });
+      this.channelService.showedMembers.push(this.membersObj = { name: event.option.viewValue });
+      console.log(this.channelService.showedMembers);
+      
       this.memberInput.nativeElement.value = '';
       this.memberCtrl.setValue(null);
     }

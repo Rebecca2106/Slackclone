@@ -1,24 +1,23 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { DM } from 'src/models/dm.class';
+import { Component, ElementRef, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Channel } from 'src/models/channel.class';
 import { AngularFirestore } from '@angular/fire/compat/firestore'
 import { FormControl, NgForm } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FireauthService } from '../services/fireauth.service';
 import firebase from 'firebase/compat/app';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-import { FirebaseChatService } from 'src/app/services/firebase-chat.service';
-import { FirebaseMainService } from '../services/firebase-main.service';
 import { FirebaseChannelService } from '../services/firebase-channel.service';
-
+import { FirebaseMainService } from '../services/firebase-main.service';
 
 @Component({
-  selector: 'app-add-chat',
-  templateUrl: './add-chat.component.html',
-  styleUrls: ['./add-chat.component.scss']
+  selector: 'app-channel-edit-dialog',
+  templateUrl: './channel-edit-dialog.component.html',
+  styleUrls: ['./channel-edit-dialog.component.scss']
 })
-export class AddChatComponent implements OnInit, OnDestroy {
-  chat: DM;
+export class ChannelEditDialogComponent implements OnInit, OnDestroy {
+
+  channel: Channel;
   createdData = {
     uid: this.fs.user.uid,
     timestamp: firebase.firestore.FieldValue.serverTimestamp()
@@ -26,17 +25,22 @@ export class AddChatComponent implements OnInit, OnDestroy {
   membersObj = {};
   separatorKeysCodes: number[] = [ENTER, COMMA];
   memberCtrl = new FormControl('');
+  
   members: Array<any> = [];
+  allmembers: Array<any> = [];
   filteredUsers: Array<any> = [];
 
   @ViewChild('memberInput') memberInput: ElementRef<HTMLInputElement>;
 
-  constructor(private firestore: AngularFirestore, public dialogRef: MatDialogRef<AddChatComponent>, public chatService: FirebaseChatService, public fs: FireauthService, public fb: FirebaseMainService, public channelService: FirebaseChannelService) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { docID: string }, private firestore: AngularFirestore, public dialogRef: MatDialogRef<ChannelEditDialogComponent>, public fs: FireauthService, public channelService: FirebaseChannelService, public fb: FirebaseMainService) {
 
   }
 
   ngOnInit(): void {
+    this.channelService.getChannelforDocID(this.data.docID);
     this.fb.getAllUsersOrderedByFullname();
+    console.log(this.channelService.showedMembers);
+    
   }
 
   ngOnDestroy(): void {
@@ -49,7 +53,7 @@ export class AddChatComponent implements OnInit, OnDestroy {
     if (e) {
       filterValue = e.toLowerCase();
     }
-    this.filteredUsers = this.fb.allmembers.filter(a => a.fullname.toLowerCase().includes(filterValue));
+    this.filteredUsers = this.allmembers.filter(a => a.fullname.toLowerCase().includes(filterValue));
   }
 
   remove(member: string): void {
@@ -93,31 +97,38 @@ export class AddChatComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(form: NgForm) {
-
-    if (this.members.length != 0) {
-      this.chat = new DM();
-      this.setChatValues(form.value);
-      this.chatService.saveDM();
+    console.log('Channeldata from form : ', form.value);
+    if (form.value) {
+      this.channel = new Channel();
+      this.setChannelValues(form.value);
+      this.saveChannel();
     }
     form.resetForm()
     this.dialogRef.close();
   }
 
-  setChatValues(data: any) {
+  setChannelValues(data: any) {
+    this.channel.title = data.title;
+    this.channel.description = data.description;
+    this.channel.created = this.createdData;
     this.setOwnUserToMembers();
-    this.setMembertUidsArray();
-    this.chat.messages = [];
-    this.chat.members = this.members;
-    this.chatService.chat = this.chat;
+    this.channel.members = this.members;
   }
 
-  setMembertUidsArray() {
-    this.members.forEach(element => {
-      this.chat.memberUids.push(element.uid);
-    });
+  saveChannel() {
+    this.firestore
+      .collection('channels')
+      .add(this.channel.toJSON())
+      .then(() => {
+        console.log('Channel created.');
+      })
+      .catch(() => {
+        console.log('Error while saving channel.');
+      });
   }
 
   onNoClick() {
     this.dialogRef.close();
   }
 }
+

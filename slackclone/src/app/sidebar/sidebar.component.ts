@@ -9,6 +9,7 @@ import firebase from 'firebase/compat/app';
 import { FireauthService } from '../services/fireauth.service';
 import { FirebaseChatService } from 'src/app/services/firebase-chat.service';
 import { FirebaseChannelService } from 'src/app/services/firebase-channel.service';
+import { ChannelEditDialogComponent } from '../channel-edit-dialog/channel-edit-dialog.component';
 
 
 
@@ -22,10 +23,9 @@ export class SidebarComponent implements OnInit {
   @Input() togglePosition;
   iconVisible1 = false;
   iconVisible2 = false;
-  channelCollection: Array<any>;
   dmCollection: Array<any>;
   filteredChannelList: Array<any>; 
-  constructor(public uiService: UiChangeService,public channelService: FirebaseChannelService, public chatService: FirebaseChatService, public dialog: MatDialog, private firestore: AngularFirestore, public fs: FireauthService) { }
+  constructor(public uiService: UiChangeService, public channelService: FirebaseChannelService, public chatService: FirebaseChatService, public dialog: MatDialog, private firestore: AngularFirestore, public fs: FireauthService) { }
 
   testClick(){
     
@@ -54,6 +54,14 @@ export class SidebarComponent implements OnInit {
       width: '350px',
     });
 
+  }
+
+  editChannel(id: string):  void {
+    this.dialog.open(ChannelEditDialogComponent, {
+      width: '350px',
+      data: { docID: id },
+    });
+    console.log('ID', id);
   }
 
   openChatDialog(): void {

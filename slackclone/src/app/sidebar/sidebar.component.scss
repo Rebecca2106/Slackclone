@@ -7,16 +7,16 @@
 
 }
 
-.accordion_wrapper{
+.accordion_wrapper {
     box-shadow: none;
     background-color: transparent;
 }
 
 .sidebar_wrapper_header {
-    padding: 4px 14px 4px 14px; 
+    padding: 4px 14px 4px 14px;
 }
 
-::ng-deep .sidebar_wrapper_header span:nth-child(2){
+::ng-deep .sidebar_wrapper_header span:nth-child(2) {
     border-radius: 4px;
     margin: 0;
     height: 24px;
@@ -27,14 +27,14 @@
 }
 
 ::ng-deep div.mat-expansion-panel-body {
-    padding: 0px 0px 0px 0px; 
-    
+    padding: 0px 0px 0px 0px;
+
 }
 
 ::ng-deep mat-expansion-panel {
     box-shadow: none;
     background-color: transparent;
-    
+
 }
 
 .mat-expansion-panel-header {
@@ -45,32 +45,33 @@
     height: 24px;
 }
 
-.accordion_element{
-    margin:0%;
+.accordion_element {
+    margin: 0%;
     padding: 4px 14px 4px 14px;
     display: flex;
     align-items: center;
     flex-direction: row;
+
 }
 
-.accordion_element div:nth-child(1){
+.accordion_element div:nth-child(1) {
     border-radius: 4px;
     margin-right: 16px;
     height: 24px;
     width: 24px;
 }
 
-.hover:hover{
+.hover:hover {
     background-color: rgba($color: #000000, $alpha: 0.3);
     cursor: pointer;
 }
 
-.sidebar_wrapper_element{
+.sidebar_wrapper_element {
     padding: 0;
     box-shadow: none;
 }
 
-.h_line{
+.h_line {
     height: 1px;
     margin-bottom: 16px;
     width: 100%;

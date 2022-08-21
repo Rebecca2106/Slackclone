@@ -38,10 +38,14 @@ body {
     }
 }
 
-.flex_cc{
+.flex_cc {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.flex_channel {
+    flex: 1;
 }
 
 .element_header {
