@@ -9,6 +9,7 @@ import firebase from 'firebase/compat/app';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { FirebaseChannelService } from '../services/firebase-channel.service';
 import { FirebaseMainService } from '../services/firebase-main.service';
+import { limitToFirst } from '@firebase/database';
 
 @Component({
   selector: 'app-channel-edit-dialog',
@@ -18,17 +19,12 @@ import { FirebaseMainService } from '../services/firebase-main.service';
 export class ChannelEditDialogComponent implements OnInit, OnDestroy {
 
   channel: Channel;
-  createdData = {
-    uid: this.fs.user.uid,
-    timestamp: firebase.firestore.FieldValue.serverTimestamp()
-  };
-  membersObj = {};
   separatorKeysCodes: number[] = [ENTER, COMMA];
   memberCtrl = new FormControl('');
-  
-  members: Array<any> = [];
   allmembers: Array<any> = [];
   filteredUsers: Array<any> = [];
+  creator = false;
+
 
   @ViewChild('memberInput') memberInput: ElementRef<HTMLInputElement>;
 
@@ -38,9 +34,18 @@ export class ChannelEditDialogComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.fb.getAllUsersOrderedByFullname();
-    this.channelService.getChannelforDocID(this.data.docID);
-    console.log(this.channelService.showedMembers);
-    
+    this.getChannelData();
+  }
+
+  async getChannelData () {
+    await this.channelService.getChannelforDocID(this.data.docID);
+    if(this.channelService.channelDetails.created['uid'] == this.fs.user.uid) {
+      this.creator = true;
+    }
+  }
+
+  getCreator(obj, value) {
+    return Object.keys(obj).find(key => obj[key] === value);
   }
 
   ngOnDestroy(): void {
@@ -53,55 +58,50 @@ export class ChannelEditDialogComponent implements OnInit, OnDestroy {
     if (e) {
       filterValue = e.toLowerCase();
     }
-    this.filteredUsers = this.allmembers.filter(a => a.fullname.toLowerCase().includes(filterValue));
+    
+    this.filteredUsers = this.fb.allmembers.filter(a => a.fullname.toLowerCase().includes(filterValue));
   }
 
-  remove(member: string): void {
-    const index = this.channelService.showedMembers.indexOf(member);
+  remove(member: any): void {  
 
-    if (index >= 0) {
-      this.channelService.showedMembers.splice(index, 1);
-      this.members.splice(index, 1);
+    if(this.creator) {
+      if (member.uid !== this.fs.user.uid) {
+      
+        const index = this.channelService.showedMembers.indexOf(member);
+        if (index >= 0) {
+          this.channelService.showedMembers.splice(index, 1);
+        }
+      }
+    } else {
+
+      if (member.uid == this.fs.user.uid) {
+      
+        const index = this.channelService.showedMembers.indexOf(member);
+        if (index >= 0) {
+          this.channelService.showedMembers.splice(index, 1);
+        }
+      }
     }
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
     if ((event.option.value !== this.fs.user.uid) && this.isElementInMembersArray(event) == -1) {
 
-      this.membersObj = {
-        uid: event.option.value,
-        read: null,
-        last_updated: null,
-        viewed_messages: null
-      }
-
-      this.members.push(this.membersObj);
-      this.channelService.showedMembers.push(this.membersObj = { name: event.option.viewValue });
+      this.channelService.showedMembers.push({ uid: event.option.value, fullname: event.option.viewValue });
       this.memberInput.nativeElement.value = '';
       this.memberCtrl.setValue(null);
     }
   }
 
   isElementInMembersArray(event) {
-    return this.members.map(e => e.uid).indexOf(event.option.value);
-  }
-
-  setOwnUserToMembers() {
-    this.membersObj = {
-      uid: this.fs.user.uid,
-      read: null,
-      last_updated: null,
-      viewed_messages: null
-    }
-    this.members.push(this.membersObj);
+    return this.channelService.showedMembers.map(e => e.uid).indexOf(event.option.value);
   }
 
   onSubmit(form: NgForm) {
-    console.log('Channeldata from form : ', form.value);
     if (form.value) {
       this.channel = new Channel();
       this.setChannelValues(form.value);
-      this.saveChannel();
+      this.updateChannel();
     }
     form.resetForm()
     this.dialogRef.close();
@@ -110,21 +110,47 @@ export class ChannelEditDialogComponent implements OnInit, OnDestroy {
   setChannelValues(data: any) {
     this.channel.title = data.title;
     this.channel.description = data.description;
-    this.channel.created = this.createdData;
-    this.setOwnUserToMembers();
-    this.channel.members = this.members;
+    this.channel.created = this.channelService.channelDetails.created;
+    this.setMemberValues();
   }
 
-  saveChannel() {
+  setMemberValues () {
+    this.channel.members = this.channelService.showedMembers.map( e => {
+      return  {
+        uid: e.uid,
+        read: null,
+        last_updated: null,
+        viewed_messages: null
+      }
+    })   
+  }
+
+  updateChannel() {
     this.firestore
       .collection('channels')
-      .add(this.channel.toJSON())
+      .doc(this.data.docID)
+      .update(this.channel.toJSON())
       .then(() => {
-        console.log('Channel created.');
+        console.log('Channel updated.');
       })
       .catch(() => {
-        console.log('Error while saving channel.');
+        console.log('Error while updating channel.');
       });
+  }
+
+  deleteChannel() {
+    this.firestore
+    .collection('channels')
+    .doc(this.data.docID)
+    .delete()
+    .then(() => {
+      console.log('Channel deleted.');
+      this.dialogRef.close();
+    })
+    .catch(() => {
+      console.log('Error while deleting channel.');
+      this.dialogRef.close();
+    });
   }
 
   onNoClick() {

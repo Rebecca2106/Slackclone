@@ -25,7 +25,6 @@ export class AddChannelComponent implements OnInit, OnDestroy {
   membersObj = {};
   separatorKeysCodes: number[] = [ENTER, COMMA];
   memberCtrl = new FormControl('');
-  members: Array<any> = [];
   filteredUsers: Array<any> = [];
 
   @ViewChild('memberInput') memberInput: ElementRef<HTMLInputElement>;
@@ -36,10 +35,15 @@ export class AddChannelComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.fb.getAllUsersOrderedByFullname();
+    this.setOwnUserToMembers();
   }
 
   ngOnDestroy(): void {
     this.channelService.showedMembers = [];
+  }
+
+  setOwnUserToMembers() {
+    this.channelService.showedMembers.push({ uid: this.fs.user.uid, fullname: this.fs.user.fullname, email: this.fs.user.email });
   }
 
   startSearch(e?) {
@@ -48,53 +52,33 @@ export class AddChannelComponent implements OnInit, OnDestroy {
     if (e) {
       filterValue = e.toLowerCase();
     }
-    this.filteredUsers = this.fb.allmembers.filter(a => a.fullname.toLowerCase().includes(filterValue));
+    this.filteredUsers = this.fb.allmembers.filter(a => a.fullname.toLowerCase().includes(filterValue));    
   }
 
-  remove(member: string): void {
-    const index = this.channelService.showedMembers.indexOf(member);
-
-    if (index >= 0) {
-      this.channelService.showedMembers.splice(index, 1);
-      this.members.splice(index, 1);
+  remove(member: any): void {    
+    if (member.uid !== this.fs.user.uid) {
+      
+      const index = this.channelService.showedMembers.indexOf(member);
+      if (index >= 0) {
+        this.channelService.showedMembers.splice(index, 1);
+      }
     }
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
-    if ((event.option.value !== this.fs.user.uid) && this.isElementInMembersArray(event)==-1) {
+    if ((event.option.value !== this.fs.user.uid) && this.isElementInMembersArray(event) == -1) {
 
-      this.membersObj = {
-        uid: event.option.value,
-        read: null,
-        last_updated: null,
-        viewed_messages: null
-      }
-
-      this.members.push(this.membersObj);
-      this.channelService.showedMembers.push(this.membersObj = { name: event.option.viewValue });
-      console.log(this.channelService.showedMembers);
-      
+      this.channelService.showedMembers.push({ uid: event.option.value, fullname: event.option.viewValue });
       this.memberInput.nativeElement.value = '';
       this.memberCtrl.setValue(null);
     }
   }
 
   isElementInMembersArray(event) {
-    return this.members.map(e => e.uid).indexOf(event.option.value);
-  }
-
-  setOwnUserToMembers() {
-    this.membersObj = {
-      uid: this.fs.user.uid,
-      read: null,
-      last_updated: null,
-      viewed_messages: null
-    }
-    this.members.push(this.membersObj);
+    return this.channelService.showedMembers.map(e => e.uid).indexOf(event.option.value);
   }
 
   onSubmit(form: NgForm) {
-    console.log('Channeldata from form : ', form.value);
     if (form.value) {
       this.channel = new Channel();
       this.setChannelValues(form.value);
@@ -108,8 +92,18 @@ export class AddChannelComponent implements OnInit, OnDestroy {
     this.channel.title = data.title;
     this.channel.description = data.description;
     this.channel.created = this.createdData;
-    this.setOwnUserToMembers();
-    this.channel.members = this.members;
+    this.setMemberValues();
+  }
+
+  setMemberValues () {
+    this.channel.members = this.channelService.showedMembers.map( e => {
+      return  {
+        uid: e.uid,
+        read: null,
+        last_updated: null,
+        viewed_messages: null
+      }
+    })   
   }
 
   saveChannel() {

@@ -19,12 +19,10 @@ export class FirebaseMainService {
   async getUserFromId(id) {
     return new Promise(async resolve => {
       const usersRef = collection(this.db, "users");
-
       const q = query(usersRef, where("uid", "==", id));
       const querySnapshot = await getDocs(q);
-      // querySnapshot.forEach((doc) => {return [doc.data()]});
       querySnapshot.forEach((doc) => {
-        console.log('Result', doc.id, " => ", doc.data());
+        // console.log('Result', doc.id, " => ", doc.data());
         resolve(doc.data());
       });
     })

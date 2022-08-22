@@ -39,7 +39,6 @@ export class FireauthService {
   constructor(public auth: AngularFireAuth, public router: Router, private _SnackBar: MatSnackBar, private firestore: AngularFirestore) {
     const auth1 = getAuth();
     onAuthStateChanged(auth1, (user1) => {
-    console.log("heyhoooo:",user1);
     
     if (!user1) {
       this.router.navigate(['login']);
@@ -65,11 +64,11 @@ export class FireauthService {
         if (user.length > 0) {
           this.user = new User(user[0]);
           this.docID = user[0].docID;
-          console.log('Current user:', this.user);
+          // console.log('Current user:', this.user);
           this.router.navigate(['']);          
         
         } else {  // BLA unnötig oder für signup
-          console.log('User not found!');
+          // console.log('User not found!');
           await this.addUser(uid, email);
         }
       })

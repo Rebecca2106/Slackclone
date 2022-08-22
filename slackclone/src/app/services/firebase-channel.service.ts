@@ -38,26 +38,22 @@ export class FirebaseChannelService {
   }
 
   getChannelforDocID(id) {
+    return new Promise(async resolve => {
     this.firestore
       .collection('channels')
       .doc(id)
       .valueChanges().pipe(take(1))
       .subscribe((channel: any) => {
         this.showedMembers = [];
-        console.log('channel', channel);
         this.channelDetails = channel;
-        console.log('Members', channel.members);
-
         channel.members.forEach(async e => {
-          console.log('Member-ID', e.uid);
+          // console.log('Member-ID', e.uid);
           let result = await this.fb.getUserFromId(e.uid);
-          console.log("ich will das result", result);
           this.showedMembers.push(result);
-          console.log("showedMembers",  this.showedMembers);
         });
-
+        resolve(this.showedMembers); ;
       })
-   
+    })
   }
 
 }

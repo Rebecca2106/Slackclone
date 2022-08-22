@@ -1,70 +1,47 @@
 <h1 mat-dialog-title>Edit channel</h1>
 <form (ngSubmit)="onSubmit(f)" #f="ngForm">
-    <h4>Name</h4>
-    <mat-form-field appearance="fill">
-        <mat-label>Name</mat-label>  
-        <span matPrefix># &nbsp;</span>      
-        <input 
-        [(ngModel)]="channelService.channelDetails.title"
-        name="title"
-        placeholder="name"
-        matInput
-        minlength="3" 
-        maxlength="30" 
-        required />
-    </mat-form-field>
+  <h4>Name</h4>
+  <mat-form-field appearance="fill">
+    <mat-label>Name</mat-label>
+    <span matPrefix># &nbsp;</span>
+    <input [(ngModel)]="channelService.channelDetails.title" name="title" placeholder="name" matInput minlength="3"
+      maxlength="30" required />
+  </mat-form-field>
 
-    <h4>Describe your channel</h4>
-    <mat-form-field appearance="fill">
-         <mat-label>Description</mat-label>
-      <textarea
-        [(ngModel)]="channelService.channelDetails.description"
-        name="description"
-        placeholder="description"
-        matInput
-        maxlength="120"
-        cdkTextareaAutosize >
+  <h4>Describe your channel</h4>
+  <mat-form-field appearance="fill">
+    <mat-label>Description</mat-label>
+    <textarea [(ngModel)]="channelService.channelDetails.description" name="description" placeholder="description"
+      matInput maxlength="120" cdkTextareaAutosize>
     </textarea>
-    </mat-form-field>
+  </mat-form-field>
 
-    <h4>Channel members</h4>
-    <mat-form-field appearance="fill">
-        <mat-label>Add members</mat-label>
-        <mat-chip-list #chipList>
-          <mat-chip
-            *ngFor="let member of channelService.showedMembers"
-            (removed)="remove(member)">
-            {{member.fullname}} <span *ngIf="member.email">({{member.email}})</span>
-            <span *ngIf="!member.fullname && !member.email">{{member.uid}}</span>
-            <button matChipRemove>
-              <mat-icon>cancel</mat-icon>
-            </button>
-          </mat-chip>
-          <input
-            placeholder="New member..."
-            #memberInput
-            [formControl]="memberCtrl"
-            [matAutocomplete]="auto"
-            [matChipInputFor]="chipList"
-            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-            (ngModelChange)="startSearch($event)"
-            (focus)="startSearch()">
-        </mat-chip-list>
-        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-          <mat-option *ngFor="let user of fb.allmembers" [value]="user.uid">
-            {{user.fullname}} <span *ngIf="user.email">({{user.email}})</span>
-            <span *ngIf="!user.fullname && !user.email">{{user.uid}}</span>
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
+  <h4>Channel members</h4>
+  <mat-form-field appearance="fill">
+    <mat-label>Change members</mat-label>
+    <mat-chip-list #chipList>
+      <mat-chip *ngFor="let member of channelService.showedMembers" (removed)="remove(member)">
+        {{member.fullname}} <span *ngIf="member.email">({{member.email}})</span>
+        <span *ngIf="!member.fullname && !member.email">{{member.uid}}</span>
+        <button matChipRemove>
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </mat-chip>
+      <input placeholder="New member..." #memberInput [formControl]="memberCtrl" [matAutocomplete]="auto"
+        [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+        (ngModelChange)="startSearch($event)" (focus)="startSearch()">
+    </mat-chip-list>
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+      <mat-option *ngFor="let user of filteredUsers" [value]="user.uid">
+        {{user.fullname}} <span *ngIf="user.email">({{user.email}})</span>
+        <span *ngIf="!user.fullname && !user.email">{{user.uid}}</span>
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field> <button mat-button type="button" class="mat-red" (click)="deleteChannel()" *ngIf="creator">delete channel</button>
 
-    
-
-    <mat-dialog-actions align="end">
-        <button mat-button type="button" (click)="onNoClick()">Cancel</button>
-        <button type=submit [class.mat-green]="f.valid" mat-button [disabled]="!f.valid">Create</button>
-
-    </mat-dialog-actions>
+  <mat-dialog-actions align="end">
+    <button mat-button type="button" (click)="onNoClick()">Cancel</button>
+    <button type=submit [class.mat-green]="f.valid" mat-button [disabled]="!f.valid">Save</button>
+  </mat-dialog-actions>
 
 </form>
-
