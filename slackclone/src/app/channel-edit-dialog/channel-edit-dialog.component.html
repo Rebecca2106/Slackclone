@@ -1,21 +1,23 @@
 <h1 mat-dialog-title>Edit channel</h1>
 <form (ngSubmit)="onSubmit(f)" #f="ngForm">
   <h4>Name</h4>
-  <mat-form-field appearance="fill">
-    <mat-label>Name</mat-label>
-    <span matPrefix># &nbsp;</span>
-    <input [(ngModel)]="channelService.channelDetails.title" name="title" placeholder="name" matInput minlength="3"
-      maxlength="30" required />
-  </mat-form-field>
+  <div matTooltip="Only the creator can change name and description." [matTooltipDisabled]="creator"
+    matTooltipClass="tooltip" #tooltip="matTooltip"></div>
+    <mat-form-field appearance="fill" (click)="tooltip.show()">
+      <mat-label>Name</mat-label>
+      <span matPrefix># &nbsp;</span>
+      <input [(ngModel)]="channelService.channelDetails.title" name="title" placeholder="name" matInput minlength="3"
+        maxlength="30" required [disabled]="!creator">
+    </mat-form-field>
 
-  <h4>Describe your channel</h4>
-  <mat-form-field appearance="fill">
-    <mat-label>Description</mat-label>
-    <textarea [(ngModel)]="channelService.channelDetails.description" name="description" placeholder="description"
-      matInput maxlength="120" cdkTextareaAutosize>
+    <h4>Describe your channel</h4>
+    <mat-form-field appearance="fill" (click)="tooltip.show()">
+      <mat-label>Description</mat-label>
+      <textarea [(ngModel)]="channelService.channelDetails.description" name="description" placeholder="description"
+        matInput maxlength="120" cdkTextareaAutosize [disabled]="!creator">
     </textarea>
-  </mat-form-field>
-
+    </mat-form-field>
+  
   <h4>Channel members</h4>
   <mat-form-field appearance="fill">
     <mat-label>Change members</mat-label>
@@ -37,11 +39,13 @@
         <span *ngIf="!user.fullname && !user.email">{{user.uid}}</span>
       </mat-option>
     </mat-autocomplete>
-  </mat-form-field> <button mat-button type="button" class="mat-red" (click)="deleteChannel()" *ngIf="creator">delete channel</button>
+  </mat-form-field> <button mat-button type="button" class="mat-red" (click)="deleteChannel()" *ngIf="creator">delete
+    channel</button>
 
   <mat-dialog-actions align="end">
     <button mat-button type="button" (click)="onNoClick()">Cancel</button>
-    <button type=submit [class.mat-green]="f.valid" mat-button [disabled]="!f.valid">Save</button>
+    <button type=submit [class.mat-green]="f.valid || !creator" mat-button
+      [disabled]="!f.valid && creator">Save</button>
   </mat-dialog-actions>
 
 </form>

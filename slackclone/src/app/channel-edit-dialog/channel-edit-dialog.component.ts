@@ -1,5 +1,5 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { Component, ElementRef, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Channel } from 'src/models/channel.class';
 import { AngularFirestore } from '@angular/fire/compat/firestore'
 import { FormControl, NgForm } from '@angular/forms';
@@ -14,7 +14,8 @@ import { limitToFirst } from '@firebase/database';
 @Component({
   selector: 'app-channel-edit-dialog',
   templateUrl: './channel-edit-dialog.component.html',
-  styleUrls: ['./channel-edit-dialog.component.scss']
+  styleUrls: ['./channel-edit-dialog.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class ChannelEditDialogComponent implements OnInit, OnDestroy {
 
