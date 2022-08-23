@@ -5,7 +5,7 @@ export class DM {
  
     constructor(obj?: any) {
         this.members = obj ? obj.members : [{"uid": "", "read": null, "last_updated": null, "viewed_messages": null}];
-        this.messages = obj ? obj.messages : [{"messageID": null, "threadID": null}];
+        this.messages = obj ? obj.messages : [];
         this.memberUids = obj ? obj.memberUids : [];
     }
 

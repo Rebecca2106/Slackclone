@@ -4,6 +4,8 @@ export class Message {
     message: string;
     images: Array<any>;
     docs: Array<any>;
+    thread: string;
+    threadAvailable: Boolean;
  
     constructor(obj?: any) {
         this.timestamp = obj ? obj.timestamp : '';
@@ -11,6 +13,8 @@ export class Message {
         this.message = obj ? obj.message : '';
         this.images = obj ? obj.images : [];
         this.docs = obj ? obj.docs : [];
+        this.thread = obj ? obj.thread : "";
+        this.threadAvailable = obj ? obj.threadAvailable : "";
     }
 
     public toJSON() {
@@ -19,7 +23,9 @@ export class Message {
             creator: this.creator,
             message: this.message,
             images: this.images,
-            docs: this.docs
+            docs: this.docs,
+            thread: this.thread,
+            threadAvailable: this.threadAvailable
         }
     }
 }
