@@ -18,9 +18,10 @@ export class StatusDialogComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<StatusDialogComponent>, public fs: FireauthService, private firestore: AngularFirestore) { }
 
   ngOnInit(): void {
+    debugger
     if (this.fs.user) {
       let sub = this.firestore
-        .collection('users', ref => ref.where('uid', '==', this.fs.uid))
+        .collection('users', ref => ref.where('uid', '==', this.fs.user.uid))
         .valueChanges({ idField: 'docID' })
         .subscribe((user: any) => {
           this.docID = user[0].docID;
