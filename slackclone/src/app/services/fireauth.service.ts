@@ -187,11 +187,13 @@ export class FireauthService {
     this.interval2 = setInterval(() => {
       
       if (!this.user) {
+        console.log("wird ausgeführt, wenn this.user nicht verfügbar", this.user );
+        console.log("this.user.lastTimeOnline", this.user.lastTimeOnline );
         clearInterval(this.interval2);
         this.setInitalTimeUpdate();
       }
 
-      if (this.user) {
+      if (this.user) {    
         this.updateTimestamp();
         clearInterval(this.interval2);
       }

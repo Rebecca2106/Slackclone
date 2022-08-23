@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.fs.triggerUpdateLastTimeOnline();
+
   }
 
   openStateDialog() {
