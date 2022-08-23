@@ -7,8 +7,7 @@
           <mat-chip
           *ngFor="let member of channelService.showedMembers"
           (removed)="remove(member)">
-          {{member.fullname}} <span *ngIf="member.email">({{member.email}})</span>
-          <span *ngIf="!member.fullname && !member.email">{{member.uid}}</span>
+          {{member.name}}
             <button matChipRemove>
               <mat-icon>cancel</mat-icon>
             </button>

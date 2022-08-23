@@ -5,11 +5,11 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { AddChannelComponent } from '../add-channel/add-channel.component';
 import { AddChatComponent } from '../add-chat/add-chat.component';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import firebase from 'firebase/compat/app';
 import { FireauthService } from '../services/fireauth.service';
 import { FirebaseChatService } from 'src/app/services/firebase-chat.service';
 import { FirebaseChannelService } from 'src/app/services/firebase-channel.service';
 import { ChannelEditDialogComponent } from '../channel-edit-dialog/channel-edit-dialog.component';
+import { FirebaseMainService } from '../services/firebase-main.service';
 
 
 
@@ -25,7 +25,7 @@ export class SidebarComponent implements OnInit {
   iconVisible2 = false;
   dmCollection: Array<any>;
   filteredChannelList: Array<any>; 
-  constructor(public uiService: UiChangeService, public channelService: FirebaseChannelService, public chatService: FirebaseChatService, public dialog: MatDialog, private firestore: AngularFirestore, public fs: FireauthService) { }
+  constructor(public uiService: UiChangeService, public channelService: FirebaseChannelService, public chatService: FirebaseChatService, public dialog: MatDialog, private firestore: AngularFirestore, public fs: FireauthService, public fb: FirebaseMainService) { }
 
   testClick(){
     
@@ -40,10 +40,10 @@ export class SidebarComponent implements OnInit {
 
   //weg?
   getOtherUsersNames(list){
-    let filteredlist = []
+    let filteredlist = []        
     list.forEach(element => {
       if(element.uid != this.fs.user.uid){
-        filteredlist.push(element.uid);
+        filteredlist.push(element.uid);        
       }
     });
     return filteredlist;

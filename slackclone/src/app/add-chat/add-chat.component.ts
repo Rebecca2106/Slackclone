@@ -64,14 +64,22 @@ export class AddChatComponent implements OnInit, OnDestroy {
   selected(event: MatAutocompleteSelectedEvent): void {
     if ((event.option.value !== this.fs.user.uid) && this.isElementInMembersArray(event) == -1) {
 
-      this.channelService.showedMembers.push({ uid: event.option.value, fullname: event.option.viewValue });
+      this.membersObj = {
+        uid: event.option.value,
+        read: null,
+        last_updated: null,
+        viewed_messages: null
+      }
+
+      this.members.push(this.membersObj);
+      this.channelService.showedMembers.push(this.membersObj = { name: event.option.viewValue });
       this.memberInput.nativeElement.value = '';
       this.memberCtrl.setValue(null);
     }
   }
 
   isElementInMembersArray(event) {
-    return this.channelService.showedMembers.map(e => e.uid).indexOf(event.option.value);
+    return this.members.map(e => e.uid).indexOf(event.option.value);
   }
 
   setOwnUserToMembers() {
