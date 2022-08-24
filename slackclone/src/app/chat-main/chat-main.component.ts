@@ -21,6 +21,8 @@ export class ChatMainComponent implements OnInit {
   filepathID: string;
   isUploading: boolean = false;
   noteText: string;
+  noteTextSaved: string;
+  newContent = "";
   currentUploadImage: string;
 
   constructor(public uiService: UiChangeService, private storage: AngularFireStorage, public fs: FireauthService, private firestore: AngularFirestore) {
@@ -39,47 +41,64 @@ export class ChatMainComponent implements OnInit {
   }
 
   upload(event: any) {
-    this.showUploadSpinner();
-    // this.isUploading = true;
-    // this.createUniquefilepathID(event);
-    // const file = event.target.files[0];    
-    // const filePath = `message_images/${this.filepathID}_msgimage`;
-    // const fileRef = this.storage.ref(filePath);
-    // const task = this.storage.upload(filePath, file);
+    this.isUploading = true;
+    this.showUploadSpinner(this.isUploading);
+    this.createUniquefilepathID(event);
+    const file = event.target.files[0];
+    const filePath = `message_images/${this.filepathID}_msgimage`;
+    const fileRef = this.storage.ref(filePath);
+    const task = this.storage.upload(filePath, file);
 
-    // // get notified when the download URL is available
-    // task.snapshotChanges().pipe(
-    //   finalize(() => { // Execute when the observable completes
-    //     fileRef.getDownloadURL().subscribe(downloadURL => {
-    //       this.messageImages.push(downloadURL);
-    //       this.currentUploadImage = downloadURL;
-    //       console.log('messageImages', this.messageImages);
-    //       this.isUploading = false;
-    //     });
-    //   })
-    // ).subscribe(); 
+    // get notified when the download URL is available
+    task.snapshotChanges().pipe(
+      finalize(() => { // Execute when the observable completes
+        fileRef.getDownloadURL().subscribe(downloadURL => {
+          this.messageImages.push(downloadURL);
+          this.currentUploadImage = downloadURL;
+          console.log('messageImages', this.messageImages);
+          this.isUploading = false;
+          this.showUploadSpinner(this.isUploading);
+        });
+      })
+    ).subscribe();
   };
 
-  showUploadSpinner() {
-    console.log(this.noteText);
-    let spinnerCode = `<p><img src="https://icon-library.com/images/loading-icon-animated-gif/loading-icon-animated-gif-19.jpg" alt="" width="117" height="87"></p>`;
-    if(!this.noteText) {
-      this.noteText = '';
+  showUploadSpinner(isUploading: boolean) {
+    let newText = "";
+   
+    if (isUploading) {
+      this.noteTextSaved = this.noteText;
+      let spinnerCode = `<img src="https://icon-library.com/images/loading-icon-animated-gif/loading-icon-animated-gif-19.jpg" width="117" height="87">`;
+      if (!this.noteTextSaved) {
+        newText = '';
+      } else {
+        newText = this.noteTextSaved;
+      }
+      this.newContent = `${newText}${spinnerCode}`;
+    } else {
+      if (!this.noteTextSaved) {
+        newText = '';
+      } else {
+        newText = this.noteTextSaved;
+      }
+      let newTextAppend = `<img src="${this.currentUploadImage}" width="auto" height="62">`;
+      this.newContent = `${newText}${newTextAppend}`;
     }
-    let newContent = `${this.noteText}${spinnerCode}`;
-    console.log(newContent);
-
-    this.setContentToEditor(newContent);
+    this.setContentToEditor(this.newContent);
+    this.noteText = this.newContent;
   }
 
   sendMsg() {
     console.log(this.noteText);
     // do something else...
     this.setContentToEditor(''); //clear input
+    this.noteText = '';
+    tinymce.activeEditor.focus();
   }
 
   setContentToEditor(data: string) {
     tinymce.activeEditor.setContent(data, { format: 'html' });
+    console.log("content set", this.noteText);
   }
 
 }

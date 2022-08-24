@@ -26,6 +26,7 @@
         align-items: center;
         padding: 4px;
         cursor: pointer;
+        user-select: none;
     }
 
     .control-send-msg {
@@ -34,6 +35,7 @@
         border: unset;
         padding: 4px;
         background-color: gray;
+        user-select: none;
     }
 
     .dirty {
