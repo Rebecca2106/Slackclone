@@ -39,10 +39,11 @@
           emoticons_database: 'emojis'
       }">
     </editor>
-    <div class="message-controller">
-        <input style="display: none" type="file" accept=".png,.jpg" #fileInput (change)="upload($event)" />
-        <div class="control-upload-img material-icons" (click)="fileInput.click()">upload</div>
-        <button class="control-send-msg material-icons" [class.dirty]="noteText" (click)="addMessage()"
-            [disabled]="!noteText">send</button>
-    </div>
+</div>
+<div class="upload-wrapper"></div>
+<div class="message-controller">
+    <input style="display: none" type="file" accept=".png,.jpg" #fileInput (change)="upload($event)" />
+    <div class="control-upload-img material-icons" (click)="fileInput.click()">upload</div>
+    <button class="control-send-msg material-icons" [class.dirty]="noteText" (click)="addMessage()"
+        [disabled]="!noteText">send</button>
 </div>
