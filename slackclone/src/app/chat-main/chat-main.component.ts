@@ -68,7 +68,7 @@ export class ChatMainComponent implements OnInit {
    
     if (isUploading) {
       this.noteTextSaved = this.noteText;
-      let spinnerCode = `<img src="https://icon-library.com/images/loading-icon-animated-gif/loading-icon-animated-gif-19.jpg" width="117" height="87">`;
+      let spinnerCode = `<img src="https://icon-library.com/images/loading-icon-animated-gif/loading-icon-animated-gif-19.jpg" width="auto" height="62">`;
       if (!this.noteTextSaved) {
         newText = '';
       } else {
@@ -90,7 +90,12 @@ export class ChatMainComponent implements OnInit {
 
   sendMsg() {
     console.log(this.noteText);
-    // do something else...
+    this.message = new Message;
+    // hier müss ich weiter machen, um ein neues Messageobjekt zu erstellen.
+    this.clearInput();
+  }
+
+  clearInput () {
     this.setContentToEditor(''); //clear input
     this.noteText = '';
     tinymce.activeEditor.focus();
