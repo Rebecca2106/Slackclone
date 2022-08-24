@@ -12,9 +12,9 @@
         <div class="message-body">
             <div class="header">
                 <h4>{{message.creator}}</h4>
-                <h5>{{getTimeOfMessage(message.timestamp)}}</h5>
+                <h5>{{message.timestamp.toMillis() | date:'medium'}}</h5>
             </div>
-            {{message.message}}
+            <div [innerHtml]="message.message"></div>
             <button (click)="this.fcctService.openThread(message.timestamp)">open Thread</button>
         </div>
     </div>

@@ -108,7 +108,7 @@ export class ChatMainComponent implements OnInit {
     if (this.fcctService.midContent.type == 'chat' || this.fcctService.midContent.type == 'channel') {
 
       let message = new Message();
-      message.timestamp = new Date();
+      message.timestamp = firebase.firestore.Timestamp.now();
       message.creator = this.fs.user.uid;
       message.message = this.noteText;
       this.fcctService.midContent.messages.push(message.toJSON());
@@ -121,14 +121,6 @@ export class ChatMainComponent implements OnInit {
       this.clearInput();
     }
 
-  }
-
-  getTimeOfMessage(time) {
-    if (time) {
-      //time = time.toDate();
-        return time//.getHours() + ":" + String(time.getMinutes()).padStart(2, '0') + ":" + String(time.getSeconds()).padStart(2, '0')+ ":" + String(time.getMilliseconds()).padStart(3, '0');
-    }
-    return "noTime";
   }
 
   openThread(){
