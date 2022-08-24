@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FirebaseChannelChatThreadService } from 'src/app/services/firebase-channel-chat-thread.service';
 
 @Component({
   selector: 'app-chat-thread',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChatThreadComponent implements OnInit {
 
-  constructor() { 
+  constructor(public fcctService: FirebaseChannelChatThreadService) { 
   }
 
   ngOnInit(): void {

@@ -77,3 +77,10 @@
     width: 100%;
     border: unset;
 }
+
+.elipse {
+    max-width: calc(100% - 40px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

@@ -1,14 +1,26 @@
 <div class="chat-main"
     [ngStyle]="{'background-color': uiService.bg_light_color, 'color': uiService.font_lowlight_color}">
     <div class="element_header" [ngStyle]="{'border-bottom': '2px solid' + uiService.bg_lighter_color}">
-        <p>CHANNELNAME</p>
+        <p>{{this.fcctService.midContent.header}}</p>
     </div>
+    <div *ngIf="this.fcctService.midContent.messages.length == 0">nothing in here</div>
 
-    <p>Chat-Main Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facilis, sunt magni corrupti velit dolore,
-        praesentium quia dolor alias recusandae omnis quibusdam, in eligendi distinctio! Delectus dolore ipsa doloribus
-        magnam nesciunt!</p>
-    <button (click)="uiService.toggleThread()">open thread</button>
+    <div *ngFor="let message of this.fcctService.midContent.messages" class="message">
+        <div class="profilpicture">
+            <img class="avatar" src="">
+        </div>
+        <div class="message-body">
+            <div class="header">
+                <h4>{{message.creator}}</h4>
+                <h5>{{getTimeOfMessage(message.timestamp)}}</h5>
+            </div>
+            {{message.message}}
+            <button (click)="this.fcctService.openThread(message.timestamp)">open Thread</button>
+        </div>
+    </div>
 </div>
+
+
 
 <div class="editor">
     <editor [(ngModel)]="noteText" (ngModelChange)="getContentOfEditor()"
@@ -30,7 +42,7 @@
     <div class="message-controller">
         <input style="display: none" type="file" accept=".png,.jpg" #fileInput (change)="upload($event)" />
         <div class="control-upload-img material-icons" (click)="fileInput.click()">upload</div>
-        <button class="control-send-msg material-icons" [class.dirty]="noteText" (click)="sendMsg()"
+        <button class="control-send-msg material-icons" [class.dirty]="noteText" (click)="addMessage()"
             [disabled]="!noteText">send</button>
     </div>
 </div>

@@ -5,9 +5,8 @@
 
 .editor {
     position: absolute;
+    width: 90%;
     bottom: 2px;
-    left: 255px;
-    right: 355px;
 }
 
 .message-controller {
@@ -41,4 +40,35 @@
     .dirty {
         color: #007a5a;
     }
+}
+
+
+
+.message,
+.header {
+    display: flex;
+}
+
+.message {
+    margin-bottom: 20px;
+}
+
+h4,
+h5 {
+    margin-block-start: unset;
+    margin-block-end: unset;
+}
+
+h4 {
+    margin-right: 5px;
+}
+
+.header {
+    align-items: center;
+}
+
+.avatar {
+    margin-right: 10px;
+    height: 35px;
+    border-radius: 6px;
 }

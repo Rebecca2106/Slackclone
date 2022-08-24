@@ -20,7 +20,7 @@
                         (click)="openChannelDialog(); $event.stopPropagation()" class="material-icons add-button"
                         *ngIf="iconVisible1">add</span>
                 </mat-expansion-panel-header>
-                <div class="hover accordion_element" *ngFor=" let channel of this.channelService.channelCollection ">
+                <div class="hover accordion_element" *ngFor=" let channel of this.channelService.channelCollection " (click)="fcctService.openChannel(channel)">
                     <div class="flex_cc"># </div>
                     <div class="flex_channel">{{ channel.title }}</div>
                     <div class="material-icons" (click)="editChannel(channel.docID)">edit</div>
@@ -41,11 +41,11 @@
                         Directmessages
                     </mat-panel-title>
                     <span [ngStyle]="{'color': uiService.font_lowlight_color}"
-                        (click)="openChatDialog(); testClick(); $event.stopPropagation()" class="material-icons"
+                        (click)="openChatDialog();$event.stopPropagation()" class="material-icons"
                         *ngIf="iconVisible2">add</span>
                 </mat-expansion-panel-header>
-                <div class="hover accordion_element" *ngFor=" let chat of this.chatService.dmCollection ">
-                    <div>Bild</div> {{getOtherUsersNames(chat.members)}}
+                <div class="hover accordion_element" *ngFor=" let chat of this.chatService.dmCollection " (click)="fcctService.openChat(chat)">
+                    <div>Bild</div> <div class="elipse">{{getOtherUsersNames(chat.members)}}</div>
                 </div>
             </mat-expansion-panel>
         </mat-accordion>

@@ -13,7 +13,7 @@ export class Message {
         this.message = obj ? obj.message : '';
         this.images = obj ? obj.images : [];
         this.docs = obj ? obj.docs : [];
-        this.thread = obj ? obj.thread : "";
+        this.thread = obj ? obj.thread : [];
         this.threadAvailable = obj ? obj.threadAvailable : "";
     }
 

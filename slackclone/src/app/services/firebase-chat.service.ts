@@ -6,7 +6,9 @@ import firebase from 'firebase/compat/app';
 import { collection, query, where, doc, getDoc, getDocs } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
+import { UiChangeService } from '../services/ui-change.service';
 import { FirebaseMainService } from 'src/app/services/firebase-main.service';
+import { FirebaseChannelChatThreadService } from 'src/app/services/firebase-channel-chat-thread.service';
 
 // import firebase from 'firebase/app';
 
@@ -23,7 +25,7 @@ export class FirebaseChatService {
     dmCollection: Array<any>;
     chat: DM;
 
-    constructor(public fb: FirebaseMainService ,private firestore: AngularFirestore, public fs: FireauthService) { }
+    constructor(public fcctService: FirebaseChannelChatThreadService, public fb: FirebaseMainService ,private firestore: AngularFirestore, public fs: FireauthService) { }
 
 
 
@@ -33,12 +35,23 @@ export class FirebaseChatService {
     async subscribeChats() {
         this.firestore
             .collection( 'dms', ref => ref.where("memberUids", "array-contains", this.fs.user.uid))
-            .valueChanges()
+            .valueChanges({ idField: 'docID' })
             .subscribe((dms: any) => {
-
                 this.dmCollection = dms.sort( this.compare );
-                console.log('dms', this.dmCollection);
+                console.log('dms', dms);
+                this.updateOpenChat();
             })
+    }
+
+
+    updateOpenChat(){
+        if(this.fcctService.midContent.type == 'chat'){
+            this.dmCollection.forEach(chat => {
+                if(this.fcctService.midContent.docID == chat.docID){
+                    this.fcctService.setContent(chat.docID,"chat", chat.messages);
+                }
+            });
+        }
     }
 
     compare(a, b) {
@@ -79,5 +92,12 @@ export class FirebaseChatService {
                 console.log('Error while saving Chat.');
             });
     }
+
+    updateChatMessages(docID, messages) {
+        let docRef = this.firestore.collection('dms').doc(docID);
+        docRef.update({
+          messages: messages
+        });
+      }
 }
 

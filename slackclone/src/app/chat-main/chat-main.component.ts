@@ -4,10 +4,15 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { Message } from 'src/models/message.class';
 import { FireauthService } from '../services/fireauth.service';
 import { UiChangeService } from '../services/ui-change.service';
-import { finalize } from 'rxjs/operators';
+import { finalize, timestamp } from 'rxjs/operators';
 import { DOCUMENT } from '@angular/common';
-import tinymce from 'dist/slackclone/tinymce/tinymce';
+import firebase from 'firebase/compat/app';
+import { FirebaseChatService } from 'src/app/services/firebase-chat.service';
+import { FirebaseChannelService } from 'src/app/services/firebase-channel.service';
+import tinymce from 'node_modules/tinymce';
+import { serverTimestamp } from "firebase/firestore";
 import { TransactionResult } from '@angular/fire/database';
+import { FirebaseChannelChatThreadService } from 'src/app/services/firebase-channel-chat-thread.service';
 
 @Component({
   selector: 'app-chat-main',
@@ -25,7 +30,7 @@ export class ChatMainComponent implements OnInit {
   newContent = "";
   currentUploadImage: string;
 
-  constructor(public uiService: UiChangeService, private storage: AngularFireStorage, public fs: FireauthService, private firestore: AngularFirestore) {
+  constructor(public fcctService: FirebaseChannelChatThreadService, public channelService: FirebaseChannelService, public chatService: FirebaseChatService, public uiService: UiChangeService, private storage: AngularFireStorage, public fs: FireauthService, private firestore: AngularFirestore) {
   }
 
   ngOnInit(): void {
@@ -65,7 +70,7 @@ export class ChatMainComponent implements OnInit {
 
   showUploadSpinner(isUploading: boolean) {
     let newText = "";
-   
+
     if (isUploading) {
       this.noteTextSaved = this.noteText;
       let spinnerCode = `<img src="https://icon-library.com/images/loading-icon-animated-gif/loading-icon-animated-gif-19.jpg" width="auto" height="62">`;
@@ -88,14 +93,7 @@ export class ChatMainComponent implements OnInit {
     this.noteText = this.newContent;
   }
 
-  sendMsg() {
-    console.log(this.noteText);
-    this.message = new Message;
-    // hier müss ich weiter machen, um ein neues Messageobjekt zu erstellen.
-    this.clearInput();
-  }
-
-  clearInput () {
+  clearInput() {
     this.setContentToEditor(''); //clear input
     this.noteText = '';
     tinymce.activeEditor.focus();
@@ -104,6 +102,37 @@ export class ChatMainComponent implements OnInit {
   setContentToEditor(data: string) {
     tinymce.activeEditor.setContent(data, { format: 'html' });
     console.log("content set", this.noteText);
+  }
+
+  addMessage() {
+    if (this.fcctService.midContent.type == 'chat' || this.fcctService.midContent.type == 'channel') {
+
+      let message = new Message();
+      message.timestamp = new Date();
+      message.creator = this.fs.user.uid;
+      message.message = this.noteText;
+      this.fcctService.midContent.messages.push(message.toJSON());
+
+      if (this.fcctService.midContent.type == 'channel') {
+        this.channelService.updateChannelMessages(this.fcctService.midContent.docID, this.fcctService.midContent.messages)
+      } else {
+        this.chatService.updateChatMessages(this.fcctService.midContent.docID, this.fcctService.midContent.messages)
+      }
+      this.clearInput();
+    }
+
+  }
+
+  getTimeOfMessage(time) {
+    if (time) {
+      //time = time.toDate();
+        return time//.getHours() + ":" + String(time.getMinutes()).padStart(2, '0') + ":" + String(time.getSeconds()).padStart(2, '0')+ ":" + String(time.getMilliseconds()).padStart(3, '0');
+    }
+    return "noTime";
+  }
+
+  openThread(){
+
   }
 
 }

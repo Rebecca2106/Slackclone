@@ -10,7 +10,7 @@ import { FirebaseChatService } from 'src/app/services/firebase-chat.service';
 import { FirebaseChannelService } from 'src/app/services/firebase-channel.service';
 import { ChannelEditDialogComponent } from '../channel-edit-dialog/channel-edit-dialog.component';
 import { FirebaseMainService } from '../services/firebase-main.service';
-
+import { FirebaseChannelChatThreadService } from 'src/app/services/firebase-channel-chat-thread.service';
 
 
 @Component({
@@ -25,11 +25,8 @@ export class SidebarComponent implements OnInit {
   iconVisible2 = false;
   dmCollection: Array<any>;
   filteredChannelList: Array<any>; 
-  constructor(public uiService: UiChangeService, public channelService: FirebaseChannelService, public chatService: FirebaseChatService, public dialog: MatDialog, private firestore: AngularFirestore, public fs: FireauthService, public fb: FirebaseMainService) { }
+  constructor(public fcctService: FirebaseChannelChatThreadService, public uiService: UiChangeService, public channelService: FirebaseChannelService, public chatService: FirebaseChatService, public dialog: MatDialog, private firestore: AngularFirestore, public fs: FireauthService, public fb: FirebaseMainService) { }
 
-  testClick(){
-    
-  }
 
   ngOnInit(): void {
     
