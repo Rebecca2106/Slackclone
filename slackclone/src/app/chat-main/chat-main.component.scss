@@ -3,7 +3,7 @@
     height: calc(100vh - 48px);
 }
 
-.editor{
+.editor {
     position: absolute;
     bottom: 2px;
     left: 255px;
@@ -21,10 +21,22 @@
     display: flex;
     justify-content: space-between;
 
-    .control-upload-img, .control-send-msg  {
+    .control-upload-img {
         display: flex;
         align-items: center;
         padding: 4px;
         cursor: pointer;
+    }
+
+    .control-send-msg {
+        display: flex;
+        align-items: center;
+        border: unset;
+        padding: 4px;
+        background-color: gray;
+    }
+
+    .dirty {
+        color: #007a5a;
     }
 }

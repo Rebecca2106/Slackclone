@@ -11,24 +11,26 @@
 </div>
 
 <div class="editor">
-    <editor
-    apiKey="tcf6s96vi3ln7h1sgtod2tzjhnfnrgsypmimricsl27j6wc9"
-    [init]="{ height: 200,
+    <editor [(ngModel)]="noteText" (ngModelChange)="getContentOfEditor()"
+        apiKey="tcf6s96vi3ln7h1sgtod2tzjhnfnrgsypmimricsl27j6wc9" [init]="{
+        height: 200,
         menubar: false,
         selector: '',
         base_url: '/tinymce',
         suffix: '.min',
         plugins: [
-          'emoticons', 'lists', 'link'
+          'emoticons', 'lists', 'link', 'image'
         ],
         toolbar:
-          'undo redo | link | bold italic backcolor | \
+          'undo redo | link | image | bold italic backcolor | \
           bullist numlist | removeformat | emoticons ',
           emoticons_database: 'emojis'
       }">
-</editor>
-<div class="message-controller">
-    <div class="control-upload-img material-icons">upload</div>
-    <div class="control-send-msg material-icons">send</div>
-</div>
+    </editor>
+    <div class="message-controller">
+        <input style="display: none" type="file" accept=".png,.jpg" #fileInput (change)="upload($event)" />
+        <div class="control-upload-img material-icons" (click)="fileInput.click()">upload</div>
+        <button class="control-send-msg material-icons" [class.dirty]="noteText" (click)="sendMsg()"
+            [disabled]="!noteText">send</button>
+    </div>
 </div>

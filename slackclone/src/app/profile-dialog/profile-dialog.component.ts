@@ -46,7 +46,7 @@ export class ProfileDialogComponent implements OnInit {
   upload(event: any) {
     this.isUploading = true;
     const file = event.target.files[0];
-    const filePath = `${this.fs.user.uid}_profileimage`;
+    const filePath = `user_images/${this.fs.user.uid}_profileimage`;
     const fileRef = this.storage.ref(filePath);
     const task = this.storage.upload(filePath, file);
 
