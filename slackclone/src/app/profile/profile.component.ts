@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ProfileDialogComponent } from '../profile-dialog/profile-dialog.component';
 import { FireauthService } from '../services/fireauth.service';
 import { UiChangeService } from '../services/ui-change.service';
-
+import {AppComponent} from '../app.component';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { User } from 'src/models/user.class';
 
@@ -19,8 +19,11 @@ export class ProfileComponent implements OnInit {
 
   docID: string;
 
-  constructor(public uiService: UiChangeService, public fs: FireauthService, private firestore: AngularFirestore, public dialog: MatDialog ) { }
+  constructor(public myapp: AppComponent, public uiService: UiChangeService, public fs: FireauthService, private firestore: AngularFirestore, public dialog: MatDialog ) { }
 
+  testclick(){
+    this.myapp.testingFunction("asdasdasd");
+  }
 
   ngOnInit(): void {
     this.fs.triggerUpdateLastTimeOnline(); 

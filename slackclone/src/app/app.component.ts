@@ -9,4 +9,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'slackclone';
 
+  testingFunction(test){
+    console.log("ich funze",test);
+  }
 }
