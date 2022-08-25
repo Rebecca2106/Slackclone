@@ -4,7 +4,7 @@
         <p>{{this.fcctService.midContent.header}}</p>
     </div>
     <div *ngIf="this.fcctService.midContent.messages.length == 0">nothing in here</div>
-
+  
     <div *ngFor="let message of this.fcctService.midContent.messages" class="message">
         <div class="profilpicture">
             <img class="avatar" src="">
@@ -15,7 +15,10 @@
                 <h5>{{message.timestamp.toMillis() | date:'medium'}}</h5>
             </div>
             <div [innerHtml]="message.message"></div>
-            {{ message.images }}
+            <div class="message-img-container">
+                <img *ngFor="let img of message.images" class="message-img" src={{img}} width="auto" height="150">
+            </div>
+           
             <button (click)="this.fcctService.openThread(message.timestamp)">open Thread</button>
         </div>
     </div>
@@ -45,8 +48,7 @@
     <div class="upload-img" *ngFor="let url of messageImages">
         <img src={{url}} width="62" height="62">
     </div>
-    <img *ngIf="isUploading"
-    src="./assets/img/spinner.jpg" width="auto" height="62">
+    <img *ngIf="isUploading" src="./assets/img/spinner.jpg" width="auto" height="62">
 </div>
 <div class="message-controller">
     <input style="display: none" type="file" accept=".png,.jpg" #fileInput (change)="upload($event)" />
