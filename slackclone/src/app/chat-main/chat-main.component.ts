@@ -13,6 +13,7 @@ import tinymce from 'node_modules/tinymce';
 import { serverTimestamp } from "firebase/firestore";
 import { TransactionResult } from '@angular/fire/database';
 import { FirebaseChannelChatThreadService } from 'src/app/services/firebase-channel-chat-thread.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-chat-main',
@@ -26,17 +27,17 @@ export class ChatMainComponent implements OnInit {
   filepathID: string;
   isUploading: boolean = false;
   noteText: string;
-  noteTextSaved: string;
   newContent = "";
   currentUploadImage: string;
+  uploadData = "";
 
-  constructor(public fcctService: FirebaseChannelChatThreadService, public channelService: FirebaseChannelService, public chatService: FirebaseChatService, public uiService: UiChangeService, private storage: AngularFireStorage, public fs: FireauthService, private firestore: AngularFirestore) {
+  constructor(public sanitizer: DomSanitizer, public fcctService: FirebaseChannelChatThreadService, public channelService: FirebaseChannelService, public chatService: FirebaseChatService, public uiService: UiChangeService, private storage: AngularFireStorage, public fs: FireauthService, private firestore: AngularFirestore) {
   }
 
   ngOnInit(): void {
   }
 
-  getContentOfEditor() {
+  logChange() {
     console.log(this.noteText);
   }
 
@@ -47,7 +48,6 @@ export class ChatMainComponent implements OnInit {
 
   upload(event: any) {
     this.isUploading = true;
-    this.showUploadSpinner(this.isUploading);
     this.createUniquefilepathID(event);
     const file = event.target.files[0];
     const filePath = `message_images/${this.filepathID}_msgimage`;
@@ -62,68 +62,47 @@ export class ChatMainComponent implements OnInit {
           this.currentUploadImage = downloadURL;
           console.log('messageImages', this.messageImages);
           this.isUploading = false;
-          this.showUploadSpinner(this.isUploading);
         });
       })
     ).subscribe();
   };
 
-  showUploadSpinner(isUploading: boolean) {
-    let newText = "";
-
-    if (isUploading) {
-      this.noteTextSaved = this.noteText;
-      let spinnerCode = `<img src="https://icon-library.com/images/loading-icon-animated-gif/loading-icon-animated-gif-19.jpg" width="auto" height="62">`;
-      if (!this.noteTextSaved) {
-        newText = '';
-      } else {
-        newText = this.noteTextSaved;
-      }
-      this.newContent = `${newText}${spinnerCode}`;
-    } else {
-      if (!this.noteTextSaved) {
-        newText = '';
-      } else {
-        newText = this.noteTextSaved;
-      }
-      let newTextAppend = `<img src="${this.currentUploadImage}" width="auto" height="62">`;
-      this.newContent = `${newText}${newTextAppend}`;
-    }
-    this.setContentToEditor(this.newContent);
-    this.noteText = this.newContent;
-  }
-
   clearInput() {
-    this.setContentToEditor(''); //clear input
+    this.uploadData = '';
     this.noteText = '';
+    this.newContent = '';
+    this.messageImages = [];
+    this.setContentToEditor(''); //clear input
     tinymce.activeEditor.focus();
   }
 
   setContentToEditor(data: string) {
     tinymce.activeEditor.setContent(data, { format: 'html' });
-    console.log("content set", this.noteText);
   }
 
   addMessage() {
+    console.log('dd');
+    
     if (this.fcctService.midContent.type == 'chat' || this.fcctService.midContent.type == 'channel') {
 
       let message = new Message();
       message.timestamp = firebase.firestore.Timestamp.now();
       message.creator = this.fs.user.uid;
       message.message = this.noteText;
+      message.images = this.messageImages;
       this.fcctService.midContent.messages.push(message.toJSON());
 
       if (this.fcctService.midContent.type == 'channel') {
-        this.channelService.updateChannelMessages(this.fcctService.midContent.docID, this.fcctService.midContent.messages)
+        this.channelService.updateChannelMessages(this.fcctService.midContent.docID, this.fcctService.midContent.messages);
       } else {
-        this.chatService.updateChatMessages(this.fcctService.midContent.docID, this.fcctService.midContent.messages)
+        this.chatService.updateChatMessages(this.fcctService.midContent.docID, this.fcctService.midContent.messages);
       }
       this.clearInput();
     }
 
   }
 
-  openThread(){
+  openThread() {
 
   }
 

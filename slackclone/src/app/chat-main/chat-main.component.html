@@ -15,6 +15,7 @@
                 <h5>{{message.timestamp.toMillis() | date:'medium'}}</h5>
             </div>
             <div [innerHtml]="message.message"></div>
+            {{ message.images }}
             <button (click)="this.fcctService.openThread(message.timestamp)">open Thread</button>
         </div>
     </div>
@@ -23,8 +24,8 @@
 
 
 <div class="editor">
-    <editor [(ngModel)]="noteText" (ngModelChange)="getContentOfEditor()"
-        apiKey="tcf6s96vi3ln7h1sgtod2tzjhnfnrgsypmimricsl27j6wc9" [init]="{
+    <editor [(ngModel)]="noteText" (onChange)="logChange()" apiKey="tcf6s96vi3ln7h1sgtod2tzjhnfnrgsypmimricsl27j6wc9"
+        [init]="{
         height: 200,
         menubar: false,
         selector: '',
@@ -40,10 +41,16 @@
       }">
     </editor>
 </div>
-<div class="upload-wrapper"></div>
+<div class="upload-wrapper">
+    <div class="upload-img" *ngFor="let url of messageImages">
+        <img src={{url}} width="62" height="62" object-fit="scale-down">
+    </div>
+    <img *ngIf="isUploading"
+    src="./assets/img/spinner.jpg" width="auto" height="62">
+</div>
 <div class="message-controller">
     <input style="display: none" type="file" accept=".png,.jpg" #fileInput (change)="upload($event)" />
     <div class="control-upload-img material-icons" (click)="fileInput.click()">upload</div>
-    <button class="control-send-msg material-icons" [class.dirty]="noteText" (click)="addMessage()"
-        [disabled]="!noteText">send</button>
+    <button class="control-send-msg material-icons" [class.dirty]="(noteText || messageImages[0]) && !isUploading"
+        (click)="addMessage()" [disabled]="!noteText && !messageImages[0] || isUploading">send</button>
 </div>
