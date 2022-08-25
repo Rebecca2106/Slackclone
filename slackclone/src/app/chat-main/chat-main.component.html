@@ -43,7 +43,7 @@
 </div>
 <div class="upload-wrapper">
     <div class="upload-img" *ngFor="let url of messageImages">
-        <img src={{url}} width="62" height="62" object-fit="scale-down">
+        <img src={{url}} width="62" height="62">
     </div>
     <img *ngIf="isUploading"
     src="./assets/img/spinner.jpg" width="auto" height="62">

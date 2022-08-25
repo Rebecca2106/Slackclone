@@ -20,10 +20,15 @@
     user-select: none;
     display: flex;
     justify-content: flex-start;
+    gap: 6px;
     box-sizing: border-box;
+    overflow: auto;
 
    .upload-img {
-    margin-left: 6px;
+    
+    img {
+        object-fit: contain;
+    }
    }
 }
 
