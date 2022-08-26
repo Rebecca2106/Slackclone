@@ -1,0 +1,45 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+
+@mixin color($theme) {
+    $color-config: mat.get-color-config($theme);
+
+    $primary-palette: map.get($color-config, 'primary');
+
+    .material-icons {
+        color: mat.get-color-from-palette($primary-palette);
+    }
+    
+
+    .element_header {
+        border-bottom: {
+            color: mat.get-color-from-palette($primary-palette) !important;
+        }
+    }
+
+    hr{
+        background-color: mat.get-color-from-palette($primary-palette);
+        border-color: mat.get-color-from-palette($primary-palette);
+
+    }
+
+    
+}
+
+
+@mixin theme($theme) {
+    $color-config: mat.get-color-config($theme);
+
+    @if $color-config  !=null {
+        @include color($theme);
+    }
+}
+
+// @mixin typography($theme) {
+//   // Get the typography config from the theme.
+//   $typography-config: mat.get-typography-config($theme);
+
+//   .my-carousel {
+//     font-family: mat.font-family($typography-config);
+//   }
+// }

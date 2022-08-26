@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, HostBinding } from '@angular/core';
+import { OverlayContainer } from '@angular/cdk/overlay';
 
 
 @Component({
@@ -8,5 +9,19 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'slackclone';
+  theme;
+
+
+  constructor(public overlayContainer: OverlayContainer) {}
+
+  @HostBinding('class') componentCssClass;
+
+  onSetTheme(theme) {
+    
+    this.overlayContainer.getContainerElement().classList.remove(this.theme);
+    this.overlayContainer.getContainerElement().classList.add(theme);
+    this.componentCssClass = theme;
+    this.theme=theme;
+  }
 
 }

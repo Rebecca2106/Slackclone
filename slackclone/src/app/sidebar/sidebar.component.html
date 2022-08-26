@@ -1,22 +1,20 @@
-<div class="channels"
-    [ngStyle]="{'background-color': uiService.bg_dark_color, 'color': uiService.font_lowlight_color   }">
+<mat-sidenav-container class="channels"><div class="channels">
 
-    <div class="element_header" [ngStyle]="{'border-bottom': '2px solid' + uiService.bg_lighter_color}">
+    <div class="element_header" [ngStyle]="{'border-bottom': '2px solid'}">
         <p>UnserSchönerSpace</p>
         <span (click)="uiService.toggleSidebar()" class="material-icons">close</span>
     </div>
     <div class="accordion_wrapper">
         <mat-accordion [togglePosition]="'before'">
             <mat-expansion-panel
-                [ngStyle]="{'background-color': uiService.bg_dark_color, 'color': uiService.font_lowlight_color  }"
-                class="sidebar_wrapper_element" (opened)="panelOpenState = true" (closed)="panelOpenState = false"
+                class="sidebar_wrapper_element accordion_wrapper" (opened)="panelOpenState = true" (closed)="panelOpenState = false"
                 [expanded]="true">
                 <mat-expansion-panel-header class="sidebar_wrapper_header" (mouseenter)="mouseEnter('iconVisible1')"
                     (mouseleave)="mouseLeave('iconVisible1')">
-                    <mat-panel-title [ngStyle]="{'color': uiService.font_lowlight_color}">
+                    <mat-panel-title>
                         Channels
                     </mat-panel-title>
-                    <span [ngStyle]="{'color': uiService.font_lowlight_color}"
+                    <span 
                         (click)="openChannelDialog(); $event.stopPropagation()" class="material-icons add-button"
                         *ngIf="iconVisible1">add</span>
                 </mat-expansion-panel-header>
@@ -29,15 +27,15 @@
         </mat-accordion>
 
     </div>
-    <hr class="h_line" [ngStyle]="{'background-color': uiService.bg_lighter_color}">
+    <hr class="h_line" >
     <div class="accordion_wrapper">
 
         <mat-accordion [togglePosition]="'before'">
-            <mat-expansion-panel [ngStyle]="{'color': uiService.font_lowlight_color}" class="accordion_wrapper"
+            <mat-expansion-panel  class="accordion_wrapper"
                 (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true">
                 <mat-expansion-panel-header class="sidebar_wrapper_header" (mouseenter)="mouseEnter('iconVisible2')"
                     (mouseleave)="mouseLeave('iconVisible2')">
-                    <mat-panel-title [ngStyle]="{'color': uiService.font_lowlight_color}">
+                    <mat-panel-title >
                         Directmessages
                     </mat-panel-title>
                     <span [ngStyle]="{'color': uiService.font_lowlight_color}"
@@ -51,3 +49,4 @@
         </mat-accordion>
     </div>
 </div>
+</mat-sidenav-container>

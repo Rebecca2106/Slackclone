@@ -1,4 +1,4 @@
-<div class="header" [ngStyle]="{'background-color': uiService.bg_darker_color, 'color': uiService.font_lowlight_color, 'border-bottom': '1px solid' + uiService.bg_lighter_color}">
+<mat-sidenav-container><div class="header">
     <div> 
         <mat-icon aria-hidden="false" class="padding-6" class="menu padding-6" (click)="uiService.toggleSidebar()">menu
         </mat-icon>
@@ -25,3 +25,4 @@
         </mat-menu>
     </div>
 </div>
+</mat-sidenav-container>

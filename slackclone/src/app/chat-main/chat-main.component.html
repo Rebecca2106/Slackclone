@@ -1,6 +1,5 @@
-<div class="chat-main"
-    [ngStyle]="{'background-color': uiService.bg_light_color, 'color': uiService.font_lowlight_color}">
-    <div class="element_header" [ngStyle]="{'border-bottom': '2px solid' + uiService.bg_lighter_color}">
+<mat-sidenav-container><div class="chat-main">
+    <div class="element_header" [ngStyle]="{'border-bottom': '2px solid'}">
         <p>{{this.fcctService.midContent.header}}</p>
     </div>
     <div *ngIf="this.fcctService.midContent.messages.length == 0">nothing in here</div>
@@ -54,3 +53,4 @@
     <button class="control-send-msg material-icons" [class.dirty]="(noteText || messageImages[0]) && !isUploading"
         (click)="addMessage()" [disabled]="!noteText && !messageImages[0] || isUploading">send</button>
 </div>
+</mat-sidenav-container>

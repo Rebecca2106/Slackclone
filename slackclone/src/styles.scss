@@ -1,13 +1,53 @@
 /* You can add global styles to this file, and also import other style files */
-:root {
-    --dark-color: #24252B;
-    --light-color: #FFDB58;
-}
+// :root {
+//     --dark-color: #24252B;
+//     --light-color: #FFDB58;
+// }
+
+
+@use './app/header/header-theme' as header;
+@use './app/profile/profile-theme' as profile;
+@use './app/sidebar/sidebar-theme' as sidebar;
+@use './app/chat-main/chat-main-theme' as chatmain;
+@use './app/chatarea/chatearea-theme' as chatarea;
+@use './app/chat-thread/chat-thread' as thread;
+@use '@angular/material' as mat;
+@import '~@angular/material/theming';
+@import '/src/custom.theme.scss';
+
+
+$custom-theme-primary: mat.define-palette($custom-pink, 500);
+$custom-theme-primar-ligth: mat.define-palette($custom-pink, 800);
+$custom-theme-accent: mat.define-palette($custom-accent, 500);
+$custom-theme-warn: mat.define-palette($mat-red);
+$custom-theme-ligth: mat.define-light-theme($custom-theme-primar-ligth, $custom-theme-accent, $custom-theme-warn );
+$custom-theme-dark: mat.define-dark-theme($custom-theme-primary, $custom-theme-accent, $custom-theme-warn );
+
+// @include mat.core-theme($custom-theme-dark);
+// @include angular-material-theme($custom-theme-dark);
+@include mat.all-component-themes($custom-theme-dark);
+@include header.theme($custom-theme-dark);
+@include profile.theme($custom-theme-dark);
+@include sidebar.theme($custom-theme-dark);
+@include chatarea.theme($custom-theme-dark);
+@include thread.theme($custom-theme-dark);
+
+
+
 
 html,
 body {
     height: 100%;
     overflow-y: auto;
+}
+
+
+.dark-theme{
+    @include angular-material-theme($custom-theme-dark)
+}
+
+.ligth-theme{
+    @include angular-material-theme($custom-theme-ligth)
 }
 
 body {
@@ -36,6 +76,10 @@ body {
     &:hover {
         text-decoration: underline;
     }
+}
+
+.mat-drawer-content {
+    overflow: unset !important;
 }
 
 .flex_cc {
