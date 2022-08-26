@@ -16,6 +16,7 @@
             <span *ngIf="!fs.user.onlineState" class="dot-away"></span>
         </div>
         <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="openDesignDialog()">Design</button>
             <button mat-menu-item (click)="uiService.toggleProfile()">Open profile</button>
             <button mat-menu-item (click)="openStateDialog()">Set status</button>
             <button mat-menu-item (click)="toggleOnlineState()">

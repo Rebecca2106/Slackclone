@@ -26,7 +26,7 @@ $custom-theme-dark: mat.define-dark-theme($custom-theme-primary, $custom-theme-a
 
 // @include mat.core-theme($custom-theme-dark);
 // @include angular-material-theme($custom-theme-dark);
-@include mat.all-component-themes($custom-theme-dark);
+@include mat.all-component-themes($custom-theme-ligth);
 @include header.theme($custom-theme-dark);
 @include profile.theme($custom-theme-dark);
 @include sidebar.theme($custom-theme-dark);

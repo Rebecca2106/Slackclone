@@ -57,9 +57,9 @@ export class FirebaseMainService {
       return false;
     } else {
       //console.log(this.fs.user.lastTimeOnline.toMillis(),"-",result.lastTimeOnline.toMillis());
-      if(this.fs.user.lastTimeOnline.toMillis() - 20000 < result.lastTimeOnline.toMillis()){
-        return true;
-      }
+      // if(this.fs.user.lastTimeOnline.toMillis() - 20000 < result.lastTimeOnline.toMillis()){
+      //   return true;
+      // }
       return false;
     }
   }

@@ -43,6 +43,9 @@ import { AddChatComponent } from './add-chat/add-chat.component';
 import { ChannelEditDialogComponent } from './channel-edit-dialog/channel-edit-dialog.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import { DesignDialogComponent } from './design-dialog/design-dialog.component';
+import {MatRadioModule} from '@angular/material/radio';
+
 
 
 
@@ -64,6 +67,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     StatusDialogComponent,
     AddChatComponent,
     ChannelEditDialogComponent,
+    DesignDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -97,6 +101,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     MatAutocompleteModule,
     MatTooltipModule,
     MatToolbarModule,
+    MatRadioModule
     
   ],
   providers: [AppComponent, {  provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js' }],

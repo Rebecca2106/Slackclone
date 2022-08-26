@@ -1,0 +1,17 @@
+mat-radio-group{
+
+   display: flex;
+   flex-direction: column;
+   align-content: center;
+    width: 480px;
+
+    img{
+        width: 470px;
+        border-radius: 5px;
+        margin-bottom: 6px;
+    }
+}
+
+.dark-mode{
+    margin-bottom: 16px;
+}

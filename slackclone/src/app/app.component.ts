@@ -17,11 +17,12 @@ export class AppComponent {
   @HostBinding('class') componentCssClass;
 
   onSetTheme(theme) {
-    
+    console.log("ich funze",theme);
     this.overlayContainer.getContainerElement().classList.remove(this.theme);
     this.overlayContainer.getContainerElement().classList.add(theme);
     this.componentCssClass = theme;
     this.theme=theme;
+    console.log(theme)
   }
 
   testingFunction(test){
