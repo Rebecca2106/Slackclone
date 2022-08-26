@@ -42,6 +42,9 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { AddChatComponent } from './add-chat/add-chat.component';
 import { ChannelEditDialogComponent } from './channel-edit-dialog/channel-edit-dialog.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import {MatToolbarModule} from '@angular/material/toolbar';
+
+
 
 
 
@@ -92,7 +95,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     EditorModule,
     MatChipsModule,
     MatAutocompleteModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatToolbarModule,
+    
   ],
   providers: [AppComponent, {  provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js' }],
   bootstrap: [AppComponent]
