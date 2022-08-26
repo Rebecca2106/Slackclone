@@ -24,4 +24,7 @@ export class AppComponent {
     this.theme=theme;
   }
 
+  testingFunction(test){
+    console.log("ich funze",test);
+  }
 }
