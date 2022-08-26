@@ -55,7 +55,7 @@ export class FirebaseChannelService {
             let result = await this.fb.getUserFromId(e.uid);
             this.showedMembers.push(result);
           });
-          resolve(this.showedMembers);;
+          resolve(this.showedMembers);
         })
     })
   }

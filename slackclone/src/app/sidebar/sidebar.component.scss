@@ -59,6 +59,7 @@
     margin-right: 16px;
     height: 24px;
     width: 24px;
+
 }
 
 .hover:hover {
@@ -83,4 +84,39 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.user_img_wrapper{
+    position: relative;
+    img{
+        border-radius: 4px;
+        position: absolute;
+        top: 0%;
+        left: 0%;
+    }
+}
+
+
+.dot-active {
+    position: absolute;
+    bottom: 1px;
+    right: 0px;
+    height: 6px;
+    width: 6px;
+    outline: 2px solid white;
+    background-color: #007a5a;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.dot-away {
+    position: absolute;
+    bottom: 1px;
+    right: 0px;
+    height: 6px;
+    width: 6px;
+    outline: 1px solid black;
+    background-color: rgb(245, 245, 245);
+    border-radius: 50%;
+    display: inline-block;
 }

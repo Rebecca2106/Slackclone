@@ -1,12 +1,45 @@
 .chat-main {
     width: 100%;
-    height: calc(100vh - 48px);
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: transparent; 
+    border-radius: 10px;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: purple; 
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: transparent; 
+  }
+
+.messages_wrapper{
+    max-height: calc(100% - 66px);
+    
+  overflow: hidden;
+}
+
+.messages_wrapper:hover{
+    overflow-y: scroll;
+}
+
+.chat-main-wrapper{
+    height: 100%;
 }
 
 .editor {
     position: absolute;
-    width: 100%;
-    bottom: 86px;
+    width: 100%; 
 }
 
 .upload-wrapper {
@@ -49,6 +82,7 @@
 
 .message-controller {
     position: absolute;
+    background: #fffdfd;
     bottom: 0;
     left: 0;
     right: 0;
@@ -72,10 +106,12 @@
         padding: 4px;
         cursor: pointer;
         user-select: none;
+        background-color: transparent;
+        
     }
 
     .dirty {
-        color: #007a5a;
+        color: gray !important;
     }
 }
 
@@ -127,4 +163,12 @@ h4 {
     margin-right: 10px;
     height: 35px;
     border-radius: 6px;
+}
+
+.areaHeighthigh{
+    background-color: aqua;
+}
+
+.areaHeightlow{
+    background-color: black;
 }

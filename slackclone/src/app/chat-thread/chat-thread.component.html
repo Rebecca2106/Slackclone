@@ -1,8 +1,17 @@
 <mat-sidenav-container>
-    <div class="chat-thread">
-        <p>Chat-Thread</p>
 
-        {{fcctService.rightContent.docID}}
-        <div [innerHtml]="fcctService.currentMessage.message"></div>
+
+    <div class="chat-thread">
+        <div class="element_header" [ngStyle]="{'border-bottom': '2px solid'}">
+            <p>UnserSchönerSpace</p>
+            <span (click)="uiService.toggleThread()" class="material-icons">close</span>
+        </div>
+        <div >
+            <p>Chat-Thread</p>
+    
+            {{fcctService.rightContent.docID}}
+            <div [innerHtml]="fcctService.currentMessage.message"></div>
+        </div>
     </div>
+    
 </mat-sidenav-container>

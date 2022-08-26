@@ -1,52 +1,59 @@
-<mat-sidenav-container class="channels"><div class="channels">
+<mat-sidenav-container class="channels">
+    <div class="channels">
 
-    <div class="element_header" [ngStyle]="{'border-bottom': '2px solid'}">
-        <p>UnserSchönerSpace</p>
-        <span (click)="uiService.toggleSidebar()" class="material-icons">close</span>
-    </div>
-    <div class="accordion_wrapper">
-        <mat-accordion [togglePosition]="'before'">
-            <mat-expansion-panel
-                class="sidebar_wrapper_element accordion_wrapper" (opened)="panelOpenState = true" (closed)="panelOpenState = false"
-                [expanded]="true">
-                <mat-expansion-panel-header class="sidebar_wrapper_header" (mouseenter)="mouseEnter('iconVisible1')"
-                    (mouseleave)="mouseLeave('iconVisible1')">
-                    <mat-panel-title>
-                        Channels
-                    </mat-panel-title>
-                    <span 
-                        (click)="openChannelDialog(); $event.stopPropagation()" class="material-icons add-button"
-                        *ngIf="iconVisible1">add</span>
-                </mat-expansion-panel-header>
-                <div class="hover accordion_element" *ngFor=" let channel of this.channelService.channelCollection " (click)="fcctService.openChannel(channel)">
-                    <div class="flex_cc"># </div>
-                    <div class="flex_channel">{{ channel.title }}</div>
-                    <div class="material-icons" (click)="editChannel(channel.docID)">edit</div>
-                </div>
-            </mat-expansion-panel>
-        </mat-accordion>
+        <div class="element_header" [ngStyle]="{'border-bottom': '2px solid'}">
+            <p>UnserSchönerSpace</p>
+            <span (click)="uiService.toggleSidebar()" class="material-icons">close</span>
+        </div>
+        <div class="accordion_wrapper">
+            <mat-accordion [togglePosition]="'before'">
+                <mat-expansion-panel class="sidebar_wrapper_element accordion_wrapper" (opened)="panelOpenState = true"
+                    (closed)="panelOpenState = false" [expanded]="true">
+                    <mat-expansion-panel-header class="sidebar_wrapper_header" (mouseenter)="mouseEnter('iconVisible1')"
+                        (mouseleave)="mouseLeave('iconVisible1')">
+                        <mat-panel-title>
+                            Channels
+                        </mat-panel-title>
+                        <span (click)="openChannelDialog(); $event.stopPropagation()" class="material-icons add-button"
+                            *ngIf="iconVisible1">add</span>
+                    </mat-expansion-panel-header>
+                    <div class="hover accordion_element" *ngFor=" let channel of this.channelService.channelCollection "
+                        (click)="fcctService.openChannel(channel)">
+                        <div class="flex_cc"># </div>
+                        <div class="flex_channel">{{ channel.title }}</div>
+                        <div class="material-icons" (click)="editChannel(channel.docID)">edit</div>
+                    </div>
+                </mat-expansion-panel>
+            </mat-accordion>
 
+        </div>
+        <hr class="h_line">
+        <div class="accordion_wrapper">
+            <mat-accordion [togglePosition]="'before'">
+                <mat-expansion-panel class="accordion_wrapper" (opened)="panelOpenState = true"
+                    (closed)="panelOpenState = false" [expanded]="true">
+                    <mat-expansion-panel-header class="sidebar_wrapper_header" (mouseenter)="mouseEnter('iconVisible2')"
+                        (mouseleave)="mouseLeave('iconVisible2')">
+                        <mat-panel-title>
+                            Directmessages
+                        </mat-panel-title>
+                        <span [ngStyle]="{'color': uiService.font_lowlight_color}"
+                            (click)="openChatDialog();$event.stopPropagation()" class="material-icons"
+                            *ngIf="iconVisible2">add</span>
+                    </mat-expansion-panel-header>
+                    <div class="hover accordion_element" *ngFor=" let chat of this.chatService.dmCollection "
+                        (click)="fcctService.openChat(chat)">
+                        <div class="user_img_wrapper">
+                            <img height="100%" width="100%"
+                                src="{{this.fb.getUserFromList(getOtherUsersNames(chat.members)).image }}" alt=""
+                                srcset="">
+                            <div *ngIf="this.fb.getUserOnlineStatus(getOtherUsersNames(chat.members))" class="dot-active"></div>
+                        </div>
+                        <div class="elipse">{{this.fb.getUserFromList(getOtherUsersNames(chat.members)).fullname }}
+                        </div>
+                    </div>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
     </div>
-    <hr class="h_line" >
-    <div class="accordion_wrapper">
-
-        <mat-accordion [togglePosition]="'before'">
-            <mat-expansion-panel  class="accordion_wrapper"
-                (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true">
-                <mat-expansion-panel-header class="sidebar_wrapper_header" (mouseenter)="mouseEnter('iconVisible2')"
-                    (mouseleave)="mouseLeave('iconVisible2')">
-                    <mat-panel-title >
-                        Directmessages
-                    </mat-panel-title>
-                    <span [ngStyle]="{'color': uiService.font_lowlight_color}"
-                        (click)="openChatDialog();$event.stopPropagation()" class="material-icons"
-                        *ngIf="iconVisible2">add</span>
-                </mat-expansion-panel-header>
-                <div class="hover accordion_element" *ngFor=" let chat of this.chatService.dmCollection " (click)="fcctService.openChat(chat)">
-                    <div>Bild</div> <div class="elipse">{{getOtherUsersNames(chat.members)}}</div>
-                </div>
-            </mat-expansion-panel>
-        </mat-accordion>
-    </div>
-</div>
 </mat-sidenav-container>

@@ -6,8 +6,9 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 })
 export class UiChangeService {
   showSidebar:boolean = true;
-  profile:boolean = true;
+  profile:boolean = false;
   thread:boolean = false;
+  handyMode:boolean = false;
 
   constructor(private firestore: AngularFirestore) { }
 
@@ -41,13 +42,4 @@ export class UiChangeService {
   font_lowlight_color = "#c4c4cc";
 
 
-
-
-
-
 }
-
-
-
-
-

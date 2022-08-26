@@ -6,6 +6,8 @@ import { UiChangeService } from '../services/ui-change.service';
 import {AppComponent} from '../app.component';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { User } from 'src/models/user.class';
+import { FirebaseMainService } from '../services/firebase-main.service';
+
 
 
 @Component({
@@ -19,10 +21,11 @@ export class ProfileComponent implements OnInit {
 
   docID: string;
 
-  constructor(public myapp: AppComponent, public uiService: UiChangeService, public fs: FireauthService, private firestore: AngularFirestore, public dialog: MatDialog ) { }
+  constructor(public fsMain: FirebaseMainService ,public myapp: AppComponent, public uiService: UiChangeService, public fs: FireauthService, private firestore: AngularFirestore, public dialog: MatDialog ) { }
 
   testclick(){
     this.myapp.testingFunction("asdasdasd");
+    console.log(this.fsMain.allmembers);
   }
 
   ngOnInit(): void {

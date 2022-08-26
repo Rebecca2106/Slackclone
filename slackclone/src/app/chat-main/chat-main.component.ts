@@ -14,6 +14,7 @@ import { serverTimestamp } from "firebase/firestore";
 import { TransactionResult } from '@angular/fire/database';
 import { FirebaseChannelChatThreadService } from 'src/app/services/firebase-channel-chat-thread.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { FirebaseMainService } from '../services/firebase-main.service';
 
 @Component({
   selector: 'app-chat-main',
@@ -31,7 +32,11 @@ export class ChatMainComponent implements OnInit {
   currentUploadImage: string;
   uploadData = "";
 
-  constructor(public sanitizer: DomSanitizer, public fcctService: FirebaseChannelChatThreadService, public channelService: FirebaseChannelService, public chatService: FirebaseChatService, public uiService: UiChangeService, private storage: AngularFireStorage, public fs: FireauthService, private firestore: AngularFirestore) {
+  constructor(public fsMain: FirebaseMainService ,public sanitizer: DomSanitizer, public fcctService: FirebaseChannelChatThreadService, public channelService: FirebaseChannelService, public chatService: FirebaseChatService, public uiService: UiChangeService, private storage: AngularFireStorage, public fs: FireauthService, private firestore: AngularFirestore) {
+  }
+
+  getTest(){
+    return this.messageImages.length != 0
   }
 
   ngOnInit(): void {

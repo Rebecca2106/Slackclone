@@ -1,33 +1,37 @@
-<mat-sidenav-container><div class="chat-main">
-    <div class="element_header" [ngStyle]="{'border-bottom': '2px solid'}">
-        <p>{{this.fcctService.midContent.header}}</p>
-    </div>
-    <div *ngIf="this.fcctService.midContent.messages.length == 0">nothing in here</div>
-
-    <div *ngFor="let message of this.fcctService.midContent.messages" class="message">
-        <div class="profilpicture">
-            <img class="avatar" src="">
+<mat-sidenav-container class="chat-main-wrapper">
+    <div class="chat-main"
+        [ngStyle]="{'height': messageImages.length != 0 ? 'calc(100% - 286px)' : 'calc(100% - 200px)'}">
+        <div class="element_header" [ngStyle]="{'border-bottom': '2px solid'}">
+            <p>{{this.fcctService.midContent.header}}</p>
         </div>
-        <div class="message-body">
-            <div class="header">
-                <h4>{{message.creator}}</h4>
-                <h5>{{message.timestamp.toMillis() | date:'medium'}}</h5>
+        <div class="messages_wrapper">
+            <div *ngIf="this.fcctService.midContent.messages.length == 0">nothing in here</div>
+            <div *ngFor="let message of this.fcctService.midContent.messages" class="message">
+                <div class="profilpicture">
+                    <img class="avatar" src="">
+                </div>
+                <div class="message-body">
+                    <div class="header">
+                        <h4>{{this.fsMain.getUserFromList(message.creator).fullname}}</h4>
+                        <h5>{{message.timestamp.toMillis() | date:'medium'}}</h5>
+                    </div>
+                    <div [innerHtml]="message.message"></div>
+                    <div class="message-img-container">
+                        <img *ngFor="let img of message.images" class="message-img" src={{img}} width="auto" height="150">
+                    </div>
+    
+                    <button (click)="this.fcctService.openThread(message.timestamp)">open Thread</button>
+                </div>
             </div>
-            <div [innerHtml]="message.message"></div>
-            <div class="message-img-container">
-                <img *ngFor="let img of message.images" class="message-img" src={{img}} width="auto" height="150">
-            </div>
-
-            <button (click)="this.fcctService.openThread(message.timestamp)">open Thread</button>
         </div>
+        
     </div>
-</div>
 
 
 
-<div class="editor">
-    <editor [(ngModel)]="noteText" (onChange)="logChange()" apiKey="tcf6s96vi3ln7h1sgtod2tzjhnfnrgsypmimricsl27j6wc9"
-        [init]="{
+    <div class="editor" [ngStyle]="{'bottom': messageImages.length != 0 ? '86px' : '0px'}">
+        <editor [(ngModel)]="noteText" (onChange)="logChange()"
+            apiKey="tcf6s96vi3ln7h1sgtod2tzjhnfnrgsypmimricsl27j6wc9" [init]="{
         height: 200,
         menubar: false,
         selector: '',
@@ -41,20 +45,20 @@
           bullist numlist | removeformat | emoticons ',
           emoticons_database: 'emojis'
       }">
-    </editor>
-</div>
-<div class="upload-wrapper">
-    <div class="upload-img-area" *ngFor="let url of messageImages; index as i">
-        <div class="image-container"><img src={{url}} width="62" height="62">
-            <div class="cancel material-icons" (click)="deleteImg(i)">cancel</div>
-        </div>
+        </editor>
     </div>
-    <img *ngIf="isUploading" src="./assets/img/spinner.jpg" width="auto" height="62">
-</div>
-<div class="message-controller">
-    <input style="display: none" type="file" accept=".png,.jpg" #fileInput (change)="upload($event)" />
-    <div class="control-upload-img material-icons" (click)="fileInput.click()">upload</div>
-    <button class="control-send-msg material-icons" [class.dirty]="(noteText || messageImages[0]) && !isUploading"
-        (click)="addMessage()" [disabled]="!noteText && !messageImages[0] || isUploading">send</button>
-</div>
+    <div class="upload-wrapper" *ngIf="messageImages.length != 0">
+        <div class="upload-img-area" *ngFor="let url of messageImages; index as i">
+            <div class="image-container"><img src={{url}} width="62" height="62">
+                <div class="cancel material-icons" (click)="deleteImg(i)">cancel</div>
+            </div>
+        </div>
+        <img *ngIf="isUploading" src="./assets/img/spinner.jpg" width="auto" height="62">
+    </div>
+    <div class="message-controller ">
+        <input style="display: none" type="file" accept=".png,.jpg" #fileInput (change)="upload($event)" />
+        <div class="control-upload-img material-icons" (click)="fileInput.click()">upload</div>
+        <button class="control-send-msg material-icons" [class.dirty]="!noteText && !messageImages[0] || isUploading"
+            (click)="addMessage()" [disabled]="!noteText && !messageImages[0] || isUploading">send</button>
+    </div>
 </mat-sidenav-container>

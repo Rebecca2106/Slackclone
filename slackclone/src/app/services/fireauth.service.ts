@@ -71,8 +71,7 @@ export class FireauthService {
           // console.log('User not found!');
           await this.addUser(uid, email);
         }
-      })
-      
+      })  
   }
 
   async addUser(uid: string, email: string) {
@@ -180,7 +179,7 @@ export class FireauthService {
       if (this.user) {
         this.updateTimestamp();
       }
-    }, 60 * 1000);
+    }, 5 * 1000);
   }
 
   setInitalTimeUpdate() {

@@ -1,5 +1,6 @@
 .header {
     display: flex;
+    padding: 16px;
     justify-content: space-between;
     align-items: center;
     width: 100%;
@@ -37,12 +38,13 @@
 
 .preview-image-wrapper {
     position: relative;
+    height: 32px;
 }
 
 .dot-active {
     position: absolute;
-    bottom: 11px;
-    right: 6px;
+    bottom: 0px;
+    right: 0px;
     height: 10px;
     width: 10px;
     outline: 2px solid white;
@@ -53,8 +55,8 @@
 
 .dot-away {
     position: absolute;
-    bottom: 11px;
-    right: 6px;
+    bottom: 0px;
+    right: 0px;
     height: 10px;
     width: 10px;
     outline: 1px solid black;

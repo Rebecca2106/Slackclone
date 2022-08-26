@@ -54,6 +54,9 @@ export class FirebaseChannelChatThreadService {
   }
 
   openChat(chat){
+    if(this.uiService.handyMode) {
+      this.uiService.toggleSidebar();
+    }
     this.currentChatChannel = chat;
     this.setContent(chat.docID, "chat", chat.messages);
     this.setHeader("chat", chat.docID);

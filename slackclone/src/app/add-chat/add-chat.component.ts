@@ -36,7 +36,7 @@ export class AddChatComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.fb.getAllUsersOrderedByFullname();
+    //this.fb.getAllUsersOrderedByFullname();
   }
 
   ngOnDestroy(): void {
