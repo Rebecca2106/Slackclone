@@ -3,8 +3,17 @@
     flex-direction: column;
     height: calc(100vh - 48px);
     width: 100%;
+    border-right: 1px solid;
+}
 
+.hover:hover {
+    .hide {
+        display: block;
+    }
+}
 
+.hide{
+    display: none
 }
 
 mat-toolbar{
