@@ -20,6 +20,8 @@ export class HeaderComponent implements OnInit {
 
   }
 
+
+
   openStateDialog() {
     const dialog = this.dialog.open(StatusDialogComponent);
   }

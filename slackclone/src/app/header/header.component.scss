@@ -1,13 +1,18 @@
+mat-toolbar{
+    border-bottom: 1px solid;
+    height: 48px;
+    font: 400 14px/20px Roboto, "Helvetica Neue", sans-serif;
+
+}
+
 .header {
     display: flex;
-    padding: 16px;
     justify-content: space-between;
     align-items: center;
     width: 100%;
     height: 48px;
     background: var(--light-color);
     box-sizing: border-box;
-    border-bottom: 1px solid;
 
     .menu {
         cursor: pointer;

@@ -1,4 +1,4 @@
-<mat-sidenav-container><div class="header">
+<mat-toolbar><div class="header">
     <div> 
         <mat-icon aria-hidden="false" class="padding-6" class="menu padding-6" (click)="uiService.toggleSidebar()">menu
         </mat-icon>
@@ -16,6 +16,7 @@
             <span *ngIf="!fs.user.onlineState" class="dot-away"></span>
         </div>
         <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="uiService.toggleDesign()">Design</button>
             <button mat-menu-item (click)="uiService.toggleProfile()">Open profile</button>
             <button mat-menu-item (click)="openStateDialog()">Set status</button>
             <button mat-menu-item (click)="toggleOnlineState()">
@@ -25,4 +26,4 @@
         </mat-menu>
     </div>
 </div>
-</mat-sidenav-container>
+</mat-toolbar>
