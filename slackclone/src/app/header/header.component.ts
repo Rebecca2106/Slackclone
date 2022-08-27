@@ -4,7 +4,6 @@ import { UiChangeService } from '../services/ui-change.service';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { StatusDialogComponent } from '../status-dialog/status-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { DesignDialogComponent } from '../design-dialog/design-dialog.component';
 
 @Component({
   selector: 'app-header',
@@ -21,10 +20,7 @@ export class HeaderComponent implements OnInit {
 
   }
 
-  openDesignDialog(){
-    const dialog = this.dialog.open(DesignDialogComponent);
 
-  }
 
   openStateDialog() {
     const dialog = this.dialog.open(StatusDialogComponent);

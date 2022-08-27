@@ -1,5 +1,6 @@
 import { Component, HostBinding } from '@angular/core';
 import { OverlayContainer } from '@angular/cdk/overlay';
+import { UiChangeService } from './services/ui-change.service';
 
 
 @Component({
@@ -9,16 +10,29 @@ import { OverlayContainer } from '@angular/cdk/overlay';
 })
 export class AppComponent {
   title = 'slackclone';
-  theme;
+  theme = 'dark-theme'
+  selectedTheme;
 
 
-  constructor(public overlayContainer: OverlayContainer) {}
+
+
+
+  constructor(public overlayContainer: OverlayContainer, public uiService: UiChangeService,) {}
+
+  radioChangeHandler(event: any) {
+    console.log(" Value is : ", event.value + '-theme');
+    this.selectedTheme = event.value;
+    this.onSetTheme(this.selectedTheme + '-theme')
+  }
 
   @HostBinding('class') componentCssClass;
+
+  
 
   onSetTheme(theme) {
     console.log("ich funze",theme);
     this.overlayContainer.getContainerElement().classList.remove(this.theme);
+    console.log(this.theme)
     this.overlayContainer.getContainerElement().classList.add(theme);
     this.componentCssClass = theme;
     this.theme=theme;

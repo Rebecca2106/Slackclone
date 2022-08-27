@@ -1,2 +1,18 @@
-<button (click)="onSetTheme('ligth-theme')">klick mich</button>
+<div class="app-wrapper"><div *ngIf="uiService.showDesign" class="design-dialog-wrapper"><div class="design-dialog">
+    <span (click)="uiService.toggleDesign()" class="material-icons">close</span>
+    <h2 mat-dialog-title> Change the look and feel of Slack across all your workspaces.
+</h2>
+<mat-radio-group aria-label="Select an option">
+    <div class="dark-mode">
+        <img src="assets/img/ligth_mode.png">
+        <mat-radio-button  name="color" value="ligth" (change)="radioChangeHandler($event)">Light</mat-radio-button>
+    </div>
+    <div class="ligth-mode">
+        <img src="assets/img/dark_mode.png">
+        <mat-radio-button  name="color" value="dark" (change)="radioChangeHandler($event)">Dark</mat-radio-button>
+    </div>
+</mat-radio-group>
+</div>
+</div>
 <router-outlet></router-outlet>
+</div>
