@@ -10,9 +10,10 @@ import { UiChangeService } from './services/ui-change.service';
 })
 export class AppComponent {
   title = 'slackclone';
-  theme = 'dark-theme'
+  theme = 'dark-theme-green'
   selectedTheme;
-
+  favoriteColor= '';
+  colors: string[] = ['pink', 'green'];
 
 
 
@@ -25,6 +26,13 @@ export class AppComponent {
     this.onSetTheme(this.selectedTheme + '-theme')
   }
 
+  radioChangeColor(event: any){
+    console.log(" Value is : ", event.value);
+    this.favoriteColor=event.value;
+    this.onSetTheme(this.selectedTheme + '-theme')
+
+  }
+
   @HostBinding('class') componentCssClass;
 
   
@@ -33,10 +41,12 @@ export class AppComponent {
     console.log("ich funze",theme);
     this.overlayContainer.getContainerElement().classList.remove(this.theme);
     console.log(this.theme)
-    this.overlayContainer.getContainerElement().classList.add(theme);
-    this.componentCssClass = theme;
-    this.theme=theme;
-    console.log(theme)
+    this.overlayContainer.getContainerElement().classList.add(theme+this.favoriteColor);
+    this.componentCssClass = theme+this.favoriteColor;
+    this.theme=theme+this.favoriteColor;
+
+    console.log(theme+this.favoriteColor)
+      
   }
 
   testingFunction(test){

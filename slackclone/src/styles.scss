@@ -18,15 +18,23 @@
 
 
 $custom-theme-primary: mat.define-palette($custom-pink, 500);
-$custom-theme-primar-ligth: mat.define-palette($custom-pink, 800);
+$custom-theme-primar-light: mat.define-palette($custom-pink, 800);
 $custom-theme-accent: mat.define-palette($custom-accent, 500);
 $custom-theme-warn: mat.define-palette($mat-red);
-$custom-theme-ligth: mat.define-light-theme($custom-theme-primar-ligth, $custom-theme-accent, $custom-theme-warn );
+$custom-theme-light: mat.define-light-theme($custom-theme-primar-light, $custom-theme-accent, $custom-theme-warn );
 $custom-theme-dark: mat.define-dark-theme($custom-theme-primary, $custom-theme-accent, $custom-theme-warn );
+
+
+$custom-theme-primary-green: mat.define-palette($custom-green, 500);
+$custom-theme-accent-green: mat.define-palette($custom-green, 200);
+$custom-theme-warn-green: mat.define-palette($custom-green, A700);
+$custom-theme-light-green: mat.define-light-theme($custom-theme-primary-green, $custom-theme-accent-green, $custom-theme-warn-green);
+$custom-theme-dark-green: mat.define-dark-theme($custom-theme-primary-green, $custom-theme-accent-green, $custom-theme-warn-green);
+
 
 // @include mat.core-theme($custom-theme-dark);
 // @include angular-material-theme($custom-theme-dark);
-@include mat.all-component-themes($custom-theme-ligth);
+@include mat.all-component-themes($custom-theme-light-green);
 @include header.theme($custom-theme-dark);
 @include profile.theme($custom-theme-dark);
 @include sidebar.theme($custom-theme-dark);
@@ -86,8 +94,7 @@ $custom-theme-dark: mat.define-dark-theme($custom-theme-primary, $custom-theme-a
 
 // $custom-theme: create-wonky-theme($custom-theme-primary, $custom-theme-accent, $custom-theme-warn);
 
-// @include angular-material-theme($custom-theme);
-
+@include angular-material-theme($custom-theme-light-green);
 
 
 
@@ -97,13 +104,25 @@ body {
     overflow-y: auto;
 }
 
-
-.dark-theme{
+.dark-theme{ //default
     @include angular-material-theme($custom-theme-dark)
 }
 
-.ligth-theme{
-    @include angular-material-theme($custom-theme-ligth)
+
+.dark-themepink{
+    @include angular-material-theme($custom-theme-dark)
+}
+
+.light-themepink{
+    @include angular-material-theme($custom-theme-light)
+}
+
+.dark-themegreen{
+    @include angular-material-theme($custom-theme-dark-green)
+}
+
+.light-themegreen{
+    @include angular-material-theme($custom-theme-light-green)
 }
 
 body {
