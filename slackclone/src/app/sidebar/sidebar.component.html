@@ -45,7 +45,7 @@
                         (click)="fcctService.openChat(chat)">
                         <div class="user_img_wrapper">
                             <img height="100%" width="100%"
-                                src="{{this.fb.getUserFromList(getOtherUsersNames(chat.members)).image }}" alt=""
+                                src="{{this.fb.getUserFromList(getOtherUsersNames(chat.members)).image}}" alt=""
                                 srcset="">
                             <div *ngIf="this.fb.getUserOnlineStatus(getOtherUsersNames(chat.members))" class="dot-active"></div>
                         </div>

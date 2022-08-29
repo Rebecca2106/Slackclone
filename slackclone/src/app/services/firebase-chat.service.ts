@@ -38,6 +38,7 @@ export class FirebaseChatService {
             .valueChanges({ idField: 'docID' })
             .subscribe((dms: any) => {
                 this.dmCollection = dms.sort(this.compare);
+                console.log('DM-Coll', this.dmCollection);
                 console.log('dms', dms);
                 this.updateOpenChat();
             })

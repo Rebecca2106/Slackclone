@@ -1,4 +1,4 @@
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { COMMA, ENTER, F } from '@angular/cdk/keycodes';
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { DM } from 'src/models/dm.class';
 import { AngularFirestore } from '@angular/fire/compat/firestore'
@@ -28,6 +28,7 @@ export class AddChatComponent implements OnInit, OnDestroy {
   memberCtrl = new FormControl('');
   members: Array<any> = [];
   filteredUsers: Array<any> = [];
+  chatExisiting = false;
 
   @ViewChild('memberInput') memberInput: ElementRef<HTMLInputElement>;
 
@@ -72,6 +73,7 @@ export class AddChatComponent implements OnInit, OnDestroy {
       }
 
       this.members.push(this.membersObj);
+
       this.channelService.showedMembers.push(this.membersObj = { name: event.option.viewValue });
       this.memberInput.nativeElement.value = '';
       this.memberCtrl.setValue(null);
@@ -92,19 +94,45 @@ export class AddChatComponent implements OnInit, OnDestroy {
     this.members.push(this.membersObj);
   }
 
-  onSubmit(form: NgForm) {
+  searchExistingUids() {
+    let memberUids = this.members.map(i => i.uid);
+    let existingMem = this.chatService.dmCollection.map(e => e.memberUids);
 
-    if (this.members.length != 0) {
-      this.chat = new DM();
-      this.setChatValues(form.value);
-      this.chatService.saveDM();
+    for (let i = 0; i < existingMem.length; i++) {
+      const element = existingMem[i];
+      if (element.length === memberUids.length) {
+        let res = element.every(e => memberUids.includes(e));
+        if (res) {
+          return true;
+        }
+      }
     }
-    form.resetForm()
-    this.dialogRef.close();
+    return false;
+  }
+
+  onSubmit(form: NgForm) {
+    this.setOwnUserToMembers();
+
+    if (!this.searchExistingUids()) {
+
+      if (this.members.length != 0) {
+        this.chat = new DM();
+        this.setChatValues(form.value);
+        this.chatService.saveDM();
+      }
+      form.resetForm()
+      this.dialogRef.close();
+
+    } else {
+      this.chatExisiting = true;
+      this.members = [];
+      setTimeout(() => {
+        this.chatExisiting = false;
+      }, 5000);
+    }
   }
 
   setChatValues(data: any) {
-    this.setOwnUserToMembers();
     this.setMembertUidsArray();
     this.chat.messages = [];
     this.chat.members = this.members;
