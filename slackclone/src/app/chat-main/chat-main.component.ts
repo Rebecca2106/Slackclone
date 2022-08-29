@@ -111,7 +111,19 @@ export class ChatMainComponent implements OnInit {
   }
 
   deleteImg(i) {
-    this.messageImages.splice(i,1);
+    let imagePath = this.messageImages[i];
+    this.deleteImgFromFB(imagePath, i);
   }
 
+  
+  deleteImgFromFB(path, i) {
+    const filePath = path   
+    const fileRef = this.storage.refFromURL(filePath);
+
+    fileRef.delete().pipe(
+      finalize(() => { // Execute when the observable completes
+        this.messageImages.splice(i,1);
+      })
+      ).subscribe();
+  }
 }
