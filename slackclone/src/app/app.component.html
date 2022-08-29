@@ -1,6 +1,7 @@
-<mat-sidenav-container>
+
   <div class="app-wrapper">
     <div *ngIf="uiService.showDesign" class="design-dialog-wrapper">
+      <mat-sidenav-container>
       <div class="design-dialog">
         <span (click)="uiService.toggleDesign()" class="material-icons">close</span>
         <h2 mat-dialog-title> Change the look and feel of Slack across all your workspaces.
@@ -24,9 +25,8 @@
             {{color}}
           </mat-radio-button>
         </mat-radio-group>
-
       </div>
+    </mat-sidenav-container>
     </div>
     <router-outlet></router-outlet>
   </div>
-</mat-sidenav-container>
