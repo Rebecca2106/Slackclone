@@ -49,6 +49,12 @@ $custom-theme-warn-orange: mat.define-palette($custom-orange, A700);
 $custom-theme-light-orange: mat.define-light-theme($custom-theme-primary-orange, $custom-theme-accent-orange, $custom-theme-warn-orange );
 $custom-theme-dark-orange: mat.define-dark-theme($custom-theme-primary-orange, $custom-theme-accent-orange, $custom-theme-warn-orange );
 
+$custom-theme-primary-red: mat.define-palette($custom-red, 600);
+$custom-theme-accent-red: mat.define-palette($custom-red, 200);
+$custom-theme-warn-red: mat.define-palette($custom-red, A700);
+$custom-theme-light-red: mat.define-light-theme($custom-theme-primary-red, $custom-theme-accent-red, $custom-theme-warn-red );
+$custom-theme-dark-red: mat.define-dark-theme($custom-theme-primary-red, $custom-theme-accent-red, $custom-theme-warn-red );
+
 
 // @include mat.core-theme($custom-theme-dark);
 // @include angular-material-theme($custom-theme-dark);
@@ -121,6 +127,25 @@ body {
     height: 100%;
     overflow-y: auto;
 }
+
+.dark-themepink {
+    @include angular-material-theme($custom-theme-dark);
+    @include header.theme($custom-theme-dark);
+    @include profile.theme($custom-theme-dark);
+    @include sidebar.theme($custom-theme-dark);
+    @include chatarea.theme($custom-theme-dark);
+    @include thread.theme($custom-theme-dark);
+}
+
+.light-themepink {
+    @include angular-material-theme($custom-theme-light);
+    @include header.theme($custom-theme-light);
+    @include profile.theme($custom-theme-light);
+    @include sidebar.theme($custom-theme-light);
+    @include chatarea.theme($custom-theme-light);
+    @include thread.theme($custom-theme-light);
+}
+
 
 
 
@@ -212,6 +237,24 @@ body {
     @include sidebar.theme($custom-theme-dark-orange);
     @include chatarea.theme($custom-theme-dark-orange);
     @include thread.theme($custom-theme-dark-orange);
+}
+
+.light-themered {
+    @include angular-material-theme($custom-theme-light-red);
+    @include header.theme($custom-theme-light-red);
+    @include profile.theme($custom-theme-light-red);
+    @include sidebar.theme($custom-theme-light-red);
+    @include chatarea.theme($custom-theme-light-red);
+    @include thread.theme($custom-theme-light-red);
+}
+
+.dark-themered {
+    @include angular-material-theme($custom-theme-dark-red);
+    @include header.theme($custom-theme-dark-red);
+    @include profile.theme($custom-theme-dark-red);
+    @include sidebar.theme($custom-theme-dark-red);
+    @include chatarea.theme($custom-theme-dark-red);
+    @include thread.theme($custom-theme-dark-red);
 }
 
 body {

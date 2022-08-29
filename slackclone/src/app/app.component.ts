@@ -13,7 +13,7 @@ export class AppComponent {
   theme = 'dark-theme-green'
   selectedTheme;
   favoriteColor= '';
-  colors: string[] = ['pink', 'green','lightgreen', 'turquoise', 'orange'];
+  colors: string[] = ['pink', 'green','lightgreen', 'turquoise', 'orange', 'red'];
 
 
 
