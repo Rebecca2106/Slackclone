@@ -179,7 +179,7 @@ export class FireauthService {
       if (this.user) {
         this.updateTimestamp();
       }
-    }, 5 * 1000);
+    }, 60 * 1000);
   }
 
   setInitalTimeUpdate() {
