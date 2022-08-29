@@ -22,6 +22,11 @@ mat-radio-group {
    height: 100vh;
 }
 
+
+.border {
+   box-shadow: 3px 5.9px 5.9px rgb(0 0 0 / 41%);
+}
+
 .design-dialog {
    box-shadow: 3.0px 5.9px 5.9px hsl(0deg 0% 0% / 0.41);
    border: 1px solid rgb(195, 181, 181);
