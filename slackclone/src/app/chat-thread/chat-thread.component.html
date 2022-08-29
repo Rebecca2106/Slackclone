@@ -2,11 +2,12 @@
     <div class="thread-main"
         [ngStyle]="{'height': messageImages.length != 0 ? 'calc(100% - 286px)' : 'calc(100% - 200px)'}">
         <div class="element_header" [ngStyle]="{'border-bottom': '2px solid'}">
-            <p>{{this.fcctService.midContent.header}}</p>
+            <p>{{this.fcctService.rightContent.header}}</p>
+            <span (click)="uiService.toggleThread()" class="material-icons">close</span>
         </div>
         <div class="messages_wrapper">
-            <div *ngIf="this.fcctService.midContent.messages.length == 0">nothing in here</div>
-            <div *ngFor="let message of this.fcctService.midContent.messages" class="message">
+            <div *ngIf="this.fcctService.rightContent.messages.length == 0">nothing in here</div>
+            <div *ngFor="let message of this.fcctService.rightContent.messages" class="message">
                 <div class="profilpicture">
                     <img class="avatar" src="">
                 </div>

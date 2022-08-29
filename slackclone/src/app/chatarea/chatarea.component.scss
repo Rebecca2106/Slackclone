@@ -18,10 +18,41 @@
     z-index: 10 !important;
 }
 
+.z_index_5{
+    z-index: 5 !important;
+}
+
+.d_flex_start{
+    display: flex;
+    justify-content:flex-start ;
+}
+
+.d_flex_end{
+    display: flex;
+    justify-content:flex-end ;
+}
+
 .resize_bar{
     height: 100%;
-    // background-color: black;
+    background-color: transparent;
     cursor: col-resize;
+    span{
+        height: 100%;
+    }
+}
+
+.resize_bar:hover{
+    span{
+        background: rgb(255,255,255);
+background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(0,255,223,1) 50%, rgba(255,255,255,0) 100%);
+    }
+}
+
+.resize_bar_bgcolor{
+    span{
+        background: rgb(255,255,255);
+background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(0,255,223,1) 50%, rgba(255,255,255,0) 100%);
+    }
 }
 
 .chat_main_wrapper{
@@ -35,11 +66,14 @@
 
 .pos_abs{
     position: absolute;
+    left: 0;
+    z-index: 3;
 }
 
 .pos_abs_right{
     position: absolute;
     right: 0;
+    z-index: 3;
 }
 
 .transition{

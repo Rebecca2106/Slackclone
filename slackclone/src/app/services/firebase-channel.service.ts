@@ -77,4 +77,15 @@ export class FirebaseChannelService {
     });
   }
   
+  updateChannelThreadMessages(timeStamp, docID, messages){
+
+    let resultChannel = this.channelCollection.filter(channel => channel.docID == docID)[0];
+    let resultMsgindex = resultChannel.messages.findIndex(msg => this.validateMessage(msg, timeStamp));
+    resultChannel.messages[resultMsgindex].thread = messages;
+    this.updateChannelMessages(docID, resultChannel.messages)
+  }
+
+  validateMessage(msg, timeStamp){
+    return msg.timestamp.toMillis() == timeStamp.toMillis();
+  }
 }

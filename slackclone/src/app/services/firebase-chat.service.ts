@@ -25,7 +25,7 @@ export class FirebaseChatService {
     dmCollection: Array<any>;
     chat: DM;
 
-    constructor(public fcctService: FirebaseChannelChatThreadService, public fb: FirebaseMainService ,private firestore: AngularFirestore, public fs: FireauthService) { }
+    constructor(public fcctService: FirebaseChannelChatThreadService, public fb: FirebaseMainService, private firestore: AngularFirestore, public fs: FireauthService) { }
 
 
 
@@ -34,21 +34,21 @@ export class FirebaseChatService {
 
     async subscribeChats() {
         this.firestore
-            .collection( 'dms', ref => ref.where("memberUids", "array-contains", this.fs.user.uid))
+            .collection('dms', ref => ref.where("memberUids", "array-contains", this.fs.user.uid))
             .valueChanges({ idField: 'docID' })
             .subscribe((dms: any) => {
-                this.dmCollection = dms.sort( this.compare );
+                this.dmCollection = dms.sort(this.compare);
                 console.log('dms', dms);
                 this.updateOpenChat();
             })
     }
 
 
-    updateOpenChat(){
-        if(this.fcctService.midContent.type == 'chat'){
+    updateOpenChat() {
+        if (this.fcctService.midContent.type == 'chat') {
             this.dmCollection.forEach(chat => {
-                if(this.fcctService.midContent.docID == chat.docID){
-                    this.fcctService.setContent(chat.docID,"chat", chat.messages);
+                if (this.fcctService.midContent.docID == chat.docID) {
+                    this.fcctService.setContent(chat.docID, "chat", chat.messages);
                 }
             });
         }
@@ -96,8 +96,20 @@ export class FirebaseChatService {
     updateChatMessages(docID, messages) {
         let docRef = this.firestore.collection('dms').doc(docID);
         docRef.update({
-          messages: messages
+            messages: messages
         });
+    }
+
+    updateChatThreadMessages(timeStamp, docID, messages){
+
+        let resultChannel = this.dmCollection.filter(channel => channel.docID == docID)[0];
+        let resultMsgindex = resultChannel.messages.findIndex(msg => this.validateMessage(msg, timeStamp));
+        resultChannel.messages[resultMsgindex].thread = messages;
+        this.updateChatMessages(docID, resultChannel.messages)
+      }
+    
+      validateMessage(msg, timeStamp){
+        return msg.timestamp.toMillis() == timeStamp.toMillis();
       }
 }
 

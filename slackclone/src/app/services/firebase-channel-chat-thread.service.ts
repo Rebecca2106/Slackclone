@@ -14,30 +14,33 @@ export class FirebaseChannelChatThreadService {
 
   constructor(private firestore: AngularFirestore , public uiService: UiChangeService) { }
 
-  currentMessage;
+  currentThreadMessage;
 
   rightContent = {
     docID: "",
     header: "",
     type: "",
     messages: [],
+    msgTimeStamp: 0
   }
 
   openThread(timestamp){
+    this.rightContent.msgTimeStamp = timestamp;
     this.rightContent.docID = this.midContent.docID;
     this.rightContent.type = this.midContent.type;
-    this.setHeaderThread(this.rightContent.type, timestamp);
+    this.setHeaderThread(this.rightContent.type, "");
     this.setMessage(timestamp);
     this.uiService.openThread();
   }
 
   setHeaderThread(type, mainline){
-      this.rightContent.header = `${type}: ${mainline}`;
+      this.rightContent.header = `${type}-Thread ${mainline}`;
   }
 
   setMessage(timestamp){
     let result = this.midContent.messages.filter(msg => msg.timestamp == timestamp);
-    this.currentMessage = result[0];
+    this.rightContent.messages = result[0].thread;
+    this.currentThreadMessage = result[0];
   }
 
 
@@ -58,6 +61,8 @@ export class FirebaseChannelChatThreadService {
       this.uiService.toggleSidebar();
     }
     this.currentChatChannel = chat;
+    console.log(this.currentChatChannel);
+    
     this.setContent(chat.docID, "chat", chat.messages);
     this.setHeader("chat", chat.docID);
   }

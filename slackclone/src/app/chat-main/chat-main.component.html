@@ -7,6 +7,11 @@
         <div class="messages_wrapper">
             <div *ngIf="this.fcctService.midContent.messages.length == 0">nothing in here</div>
             <div *ngFor="let message of this.fcctService.midContent.messages" class="message">
+                <div *ngIf="message.thread.length == 0" class="start_thread_icon_wrapper">
+                    <div (click)="this.fcctService.openThread(message.timestamp)" class="start_thread_icon">
+                        openThread
+                    </div>
+                </div>
                 <div class="profilpicture">
                     <img class="avatar" src="">
                 </div>
@@ -20,7 +25,7 @@
                         <img *ngFor="let img of message.images" class="message-img" src={{img}} width="auto" height="150">
                     </div>
     
-                    <button (click)="this.fcctService.openThread(message.timestamp)">open Thread</button>
+                    <div *ngIf="message.thread.length != 0" class="thread_link" (click)="this.fcctService.openThread(message.timestamp)">{{ message.thread.length }} Antworten</div>
                 </div>
             </div>
         </div>  

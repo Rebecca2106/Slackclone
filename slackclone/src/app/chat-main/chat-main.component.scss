@@ -25,7 +25,7 @@
 
 .messages_wrapper{
     max-height: calc(100% - 66px);
-  overflow: hidden;
+    overflow: hidden;
 }
 
 .messages_wrapper:hover{
@@ -144,6 +144,10 @@
     }
 }
 
+.message{
+    position: relative;
+}
+
 h4,
 h5 {
     margin-block-start: unset;
@@ -171,3 +175,31 @@ h4 {
 .areaHeightlow{
     background-color: black;
 }
+
+.thread_link{
+    color: rgb(5, 5, 228);
+    cursor: pointer;
+}
+
+.thread_link:hover{
+    text-decoration: underline;
+    color: rgb(74, 74, 255);
+}
+
+.start_thread_icon_wrapper{
+    position: absolute;
+    top: 0;
+    right: 5%;
+}
+
+.start_thread_icon {
+    cursor: pointer;
+    display: none;
+}
+
+.message:hover{
+    .start_thread_icon {
+        display: block;
+    }
+}
+

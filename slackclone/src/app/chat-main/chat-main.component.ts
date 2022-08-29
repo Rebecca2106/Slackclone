@@ -107,9 +107,6 @@ export class ChatMainComponent implements OnInit {
 
   }
 
-  openThread() {
-  }
-
   deleteImg(i) {
     this.messageImages.splice(i,1);
   }

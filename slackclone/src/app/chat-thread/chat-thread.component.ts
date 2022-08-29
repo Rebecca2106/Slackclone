@@ -83,19 +83,19 @@ export class ChatThreadComponent implements OnInit {
   addMessage() {
     console.log('dd');
     
-    if (this.fcctService.midContent.type == 'chat' || this.fcctService.midContent.type == 'channel') {
+    if (this.fcctService.rightContent.type == 'chat' || this.fcctService.rightContent.type == 'channel') {
 
       let message = new Message();
       message.timestamp = firebase.firestore.Timestamp.now();
       message.creator = this.fs.user.uid;
       message.message = this.noteText;
       message.images = this.messageImages;
-      this.fcctService.midContent.messages.push(message.toJSON());
+      this.fcctService.rightContent.messages.push(message.toJSON());
 
-      if (this.fcctService.midContent.type == 'channel') {
-        this.channelService.updateChannelMessages(this.fcctService.midContent.docID, this.fcctService.midContent.messages);
+      if (this.fcctService.rightContent.type == 'channel') {
+        this.channelService.updateChannelThreadMessages(this.fcctService.rightContent.msgTimeStamp, this.fcctService.rightContent.docID, this.fcctService.rightContent.messages);
       } else {
-        this.chatService.updateChatMessages(this.fcctService.midContent.docID, this.fcctService.midContent.messages);
+        this.chatService.updateChatThreadMessages(this.fcctService.rightContent.msgTimeStamp,this.fcctService.rightContent.docID, this.fcctService.rightContent.messages);
       }
       this.clearInput();
     }

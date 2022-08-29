@@ -12,13 +12,13 @@ export class ChatareaComponent implements OnInit {
   leftSidebar = {
     positionAbsolute: false,
     width: 250,
-    max: 400,
+    max: 504,
     min: 200,
   }
   rightSidebar = {
     positionAbsolute: false,
     width: 350,
-    max: 500,
+    max: 504,
     min: 250,
   }
   midContentMinWidth = 400;
@@ -55,10 +55,20 @@ export class ChatareaComponent implements OnInit {
     return this.screenWidth - this.rightSidebar.width - this.leftSidebar.width <= this.midContentMinWidth ;
   }
 
-  evaluateWidth(){
-    if(this.checkMidContentWidth()){
-      this.leftSidebar.positionAbsolute = true;
+  checkSetHandyMode(){
+    if(this.screenWidth  < 500){
       this.uiService.handyMode = true;
+    }else {
+      this.uiService.handyMode = false;
+    }
+  }
+
+  evaluateWidth(){
+    this.checkSetHandyMode();
+    if(this.checkMidContentWidth()){
+
+      this.leftSidebar.positionAbsolute = true;
+      
       if(this.screenWidth >= this.rightSidebar.min + this.midContentMinWidth){
         if(this.screenWidth - this.rightSidebar.width < this.midContentMinWidth){
           this.rightSidebar.width = this.screenWidth - this.midContentMinWidth;
@@ -69,16 +79,12 @@ export class ChatareaComponent implements OnInit {
       }
     } else {
       this.leftSidebar.positionAbsolute = false;
-      this.uiService.handyMode = false;
     }
     this.updateMidContentWidth();
     if(this.checkScreenWidth()){
-      this.uiService.handyMode = true;
       this.rightSidebar.width = this.screenWidth;
       this.leftSidebar.width = this.screenWidth;
-    } else {
-      this.uiService.handyMode = false;
-    }
+    } 
   }
 
   startResize(event, side) {
@@ -98,16 +104,15 @@ export class ChatareaComponent implements OnInit {
   }
 
   onResizing(event) {
+    this.checkSetHandyMode();
     let difference = event.clientX - this.currentXPosition;
     let leftDiff = this.leftSidebar.width + difference;
     let rightDiff = this.rightSidebar.width - difference;
     if (this.resizingLeft && leftDiff <= this.leftSidebar.max && leftDiff >= this.leftSidebar.min) {
       if (this.checkMidContentWidth()) {
         this.leftSidebar.positionAbsolute = true;
-        this.uiService.handyMode = true;
       }else{
         this.leftSidebar.positionAbsolute = false;
-        this.uiService.handyMode = false;
       }
       this.leftSidebar.width = leftDiff;
     }

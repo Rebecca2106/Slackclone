@@ -1,25 +1,29 @@
-<mat-sidenav-container><app-header></app-header>
-<div *ngIf="fs.user" class="chat-flex" (mouseup)="stopResize()" (mousemove)="onResizing($event)">
-    <app-sidebar class="sidebar_wrapper z_index_10"
-        [ngStyle]="{'left': !uiService.showSidebar ? '-' + this.leftSidebar.width + 'px' : '0px', width: this.leftSidebar.width  + 'px'}"
-        [ngClass]="{'transition': this.checkScreenWidth()}">
-    </app-sidebar>
-    <div class="resize_bar"
-        [ngClass]="{'pos_abs': this.leftSidebar.positionAbsolute, 'd_none': this.checkScreenWidth()}"
-        (mousedown)="startResize($event, 'left')"
-        [ngStyle]="{'width': uiService.showSidebar ? this.leftSidebar.width + 5 + 'px' : '0px'}"></div>
-    <app-chat-main class="chat_main_wrapper" [ngStyle]="{'width': this.midContentWidth + 'px'}"></app-chat-main>
+<mat-sidenav-container>
+    <app-header></app-header>
+    <div *ngIf="fs.user" class="chat-flex" (mouseup)="stopResize()" (mousemove)="onResizing($event)">
+        <app-sidebar class="sidebar_wrapper z_index_10"
+            [ngStyle]="{'left': !uiService.showSidebar ? '-' + this.leftSidebar.width + 'px' : '0px', width: this.leftSidebar.width  + 'px'}"
+            [ngClass]="{'transition': this.checkScreenWidth()}">
+        </app-sidebar>
+        <div class="resize_bar d_flex_end"
+            [ngClass]="{'pos_abs': this.leftSidebar.positionAbsolute, 'd_none': this.uiService.handyMode, 'resize_bar_bgcolor': this.resizingLeft}"
+            (mousedown)="startResize($event, 'left')"
+            [ngStyle]="{'width': uiService.showSidebar ? this.leftSidebar.width + this.sliderWidth + 'px' : '0px'}">
+            <span [ngStyle]="{'width': this.sliderWidth + 'px'}"></span>
+        </div>
+        <app-chat-main class="chat_main_wrapper" [ngStyle]="{'width': this.midContentWidth + 'px'}"></app-chat-main>
 
 
-    <div class="sidebar_wrapper "
-        [ngStyle]="{'right': (!uiService.profile && !uiService.thread)  ? '-' + this.rightSidebar.width + 'px' : '0px', width: this.rightSidebar.width  + 'px' }"
-        [ngClass]="{'transition': this.checkScreenWidth()}">
-        <app-profile *ngIf="uiService.profile" class="side_component_wrapper"></app-profile>
-        <app-chat-thread *ngIf="uiService.thread" class="side_component_wrapper"></app-chat-thread>
+        <div class="sidebar_wrapper z_index_5"
+            [ngStyle]="{'right': (!uiService.profile && !uiService.thread)  ? '-' + this.rightSidebar.width + 'px' : '0px', width: this.rightSidebar.width  + 'px' }"
+            [ngClass]="{'transition': this.checkScreenWidth()}">
+            <app-profile *ngIf="uiService.profile" class="side_component_wrapper"></app-profile>
+            <app-chat-thread *ngIf="uiService.thread" class="side_component_wrapper"></app-chat-thread>
+        </div>
+        <div class="resize_bar d_flex_start" (mousedown)="startResize($event, 'right')"
+            [ngClass]="{'pos_abs_right': this.rightSidebar.positionAbsolute, 'd_none': this.uiService.handyMode, 'resize_bar_bgcolor': this.resizingRight}"
+            [ngStyle]="{'width': (uiService.profile || uiService.thread) ? this.rightSidebar.width + this.sliderWidth + 'px' : '0px'}">
+            <span [ngStyle]="{'width': this.sliderWidth + 'px'}"></span>
+        </div>
     </div>
-    <div class="resize_bar" (mousedown)="startResize($event, 'right')"
-        [ngClass]="{'pos_abs_right': this.rightSidebar.positionAbsolute, 'd_none': this.checkScreenWidth()}"
-        [ngStyle]="{'width': (uiService.profile || uiService.thread) ? this.rightSidebar.width + 5 + 'px' : '0px'}">
-    </div>
-</div>
 </mat-sidenav-container>
