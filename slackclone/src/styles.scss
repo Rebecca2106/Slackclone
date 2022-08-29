@@ -34,7 +34,7 @@ $custom-theme-dark-green: mat.define-dark-theme($custom-theme-primary-green, $cu
 
 // @include mat.core-theme($custom-theme-dark);
 // @include angular-material-theme($custom-theme-dark);
-@include mat.all-component-themes($custom-theme-light-green);
+@include mat.all-component-themes($custom-theme-dark);
 @include header.theme($custom-theme-dark);
 @include profile.theme($custom-theme-dark);
 @include sidebar.theme($custom-theme-dark);
@@ -94,7 +94,7 @@ $custom-theme-dark-green: mat.define-dark-theme($custom-theme-primary-green, $cu
 
 // $custom-theme: create-wonky-theme($custom-theme-primary, $custom-theme-accent, $custom-theme-warn);
 
-@include angular-material-theme($custom-theme-light-green);
+// @include angular-material-theme($custom-theme-light-green);
 
 
 
@@ -104,26 +104,44 @@ body {
     overflow-y: auto;
 }
 
-.dark-theme{ //default
-    @include angular-material-theme($custom-theme-dark)
-}
 
 
-.dark-themepink{
-    @include angular-material-theme($custom-theme-dark)
+.dark-themepink {
+    @include angular-material-theme($custom-theme-dark);
+    @include header.theme($custom-theme-dark);
+    @include profile.theme($custom-theme-dark);
+    @include sidebar.theme($custom-theme-dark);
+    @include chatarea.theme($custom-theme-dark);
+    @include thread.theme($custom-theme-dark);
 }
 
-.light-themepink{
-    @include angular-material-theme($custom-theme-light)
+.light-themepink {
+    @include angular-material-theme($custom-theme-light);
+    @include header.theme($custom-theme-light);
+    @include profile.theme($custom-theme-light);
+    @include sidebar.theme($custom-theme-light);
+    @include chatarea.theme($custom-theme-light);
+    @include thread.theme($custom-theme-light);
 }
 
-.dark-themegreen{
-    @include angular-material-theme($custom-theme-dark-green)
+.dark-themegreen {
+    @include angular-material-theme($custom-theme-dark-green);
+    @include header.theme($custom-theme-dark-green);
+    @include profile.theme($custom-theme-dark-green);
+    @include sidebar.theme($custom-theme-dark-green);
+    @include chatarea.theme($custom-theme-dark-green);
+    @include thread.theme($custom-theme-dark-green);
 }
 
-.light-themegreen{
-    @include angular-material-theme($custom-theme-light-green)
+.light-themegreen {
+    @include angular-material-theme($custom-theme-light-green);
+    @include header.theme($custom-theme-light-green);
+    @include profile.theme($custom-theme-light-green);
+    @include sidebar.theme($custom-theme-light-green);
+    @include chatarea.theme($custom-theme-light-green);
+    @include thread.theme($custom-theme-light-green);
 }
+
 
 body {
     margin: 0;
