@@ -21,7 +21,7 @@
                         (click)="fcctService.openChannel(channel)">
                         <div class="flex_cc"># </div>
                         <div class="flex_channel">{{ channel.title }}</div>
-                        <div class="material-icons" (click)="editChannel(channel.docID)">edit</div>
+                        <div class="material-icons hide" (click)="editChannel(channel.docID); $event.stopPropagation()">edit</div>
                     </div>
                 </mat-expansion-panel>
             </mat-accordion>

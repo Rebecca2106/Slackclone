@@ -6,6 +6,12 @@
 
     $primary-palette: map.get($color-config, 'primary');
 
+.channels{
+    border-right: {
+        color: mat.get-color-from-palette($primary-palette) !important;
+    }
+}
+
     mat-icon{
         color: mat.get-color-from-palette($primary-palette);
     }
