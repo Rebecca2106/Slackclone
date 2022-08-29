@@ -31,6 +31,24 @@ $custom-theme-warn-green: mat.define-palette($custom-green, A700);
 $custom-theme-light-green: mat.define-light-theme($custom-theme-primary-green, $custom-theme-accent-green, $custom-theme-warn-green);
 $custom-theme-dark-green: mat.define-dark-theme($custom-theme-primary-green, $custom-theme-accent-green, $custom-theme-warn-green);
 
+$custom-theme-primary-lightgreen: mat.define-palette($custom-lightgreen, 500);
+$custom-theme-accent-lightgreen: mat.define-palette($custom-lightgreen, 100);
+$custom-theme-warn-lightgreen: mat.define-palette($custom-lightgreen, 900);
+$custom-theme-light-lightgreen: mat.define-light-theme($custom-theme-primary-lightgreen, $custom-theme-accent-lightgreen, $custom-theme-warn-lightgreen );
+$custom-theme-dark-lightgreen: mat.define-dark-theme($custom-theme-primary-lightgreen, $custom-theme-accent-lightgreen, $custom-theme-warn-lightgreen );
+
+$custom-theme-primary-turquoise: mat.define-palette($custom-turquoise, 700);
+$custom-theme-accent-turquoise: mat.define-palette($custom-turquoise, 100);
+$custom-theme-warn-turquoise: mat.define-palette($custom-turquoise, A700);
+$custom-theme-light-turquoise: mat.define-light-theme($custom-theme-primary-turquoise, $custom-theme-accent-turquoise, $custom-theme-warn-turquoise );
+$custom-theme-dark-turquoise: mat.define-dark-theme($custom-theme-primary-turquoise, $custom-theme-accent-turquoise, $custom-theme-warn-turquoise );
+
+$custom-theme-primary-orange: mat.define-palette($custom-orange, 600);
+$custom-theme-accent-orange: mat.define-palette($custom-orange, 200);
+$custom-theme-warn-orange: mat.define-palette($custom-orange, A700);
+$custom-theme-light-orange: mat.define-light-theme($custom-theme-primary-orange, $custom-theme-accent-orange, $custom-theme-warn-orange );
+$custom-theme-dark-orange: mat.define-dark-theme($custom-theme-primary-orange, $custom-theme-accent-orange, $custom-theme-warn-orange );
+
 
 // @include mat.core-theme($custom-theme-dark);
 // @include angular-material-theme($custom-theme-dark);
@@ -142,6 +160,59 @@ body {
     @include thread.theme($custom-theme-light-green);
 }
 
+.light-themelightgreen {
+    @include angular-material-theme($custom-theme-light-lightgreen);
+    @include header.theme($custom-theme-light-lightgreen);
+    @include profile.theme($custom-theme-light-lightgreen);
+    @include sidebar.theme($custom-theme-light-lightgreen);
+    @include chatarea.theme($custom-theme-light-lightgreen);
+    @include thread.theme($custom-theme-light-lightgreen);
+}
+
+.dark-themelightgreen {
+    @include angular-material-theme($custom-theme-dark-lightgreen);
+    @include header.theme($custom-theme-light-lightgreen);
+    @include profile.theme($custom-theme-light-lightgreen);
+    @include sidebar.theme($custom-theme-light-lightgreen);
+    @include chatarea.theme($custom-theme-light-lightgreen);
+    @include thread.theme($custom-theme-light-lightgreen);
+}
+
+.light-themeturquoise {
+    @include angular-material-theme($custom-theme-light-turquoise);
+    @include header.theme($custom-theme-light-turquoise);
+    @include profile.theme($custom-theme-light-turquoise);
+    @include sidebar.theme($custom-theme-light-turquoise);
+    @include chatarea.theme($custom-theme-light-turquoise);
+    @include thread.theme($custom-theme-light-turquoise);
+}
+
+.dark-themeturquoise {
+    @include angular-material-theme($custom-theme-dark-turquoise);
+    @include header.theme($custom-theme-dark-turquoise);
+    @include profile.theme($custom-theme-dark-turquoise);
+    @include sidebar.theme($custom-theme-dark-turquoise);
+    @include chatarea.theme($custom-theme-dark-turquoise);
+    @include thread.theme($custom-theme-dark-turquoise);
+}
+
+.light-themeorange {
+    @include angular-material-theme($custom-theme-light-orange);
+    @include header.theme($custom-theme-light-orange);
+    @include profile.theme($custom-theme-light-orange);
+    @include sidebar.theme($custom-theme-light-orange);
+    @include chatarea.theme($custom-theme-light-orange);
+    @include thread.theme($custom-theme-light-orange);
+}
+
+.dark-themeorange {
+    @include angular-material-theme($custom-theme-dark-orange);
+    @include header.theme($custom-theme-dark-orange);
+    @include profile.theme($custom-theme-dark-orange);
+    @include sidebar.theme($custom-theme-dark-orange);
+    @include chatarea.theme($custom-theme-dark-orange);
+    @include thread.theme($custom-theme-dark-orange);
+}
 
 body {
     margin: 0;
