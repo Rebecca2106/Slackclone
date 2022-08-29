@@ -19,7 +19,7 @@
 
 $custom-theme-primary: mat.define-palette($custom-pink, 500);
 $custom-theme-primar-light: mat.define-palette($custom-pink, 800);
-$custom-theme-accent: mat.define-palette($custom-accent, 500);
+$custom-theme-accent: mat.define-palette($custom-pink, 200);
 $custom-theme-warn: mat.define-palette($mat-red);
 $custom-theme-light: mat.define-light-theme($custom-theme-primar-light, $custom-theme-accent, $custom-theme-warn );
 $custom-theme-dark: mat.define-dark-theme($custom-theme-primary, $custom-theme-accent, $custom-theme-warn );
