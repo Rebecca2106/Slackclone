@@ -99,6 +99,12 @@
     .message-body {
         width: 100%;
         word-wrap: break-word;
+        padding: 6px;
+        border-radius: 4px;
+
+        &:hover {
+            backdrop-filter: brightness(80%);
+        }
 
         .message-img-container {
             display: flex;
