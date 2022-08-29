@@ -11,8 +11,8 @@ import { UiChangeService } from './services/ui-change.service';
 export class AppComponent {
   title = 'slackclone';
   theme = 'dark-theme-green'
-  selectedTheme;
-  favoriteColor= '';
+  selectedTheme ='dark'
+  favoriteColor= 'pink';
   colors: string[] = ['pink', 'green','lightgreen', 'turquoise', 'orange', 'red'];
 
 

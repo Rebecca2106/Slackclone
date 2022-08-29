@@ -12,14 +12,14 @@
           </div>
           <div class="light-mode">
             <img src="assets/img/dark_mode.png">
-            <mat-radio-button name="color" value="dark" (change)="radioChangeHandler($event)">Dark</mat-radio-button>
+            <mat-radio-button name="color" value="dark" [checked]="selectedTheme === 'dark'" (change)="radioChangeHandler($event)">Dark</mat-radio-button>
           </div>
         </mat-radio-group>
 
         <label id="example-radio-group-label">Pick your favorite color</label>
         <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
           [(ngModel)]="favoriteColor">
-          <mat-radio-button name="color" value="{{color}}" class="example-radio-button" *ngFor="let color of colors"
+          <mat-radio-button name="color" value="{{color}}" [checked]="color === favoriteColor" class="example-radio-button" *ngFor="let color of colors"
             [value]="color" (change)="radioChangeColor($event)">
             {{color}}
           </mat-radio-button>
