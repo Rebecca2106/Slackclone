@@ -95,6 +95,7 @@ mat-toolbar{
 }
 
 .elipse {
+    flex: 1;
     max-width: calc(100% - 40px);
     white-space: nowrap;
     overflow: hidden;
