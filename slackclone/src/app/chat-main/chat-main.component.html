@@ -33,15 +33,7 @@
             </div>
         </div>
     </div>
-    <div class="image-popup" *ngIf="this.uiService.showImg">
-        <div class="img-wrapper">
-            <div class="material-icons close-btn" (click)="this.uiService.closeImg()">close</div>
-            <img src={{this.uiService.image}}>
-        </div>
-    </div>
-
-
-
+    
     <div class="editor" [ngStyle]="{'bottom': messageImages.length != 0 ? '86px' : '0px'}">
         <editor [(ngModel)]="noteText" (onChange)="logChange()"
             apiKey="tcf6s96vi3ln7h1sgtod2tzjhnfnrgsypmimricsl27j6wc9" [init]="{

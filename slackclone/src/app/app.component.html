@@ -1,7 +1,12 @@
-
-  <div class="app-wrapper">
-    <div *ngIf="uiService.showDesign" class="design-dialog-wrapper">
-      <mat-sidenav-container class="border">
+<div class="app-wrapper">
+  <div class="image-popup" *ngIf="this.uiService.showImg">
+    <div class="img-wrapper">
+      <div class="material-icons close-btn" (click)="this.uiService.closeImg()">close</div>
+      <img src={{this.uiService.image}}>
+    </div>
+  </div>
+  <div *ngIf="uiService.showDesign" class="design-dialog-wrapper">
+    <mat-sidenav-container class="border">
       <div class="design-dialog">
         <span (click)="uiService.toggleDesign()" class="material-icons">close</span>
         <h2 mat-dialog-title> Change the look and feel of Slack across all your workspaces.
@@ -13,20 +18,22 @@
           </div>
           <div class="light-mode">
             <img src="assets/img/dark_mode.png">
-            <mat-radio-button name="color" value="dark" [checked]="selectedTheme === 'dark'" (change)="radioChangeHandler($event)">Dark</mat-radio-button>
+            <mat-radio-button name="color" value="dark" [checked]="selectedTheme === 'dark'"
+              (change)="radioChangeHandler($event)">Dark</mat-radio-button>
           </div>
         </mat-radio-group>
 
         <label id="example-radio-group-label">Pick your favorite color</label>
         <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
           [(ngModel)]="favoriteColor">
-          <mat-radio-button name="color" value="{{color}}" [checked]="color === favoriteColor" class="example-radio-button" *ngFor="let color of colors"
-            [value]="color" (change)="radioChangeColor($event)">
+          <mat-radio-button name="color" value="{{color}}" [checked]="color === favoriteColor"
+            class="example-radio-button" *ngFor="let color of colors" [value]="color"
+            (change)="radioChangeColor($event)">
             {{color}}
           </mat-radio-button>
         </mat-radio-group>
       </div>
     </mat-sidenav-container>
-    </div>
-    <router-outlet></router-outlet>
   </div>
+  <router-outlet></router-outlet>
+</div>
