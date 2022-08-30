@@ -1,6 +1,6 @@
 <mat-toolbar><div class="header">
     <div> 
-        <mat-icon aria-hidden="false" class="padding-6" class="menu padding-6" (click)="uiService.toggleSidebar()">view_sidebar
+        <mat-icon *ngIf="!uiService.showSidebar" aria-hidden="false" class="padding-6" class="menu padding-6" (click)="uiService.toggleSidebar()">view_sidebar
         </mat-icon>
     </div>
 
