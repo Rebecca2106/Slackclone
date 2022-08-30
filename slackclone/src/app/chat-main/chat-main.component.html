@@ -60,7 +60,7 @@
       }">
         </editor>
     </div>
-    <div class="upload-wrapper" *ngIf="messageImages.length != 0">
+    <div class="upload-wrapper" *ngIf="messageImages.length != 0 || isUploading">
         <div class="upload-img-area" *ngFor="let url of messageImages; index as i">
             <div class="image-container"><img src={{url}} width="62" height="62">
                 <div class="cancel material-icons" (click)="deleteImg(i)">cancel</div>
