@@ -22,13 +22,22 @@
                     </div>
                     <div [innerHtml]="message.message"></div>
                     <div class="message-img-container">
-                        <img *ngFor="let img of message.images" class="message-img" src={{img}} width="auto" height="150">
+                        <img *ngFor="let img of message.images" class="message-img" src={{img}} width="auto"
+                            height="150" (click)="this.uiService.imagePopup(img)">
                     </div>
-    
-                    <div *ngIf="message.thread.length != 0" class="thread_link" (click)="this.fcctService.openThread(message.timestamp)">{{ message.thread.length }} Antworten</div>
+
+                    <div *ngIf="message.thread.length != 0" class="thread_link"
+                        (click)="this.fcctService.openThread(message.timestamp)">{{ message.thread.length }} Antworten
+                    </div>
                 </div>
             </div>
-        </div>  
+        </div>
+    </div>
+    <div class="image-popup" *ngIf="this.uiService.showImg">
+        <div class="img-wrapper">
+            <div class="material-icons close-btn" (click)="this.uiService.closeImg()">close</div>
+            <img src={{this.uiService.image}}>
+        </div>
     </div>
 
 

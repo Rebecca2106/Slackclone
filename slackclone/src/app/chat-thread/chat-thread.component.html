@@ -18,12 +18,13 @@
                     </div>
                     <div [innerHtml]="message.message"></div>
                     <div class="message-img-container">
-                        <img *ngFor="let img of message.images" class="message-img" src={{img}} width="auto" height="150">
+                        <img *ngFor="let img of message.images" class="message-img" src={{img}} width="auto" height="150" (click)="this.uiService.imagePopup(img)">
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 
     <div class="editor" [ngStyle]="{'bottom': messageImages.length != 0 ? '86px' : '0px'}">
         <editor [(ngModel)]="noteText" (onChange)="logChange()"

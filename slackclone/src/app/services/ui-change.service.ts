@@ -10,8 +10,16 @@ export class UiChangeService {
   thread: boolean = false;
   handyMode: boolean = false;
   showDesign: boolean = false;
+  image: string;
+  showImg: boolean = false;
 
-  constructor(private firestore: AngularFirestore) { }
+  constructor(private firestore: AngularFirestore) {
+    document.addEventListener('mouseup', () => {
+      if (this.showImg) {
+        this.showImg = false;
+      };
+    })
+  }
 
   toggleSidebar() {
     this.showSidebar = !this.showSidebar;
@@ -34,6 +42,15 @@ export class UiChangeService {
       this.profile = false;
     }
     this.thread = !this.thread;
+  }
+
+  imagePopup(img) {
+    this.image = img;
+    this.showImg = true;
+  }
+
+  closeImg() {
+    this.showImg = false;
   }
 
   openThread() {
