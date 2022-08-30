@@ -50,7 +50,7 @@
                         </div>
                         <div class="elipse">{{this.fb.getUserFromList(getOtherUsersNames(chat.members)).fullname }}
                         </div>
-                        <div class="material-icons hide">delete</div>
+                        <div class="material-icons hide" (click)="this.chatService.deleteDM(chat.docID)">delete</div>
                     </div>
                 </mat-expansion-panel>
             </mat-accordion>

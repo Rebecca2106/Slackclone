@@ -94,6 +94,19 @@ export class FirebaseChatService {
             });
     }
 
+    deleteDM(id) {
+        this.firestore
+            .collection('dms')
+            .doc(id)
+            .delete()
+            .then(() => {
+                console.log('Chat deleted.');
+            })
+            .catch(() => {
+                console.log('Error while deleting chat.');
+            });
+    }
+
     updateChatMessages(docID, messages) {
         let docRef = this.firestore.collection('dms').doc(docID);
         docRef.update({
@@ -101,16 +114,16 @@ export class FirebaseChatService {
         });
     }
 
-    updateChatThreadMessages(timeStamp, docID, messages){
+    updateChatThreadMessages(timeStamp, docID, messages) {
 
         let resultChannel = this.dmCollection.filter(channel => channel.docID == docID)[0];
         let resultMsgindex = resultChannel.messages.findIndex(msg => this.validateMessage(msg, timeStamp));
         resultChannel.messages[resultMsgindex].thread = messages;
         this.updateChatMessages(docID, resultChannel.messages)
-      }
-    
-      validateMessage(msg, timeStamp){
+    }
+
+    validateMessage(msg, timeStamp) {
         return msg.timestamp.toMillis() == timeStamp.toMillis();
-      }
+    }
 }
 
