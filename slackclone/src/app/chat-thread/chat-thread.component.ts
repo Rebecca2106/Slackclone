@@ -30,7 +30,7 @@ export class ChatThreadComponent implements OnInit {
   filepathID: string;
 
 
-  constructor( public channelService: FirebaseChannelService, public chatService: FirebaseChatService,public fsMain: FirebaseMainService ,public sanitizer: DomSanitizer, public fcctService: FirebaseChannelChatThreadService, public uiService: UiChangeService, private storage: AngularFireStorage, public fs: FireauthService, private firestore: AngularFirestore) { 
+  constructor( public channelService: FirebaseChannelService, public chatService: FirebaseChatService,public fsMain: FirebaseMainService ,public sanitizer: DomSanitizer, public fcctService: FirebaseChannelChatThreadService, public uiService: UiChangeService, private storage: AngularFireStorage, public fs: FireauthService, private firestore: AngularFirestore, public fb: FirebaseMainService) { 
   }
 
   ngOnInit(): void {
