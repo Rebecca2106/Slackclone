@@ -28,7 +28,6 @@ export class FirebaseMainService {
       const q = query(usersRef, where("uid", "==", id));
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
-        // console.log('Result', doc.id, " => ", doc.data());
         resolve(doc.data());
       });
     })

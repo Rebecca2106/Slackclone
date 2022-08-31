@@ -38,22 +38,21 @@ export class FireauthService {
 
   constructor(public auth: AngularFireAuth, public router: Router, private _SnackBar: MatSnackBar, private firestore: AngularFirestore) {
     const auth1 = getAuth();
-    onAuthStateChanged(auth1, (user1) => {
-    
-    if (!user1) {
-      this.router.navigate(['login']);
-      this.loggedIn = false;
-    } else {
-      this.authUserData = user1;
-      this.loggedIn = true;
-      this.checkUser(this.authUserData.uid, this.authUserData.email);
-    }
+    onAuthStateChanged(auth1, (user1) => {4
+      if (!user1) {
+        this.router.navigate(['login']);
+        this.loggedIn = false;
+      } else {
+        this.authUserData = user1;
+        this.loggedIn = true;
+        this.checkUser(this.authUserData.uid, this.authUserData.email);
+      }
     });
 
   }
 
 
-  
+
 
 
   checkUser(uid: string, email: string) {
@@ -61,21 +60,21 @@ export class FireauthService {
       .collection('users', ref => ref.where('uid', '==', uid))
       .valueChanges({ idField: 'docID' })
       .subscribe(async (user: any) => {
+        console.log(user ,"if",user.length);
         if (user.length > 0) {
           this.user = new User(user[0]);
           this.docID = user[0].docID;
-          // console.log('Current user:', this.user);
-          this.router.navigate(['']);          
-        
+          console.log('Current user:', this.user);
+          this.router.navigate(['']);
         } else {  // BLA unnötig oder für signup
-          // console.log('User not found!');
+          console.log('User not found!');
           await this.addUser(uid, email);
         }
-      })  
+      })
   }
 
   async addUser(uid: string, email: string) {
-
+    console.log('User not found!');
     this.newUser = new User();
     this.newUser.uid = uid;
     this.checkForMail(email);
@@ -124,16 +123,16 @@ export class FireauthService {
   }
 
   //SignUp
-  signUp(email:string, password: string, username: string) {
+  signUp(email: string, password: string, username: string) {
     this.auth.createUserWithEmailAndPassword(email, password)
-    .then(() => {
-      this.isNewUser = true;
-      this.newUsername = username;
-      this.openSuccessBar('User account successfully created.');
-    })
-    .catch(error => {
-      this.openErrorBar(error);
-    });
+      .then(() => {
+        this.isNewUser = true;
+        this.newUsername = username;
+        this.openSuccessBar('User account successfully created.');
+      })
+      .catch(error => {
+        this.openErrorBar(error);
+      });
   }
 
   // GoogleSignIn
@@ -184,15 +183,15 @@ export class FireauthService {
 
   setInitalTimeUpdate() {
     this.interval2 = setInterval(() => {
-      
+
       if (!this.user) {
-        console.log("wird ausgeführt, wenn this.user nicht verfügbar", this.user );
-        console.log("this.user.lastTimeOnline", this.user.lastTimeOnline );
+        console.log("wird ausgeführt, wenn this.user nicht verfügbar", this.user);
+        console.log("this.user.lastTimeOnline", this.user.lastTimeOnline);
         clearInterval(this.interval2);
         this.setInitalTimeUpdate();
       }
 
-      if (this.user) {    
+      if (this.user) {
         this.updateTimestamp();
         clearInterval(this.interval2);
       }
