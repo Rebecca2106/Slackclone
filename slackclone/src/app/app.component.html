@@ -14,7 +14,7 @@
         <mat-radio-group aria-label="Select an option">
           <div class="dark-mode">
             <img src="assets/img/ligth_mode.png">
-            <mat-radio-button name="color" value="light" (change)="radioChangeHandler($event)">Light</mat-radio-button>
+            <mat-radio-button name="color" value="light" [checked]="selectedTheme === 'light'" (change)="radioChangeHandler($event)">Light</mat-radio-button>
           </div>
           <div class="light-mode">
             <img src="assets/img/dark_mode.png">
