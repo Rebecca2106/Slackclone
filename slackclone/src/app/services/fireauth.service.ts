@@ -7,22 +7,10 @@ import { User } from 'src/models/user.class';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
-
-
-
-
-
 @Injectable({
   providedIn: 'root'
 })
 export class FireauthService {
-
-
-
-
-
-
-
 
   newUser: User;
   user: User;
@@ -53,28 +41,27 @@ export class FireauthService {
   }
 
 
-  
-
-
   checkUser(uid: string, email: string) {
+    console.log('checkUser')
     this.userSub = this.firestore
       .collection('users', ref => ref.where('uid', '==', uid))
       .valueChanges({ idField: 'docID' })
       .subscribe(async (user: any) => {
         if (user.length > 0) {
           this.user = new User(user[0]);
+          console.log(this.user)
           this.docID = user[0].docID;
-          // console.log('Current user:', this.user);
           this.router.navigate(['']);          
         
         } else {  // BLA unnötig oder für signup
-          // console.log('User not found!');
+          console.log('User not found!');
           await this.addUser(uid, email);
         }
       })  
   }
 
   async addUser(uid: string, email: string) {
+    console.log('addUser')
 
     this.newUser = new User();
     this.newUser.uid = uid;

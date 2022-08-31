@@ -10,43 +10,72 @@ import { UiChangeService } from './services/ui-change.service';
 })
 export class AppComponent {
   title = 'slackclone';
-  theme = 'dark-theme-green'
-  selectedTheme ='dark'
-  favoriteColor= 'pink';
-  colors: string[] = ['pink', 'green','lightgreen', 'turquoise', 'orange', 'red'];
+  theme = 'dark-themepink'
+  selectedTheme = 'dark'
+  favoriteColor = 'pink';
+  colors: string[] = ['pink', 'green', 'lightgreen', 'turquoise', 'orange', 'red'];
 
 
 
 
-  constructor(public overlayContainer: OverlayContainer, public uiService: UiChangeService,) {}
+  constructor(public overlayContainer: OverlayContainer, public uiService: UiChangeService,) { }
+
+
+  ngOnInit(): void {
+    let themeAsText = localStorage.getItem('theme');
+    let colorAsText = localStorage.getItem('color');
+
+    if (colorAsText) {
+      this.favoriteColor = JSON.parse(colorAsText)
+    }
+
+    if (themeAsText){
+      this.selectedTheme= JSON.parse(themeAsText)
+    }
+
+    this.onSetTheme()
+  }
+
+
 
   radioChangeHandler(event: any) {
-    this.selectedTheme = event.value;
-    this.onSetTheme(this.selectedTheme + '-theme')
+      this.selectedTheme = event.value;
+      this.onSetTheme();
+      this.saveTheme()
+    }
+
+    radioChangeColor(event: any) {
+      this.favoriteColor = event.value;
+      this.onSetTheme()
+      this.saveColor();
+
+    }
+
+    @HostBinding('class') componentCssClass;
+
+
+
+    onSetTheme() {
+      this.overlayContainer.getContainerElement().classList.remove(this.theme);
+      console.log(this.theme)
+      this.overlayContainer.getContainerElement().classList.add(this.selectedTheme +'-theme'+ this.favoriteColor);
+      console.log(this.selectedTheme +'-theme'+ this.favoriteColor)
+      this.componentCssClass = this.selectedTheme +'-theme'+ this.favoriteColor;
+      this.theme = this.selectedTheme+'-theme'+this.favoriteColor;
+
+    }
+
+    saveTheme() {
+      let themeAsText = JSON.stringify(this.selectedTheme);
+      localStorage.setItem('theme', themeAsText)
+    }
+
+    saveColor() {
+      let colorAsText = JSON.stringify(this.favoriteColor);
+      localStorage.setItem('color', colorAsText)
+    }
+
+    testingFunction(test) {
+      console.log("ich funze", test);
+    }
   }
-
-  radioChangeColor(event: any){
-    this.favoriteColor=event.value;
-    this.onSetTheme(this.selectedTheme + '-theme')
-
-  }
-
-  @HostBinding('class') componentCssClass;
-
-  
-
-  onSetTheme(theme) {
-    this.overlayContainer.getContainerElement().classList.remove(this.theme);
-    console.log(this.theme)
-    this.overlayContainer.getContainerElement().classList.add(theme+this.favoriteColor);
-    this.componentCssClass = theme+this.favoriteColor;
-    this.theme=theme+this.favoriteColor;
-
-    console.log(theme+this.favoriteColor)
-      
-  }
-
-  testingFunction(test){
-    console.log("ich funze",test);
-  }
-}

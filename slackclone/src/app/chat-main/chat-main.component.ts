@@ -87,7 +87,6 @@ export class ChatMainComponent implements OnInit {
 
   addMessage() {
     console.log('dd');
-    
     if (this.fcctService.midContent.type == 'chat' || this.fcctService.midContent.type == 'channel') {
 
       let message = new Message();
