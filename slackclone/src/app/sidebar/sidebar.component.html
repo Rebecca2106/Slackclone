@@ -48,10 +48,13 @@
                                 width="100%" src="{{this.fb.getUserFromList(getOtherUsersNames(chat.members)).image}}"
                                 alt="" srcset="">
                             <img *ngIf="!this.fb.getUserFromList(getOtherUsersNames(chat.members)).image" height="100%"
-                                width="100%" src="/assets/img/avatar.png"
-                                alt="" srcset="">
-                            <div *ngIf="this.fb.getUserOnlineStatus(getOtherUsersNames(chat.members))"
+                                width="100%" src="/assets/img/avatar.png" alt="" srcset="">
+                            <div *ngIf="this.fb.getUserOnlineStatus(getOtherUsersNames(chat.members))==1"
                                 class="dot-active"></div>
+                            <div *ngIf="this.fb.getUserOnlineStatus(getOtherUsersNames(chat.members))==0"
+                                class="dot-away"></div>
+                            <div *ngIf="this.fb.getUserOnlineStatus(getOtherUsersNames(chat.members))>1"
+                                class="members-badge">{{this.fb.getUserOnlineStatus(getOtherUsersNames(chat.members))}}</div>
                         </div>
                         <div class="elipse">{{this.fb.getUserFromList(getOtherUsersNames(chat.members)).fullname}}
                         </div>

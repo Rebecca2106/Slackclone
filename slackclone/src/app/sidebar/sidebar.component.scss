@@ -136,3 +136,19 @@ mat-toolbar{
     border-radius: 50%;
     display: inline-block;
 }
+
+.members-badge {
+    position: absolute;
+    bottom: -4px;
+    right: -5px;
+    width: 15px;
+    height: 15px;
+    display: flex;
+    font-size: 10px;
+    align-items: center;
+    justify-content: center;
+    outline: 1px solid black;
+    background-color: grey;
+    border-radius: 4px;
+    overflow: hidden;
+}

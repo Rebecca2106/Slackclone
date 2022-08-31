@@ -7,22 +7,10 @@ import { User } from 'src/models/user.class';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
-
-
-
-
-
 @Injectable({
   providedIn: 'root'
 })
 export class FireauthService {
-
-
-
-
-
-
-
 
   newUser: User;
   user: User;
@@ -52,10 +40,8 @@ export class FireauthService {
   }
 
 
-
-
-
   checkUser(uid: string, email: string) {
+    console.log('checkUser')
     this.userSub = this.firestore
       .collection('users', ref => ref.where('uid', '==', uid))
       .valueChanges({ idField: 'docID' })
@@ -63,9 +49,12 @@ export class FireauthService {
         console.log(user ,"if",user.length);
         if (user.length > 0) {
           this.user = new User(user[0]);
+          // console.log(this.user)
           this.docID = user[0].docID;
-          console.log('Current user:', this.user);
-          this.router.navigate(['']);
+
+          this.router.navigate(['']);          
+        
+
         } else {  // BLA unnötig oder für signup
           console.log('User not found!');
           await this.addUser(uid, email);
@@ -74,7 +63,10 @@ export class FireauthService {
   }
 
   async addUser(uid: string, email: string) {
-    console.log('User not found!');
+
+    console.log('addUser')
+
+
     this.newUser = new User();
     this.newUser.uid = uid;
     this.checkForMail(email);
@@ -185,8 +177,10 @@ export class FireauthService {
     this.interval2 = setInterval(() => {
 
       if (!this.user) {
+
         console.log("wird ausgeführt, wenn this.user nicht verfügbar", this.user);
         console.log("this.user.lastTimeOnline", this.user.lastTimeOnline);
+
         clearInterval(this.interval2);
         this.setInitalTimeUpdate();
       }

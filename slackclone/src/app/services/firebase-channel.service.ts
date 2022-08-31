@@ -26,6 +26,7 @@ export class FirebaseChannelService {
 
 
   subscribeChannels() {
+    console.log('subscribe channe')
     this.firestore
       .collection('channels', ref => ref.orderBy("title"))
       .valueChanges({ idField: 'docID' })
@@ -47,12 +48,12 @@ export class FirebaseChannelService {
         .doc(id)
         .valueChanges().pipe(take(1))
         .subscribe((channel: any) => {
-
           this.showedMembers = [];
           this.channelDetails = channel;
           channel.members.forEach(async e => {
             // console.log('Member-ID', e.uid);
             let result = await this.fb.getUserFromId(e.uid);
+            console.log(result)
             this.showedMembers.push(result);
           });
           resolve(this.showedMembers);
