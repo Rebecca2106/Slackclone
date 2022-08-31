@@ -9,7 +9,7 @@
             <div *ngFor="let message of this.fcctService.midContent.messages" class="message">
                 <div *ngIf="message.thread.length == 0" class="start_thread_icon_wrapper">
                     <div (click)="this.fcctService.openThread(message.timestamp)" class="start_thread_icon">
-                        openThread
+                        open Thread
                     </div>
                 </div>
                 <div class="profilpicture">

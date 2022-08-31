@@ -191,12 +191,15 @@ h4 {
 
 .start_thread_icon_wrapper {
     position: absolute;
-    top: 0;
-    right: 5%;
+    top: 6px;
+    right: 16px;
 }
 
 .start_thread_icon {
     cursor: pointer;
+    border-radius: 4px;
+    padding: 4px;
+    background-color: rgba(255, 255, 255, 0.1);
     display: none;
 }
 
