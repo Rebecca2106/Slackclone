@@ -41,9 +41,20 @@ export class FirebaseChatService {
                 // console.log('DM-Coll', this.dmCollection);
                 // console.log('dms', dms);
                 this.updateOpenChat();
+                this.updateOpenChatThread();
             })
     }
 
+
+    updateOpenChatThread(){
+        if (this.fcctService.rightContent.type == 'chat') {
+            this.dmCollection.forEach(chat => {
+                if (this.fcctService.rightContent.docID == chat.docID) {
+                    this.fcctService.updateThreadMessages(chat.messages)
+                }
+            });
+        } 
+    }
 
     updateOpenChat() {
         if (this.fcctService.midContent.type == 'chat') {
@@ -52,7 +63,7 @@ export class FirebaseChatService {
                     this.fcctService.setContent(chat.docID, "chat", chat.messages);
                 }
             });
-        }
+        }  
     }
 
     compare(a, b) {

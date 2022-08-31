@@ -34,8 +34,19 @@ export class FirebaseChannelService {
         this.channelCollection = channels;
         this.channelCollection = this.filterChannelByUid();
         this.updateOpenChannel();
+        this.updateOpenChatThread();
       })
   }
+
+  updateOpenChatThread(){
+    if (this.fcctService.rightContent.type == 'channel') {
+        this.channelCollection.forEach(channel => {
+            if (this.fcctService.rightContent.docID == channel.docID) {
+                this.fcctService.updateThreadMessages(channel.messages)
+            }
+        });
+    } 
+}
 
   filterChannelByUid() {
     return this.channelCollection.filter(d => d.members.some(e => e.uid == this.fs.user.uid));

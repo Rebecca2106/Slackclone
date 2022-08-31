@@ -1,11 +1,33 @@
 <mat-sidenav-container class="thread-main-wrapper">
     <div class="thread-main"
-        [ngStyle]="{'height': messageImages.length != 0 ? 'calc(100% - 286px)' : 'calc(100% - 200px)'}">
-        <div class="element_header" [ngStyle]="{'border-bottom': '2px solid'}">
+        [ngStyle]="{'height': messageImages.length != 0 ? 'calc(100% - 286px)' : 'calc(100% - 200px)'}"  >
+        <div class="element_header" [ngStyle]="{'border-bottom': '2px solid'}" >
             <p>{{this.fcctService.rightContent.header}}</p>
             <span (click)="uiService.toggleThread()" class="material-icons">close</span>
         </div>
-        <div class="messages_wrapper">
+
+        <div class="messages_wrapper" #scrollMe>
+            <div class="current_message_wrapper">
+                <div *ngFor="let message of [this.fcctService.currentThreadMessage]" class="message">
+                    <div class="profilpicture">
+                        <img *ngIf="this.fb.getUserFromList(message.creator).image" class="avatar" src="{{this.fb.getUserFromList(message.creator).image}}">
+                        <img *ngIf="!this.fb.getUserFromList(message.creator).image" class="avatar" src="/assets/img/avatar.png">
+                    </div>
+                    <div class="message-body">
+                        <div class="header">
+                            <h4>{{this.fsMain.getUserFromList(message.creator).fullname}}</h4>
+                            <h5>{{message.timestamp.toMillis() | date:'medium'}}</h5>
+                        </div>
+                        <div [innerHtml]="message.message"></div>
+                        <div class="message-img-container">
+                            <img *ngFor="let img of message.images" class="message-img" src={{img}} width="auto" height="150" (click)="this.uiService.imagePopup(img)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+
             <div *ngIf="this.fcctService.rightContent.messages.length == 0">nothing in here</div>
             <div *ngFor="let message of this.fcctService.rightContent.messages" class="message">
                 <div class="profilpicture">

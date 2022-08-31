@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { UiChangeService } from '../services/ui-change.service';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { FireauthService } from '../services/fireauth.service';
@@ -32,7 +32,7 @@ export class ChatThreadComponent implements OnInit {
 
   constructor( public channelService: FirebaseChannelService, public chatService: FirebaseChatService,public fsMain: FirebaseMainService ,public sanitizer: DomSanitizer, public fcctService: FirebaseChannelChatThreadService, public uiService: UiChangeService, private storage: AngularFireStorage, public fs: FireauthService, private firestore: AngularFirestore, public fb: FirebaseMainService) { 
   }
-
+  @ViewChild('scrollMe') private myScrollContainer: ElementRef;
   ngOnInit(): void {
   }
 
@@ -40,6 +40,11 @@ export class ChatThreadComponent implements OnInit {
     console.log(this.noteText);
   }
 
+  scrollToBottom(): void {
+    try {
+        this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+    } catch(err) { }                 
+}
   
   createUniquefilepathID(event) {
     this.filepathID = `${event.timeStamp}${event.target.files[0].size}`;
@@ -99,7 +104,7 @@ export class ChatThreadComponent implements OnInit {
       }
       this.clearInput();
     }
-
+    this.scrollToBottom();
   }
 
   deleteImg(i) {

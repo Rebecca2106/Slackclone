@@ -21,7 +21,10 @@ export class FirebaseChannelChatThreadService {
     header: "",
     type: "",
     messages: [],
-    msgTimeStamp: 0
+    msgTimeStamp: {
+      seconds : 0,
+      nanoseconds: 0
+    }
   }
 
   openThread(timestamp){
@@ -29,7 +32,7 @@ export class FirebaseChannelChatThreadService {
     this.rightContent.docID = this.midContent.docID;
     this.rightContent.type = this.midContent.type;
     this.setHeaderThread(this.rightContent.type, "");
-    this.setMessage(timestamp);
+    this.initThreadMessages(timestamp);
     this.uiService.openThread();
   }
 
@@ -37,10 +40,17 @@ export class FirebaseChannelChatThreadService {
       this.rightContent.header = `${type}-Thread ${mainline}`;
   }
 
-  setMessage(timestamp){
-    let result = this.midContent.messages.filter(msg => msg.timestamp == timestamp);
-    this.rightContent.messages = result[0].thread;
-    this.currentThreadMessage = result[0];
+  initThreadMessages(timestamp){
+    let resultMessage = this.midContent.messages.filter(msg => msg.timestamp == timestamp);
+    console.log("resultMessage: ", resultMessage);
+    this.rightContent.messages = resultMessage[0].thread;
+    this.currentThreadMessage = resultMessage[0];
+  }
+
+  updateThreadMessages(messages){ 
+    let resultMessage = messages.filter(msg => msg.timestamp.seconds == this.rightContent.msgTimeStamp.seconds && msg.timestamp.nanoseconds == this.rightContent.msgTimeStamp.nanoseconds);
+    this.rightContent.messages = resultMessage[0].thread;
+    this.currentThreadMessage = resultMessage[0];
   }
 
 
@@ -61,7 +71,7 @@ export class FirebaseChannelChatThreadService {
       this.uiService.toggleSidebar();
     }
     this.currentChatChannel = chat;
-    console.log(this.currentChatChannel);
+    //console.log(this.currentChatChannel);
     
     this.setContent(chat.docID, "chat", chat.messages);
     this.setHeader("chat", chat.docID);
