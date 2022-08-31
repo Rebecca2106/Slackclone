@@ -2,7 +2,7 @@
     width: 100%;
 }
 
-.thread-main-wrapper{
+.thread-main-wrapper {
     height: 100%;
 
 }
@@ -10,7 +10,7 @@
 
 .editor {
     position: absolute;
-    width: 100%; 
+    width: 100%;
 }
 
 .upload-wrapper {
@@ -78,7 +78,7 @@
         cursor: pointer;
         user-select: none;
         background-color: transparent;
-        
+
     }
 
     .dirty {
@@ -95,32 +95,30 @@
 
 .message {
     margin-bottom: 20px;
+    width: 100%;
+    word-wrap: break-word;
+    padding: 6px;
+    border-radius: 4px;
 
-    .message-body {
-        width: 100%;
-        word-wrap: break-word;
-        padding: 6px;
-        border-radius: 4px;
-
-        &:hover {
-            backdrop-filter: brightness(80%);
-        }
-
-        .message-img-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 16px;
-
-            .message-img {
-                border-radius: 4px;
-                box-shadow: 0 0 2px 0 grey;
-                object-fit: contain;
-                cursor: zoom-in;
-            }
-        }
-
-
+    &:hover {
+        backdrop-filter: brightness(80%);
     }
+
+    .message-img-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+
+        .message-img {
+            border-radius: 4px;
+            box-shadow: 0 0 2px 0 grey;
+            object-fit: contain;
+            cursor: zoom-in;
+        }
+    }
+
+
+
 }
 
 h4,
@@ -143,46 +141,46 @@ h4 {
     border-radius: 6px;
 }
 
-.areaHeighthigh{
+.areaHeighthigh {
     background-color: aqua;
 }
 
-.areaHeightlow{
+.areaHeightlow {
     background-color: black;
 }
 
 
-.messages_wrapper{
+.messages_wrapper {
     max-height: calc(100% - 66px);
-  overflow: hidden;
+    overflow: hidden;
 }
 
-.messages_wrapper:hover{
+.messages_wrapper:hover {
     overflow-y: scroll;
 }
 
 ::-webkit-scrollbar {
     width: 10px;
-  }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
-    box-shadow: transparent; 
-    border-radius: 10px;
-  }
-   
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: purple; 
-    border-radius: 10px;
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: transparent; 
-  }
+}
 
-  .image-popup {
+/* Track */
+::-webkit-scrollbar-track {
+    box-shadow: transparent;
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: purple;
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: transparent;
+}
+
+.image-popup {
     position: absolute;
     padding: 25px;
     z-index: 5;

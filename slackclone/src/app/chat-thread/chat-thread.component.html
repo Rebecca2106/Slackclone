@@ -9,7 +9,7 @@
             <div *ngIf="this.fcctService.rightContent.messages.length == 0">nothing in here</div>
             <div *ngFor="let message of this.fcctService.rightContent.messages" class="message">
                 <div class="profilpicture">
-                    <img class="avatar" src="">
+                    <img class="avatar" src="{{this.fb.getUserFromList(message.creator).image}}">
                 </div>
                 <div class="message-body">
                     <div class="header">
