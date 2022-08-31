@@ -49,12 +49,12 @@ export class FireauthService {
       .subscribe(async (user: any) => {
         if (user.length > 0) {
           this.user = new User(user[0]);
-          console.log(this.user)
+          // console.log(this.user)
           this.docID = user[0].docID;
           this.router.navigate(['']);          
         
         } else {  // BLA unnötig oder für signup
-          console.log('User not found!');
+          // console.log('User not found!');
           await this.addUser(uid, email);
         }
       })  
@@ -181,7 +181,7 @@ export class FireauthService {
         this.updateTimestamp();
         clearInterval(this.interval2);
       }
-    }, 10000);
+    }, 1000);
   }
 
   updateTimestamp() {
