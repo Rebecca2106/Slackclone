@@ -1,4 +1,4 @@
-import { Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { environment } from 'src/environments/environment';
@@ -42,7 +42,7 @@ export class FirebaseMainService {
       this.loadedUsers.push(user);
     }
   }
-  
+
   getUserFromList(id) {
     let result = this.allmembers.find(user => user.uid == id);
     if (!result) {
@@ -52,20 +52,28 @@ export class FirebaseMainService {
   }
 
   getUserOnlineStatus(id) {
-    let result = this.allmembers.find(user => user.uid == id);
-    if (!result) {
-      return false;
-    } else {
-      //console.log(this.fs.user.lastTimeOnline.toMillis(),"-",result.lastTimeOnline.toMillis());
-      // if(this.fs.user.lastTimeOnline.toMillis() - 20000 < result.lastTimeOnline.toMillis()){
-      //   return true;
-      // }
-      return false;
+    if (id.length == 1) {
+
+      let result = this.allmembers.find(user => user.uid == id);
+      if (!result) {
+        return 0;
+      } else {
+        if (result.onlineState) {
+          if (result.lastTimeOnline.toMillis() < this.fs.user.lastTimeOnline.toMillis() - 60000) {
+            return 0;
+          } else {
+            return 1;
+          }
+        } else {
+          return 0;
+        }
+      }
     }
+    return id.length;
   }
 
 
-  userCorrect(element,id){
+  userCorrect(element, id) {
     console.log(element.uid, id);
     return element.uid == id;
   }

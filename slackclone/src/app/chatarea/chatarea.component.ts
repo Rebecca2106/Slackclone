@@ -40,6 +40,7 @@ export class ChatareaComponent implements OnInit {
     this.evaluateWidth();
     this.updateMidContentWidth();
     this.fsMain.getAllUsersOrderedByFullname();
+    this.fs.triggerUpdateLastTimeOnline(); 
   }
 
 
