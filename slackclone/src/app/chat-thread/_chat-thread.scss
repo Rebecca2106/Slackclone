@@ -6,7 +6,20 @@
 
     $primary-palette: map.get($color-config, 'primary');
 
-    
+    .thread-main-wrapper{
+        border-left: {
+            color: mat.get-color-from-palette($primary-palette) !important;
+        }
+    }
+
+    .thread_link{
+        color: mat.get-color-from-palette($primary-palette) !important;
+    }
+
+    a{
+        color: mat.get-color-from-palette($primary-palette) !important; 
+    }
+
 }
 
 

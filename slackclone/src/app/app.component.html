@@ -11,10 +11,11 @@
         <span (click)="uiService.toggleDesign()" class="material-icons">close</span>
         <h2 mat-dialog-title> Change the look and feel of Slack across all your workspaces.
         </h2>
-        <mat-radio-group aria-label="Select an option">
+        <mat-radio-group class="background" aria-label="Select an option">
           <div class="dark-mode">
             <img src="assets/img/ligth_mode.png">
-            <mat-radio-button name="color" value="light" [checked]="selectedTheme === 'light'" (change)="radioChangeHandler($event)">Light</mat-radio-button>
+            <mat-radio-button name="color" value="light" [checked]="selectedTheme === 'li'"
+              (change)="radioChangeHandler($event)">Light</mat-radio-button>
           </div>
           <div class="light-mode">
             <img src="assets/img/dark_mode.png">
@@ -22,16 +23,25 @@
               (change)="radioChangeHandler($event)">Dark</mat-radio-button>
           </div>
         </mat-radio-group>
+        <label  id="example-radio-group-label"><b class="headline">Pick your favorite color: </b></label>
 
-        <label id="example-radio-group-label">Pick your favorite color</label>
-        <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
-          [(ngModel)]="favoriteColor">
-          <mat-radio-button name="color" value="{{color}}" [checked]="color === favoriteColor"
-            class="example-radio-button" *ngFor="let color of colors" [value]="color"
-            (change)="radioChangeColor($event)">
-            {{color}}
-          </mat-radio-button>
-        </mat-radio-group>
+        <div class="small">
+          <div class="content">
+          <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
+            [(ngModel)]="favoriteColor">
+            <div class="onecolor" *ngFor="let color of colors; let i=index">
+              <img class="small_preview" src="{{images[i]}}">
+
+              <mat-radio-button name="color" value="{{color}}" [checked]="color === favoriteColor"
+                class="example-radio-button" [value]="color" (change)="radioChangeColor($event)">
+                {{color}}
+              </mat-radio-button>
+            </div>
+
+          </mat-radio-group>
+        </div>
+        </div>
+
       </div>
     </mat-sidenav-container>
   </div>

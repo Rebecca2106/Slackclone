@@ -12,9 +12,35 @@ mat-radio-group {
    }
 }
 
+.small_preview{
+   border-radius: 5px;
+   max-height: 150px;
+   max-width: 150px;
+
+}
 .dark-mode {
    margin-bottom: 16px;
 }
+
+.onecolor{
+   border: (1px solid rgb(0 0 0 / 41%));
+   border-radius: 5px;
+   box-shadow: 3px 5.9px 5.9px rgb(0 0 0 / 41%);
+   max-width: 200px;
+   display: flex;
+   flex-direction: column;
+   margin-bottom: 10px;
+}
+
+.background{
+   margin-bottom: 12px;
+}
+
+.small{
+   margin-top: 6px;
+   columns: 2; 
+}
+
 
 .app-wrapper {
    position: relative;
@@ -80,6 +106,17 @@ mat-radio-group {
    width: 500px;
    z-index: 5;
    overflow-y: auto;
+   overflow-x: hidden;
+}
+
+@media(max-width: 550px) {
+   .design-dialog{
+      width: auto;
+   }
+
+   .design-dialog img{
+      max-width: 350px;
+   }
 }
 
 .material-icons {

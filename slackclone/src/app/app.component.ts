@@ -14,6 +14,7 @@ export class AppComponent {
   selectedTheme = 'dark'
   favoriteColor = 'pink';
   colors: string[] = ['pink', 'green', 'lightgreen', 'turquoise', 'orange', 'red'];
+  images: string[] = ['/assets/img/pink.png','/assets/img/grün.png','/assets/img/lightgreen.png', '/assets/img/blau.png', '/assets/img/gelb.png', '/assets/img/red.png']
 
 
 

@@ -188,11 +188,7 @@ export class FireauthService {
         this.updateTimestamp();
         clearInterval(this.interval2);
       }
-<<<<<<< HEAD
     }, 60 * 1000);
-=======
-    }, 10000);
->>>>>>> b66d148db757b293bb655feb5810ad4338a82c51
   }
 
   updateTimestamp() {
