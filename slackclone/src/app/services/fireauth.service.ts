@@ -189,7 +189,7 @@ export class FireauthService {
         this.updateTimestamp();
         clearInterval(this.interval2);
       }
-    }, 1000);
+    }, 60 * 1000);
   }
 
   updateTimestamp() {
