@@ -24,6 +24,8 @@ mat-radio-group {
    margin-bottom: 16px;
    display: flex;
    flex-direction: column;
+   box-shadow: 3px 5.9px 5.9px rgb(0 0 0 / 41%);
+
 }
 
 
@@ -32,10 +34,15 @@ mat-radio-group {
    border: (1px solid rgb(0 0 0 / 41%));
    border-radius: 5px;
    box-shadow: 3px 5.9px 5.9px rgb(0 0 0 / 41%);
-   max-width: 200px;
+   width: 150px;
    display: flex;
    flex-direction: column;
    margin-bottom: 10px;
+   padding: 10px;
+}
+
+.onecolor :hover {
+   filter: brightness(1.1);
 }
 
 .background {
@@ -141,7 +148,7 @@ mat-radio-group {
          width: auto;
       }
 
-      .content{
+      .content {
          align-items: center;
       }
 
@@ -157,6 +164,7 @@ mat-radio-group {
       .light-mode img {
          max-width: 250px;
       }
+
       .small {
          columns: 1;
       }
@@ -169,22 +177,22 @@ mat-radio-group {
       top: 4px
    }
 
-   
-::-webkit-scrollbar {
-   width: 10px;
-}
 
-/* Track */
-::-webkit-scrollbar-track {
-   box-shadow: transparent;
-   border-radius: 10px;
-}
+   ::-webkit-scrollbar {
+      width: 10px;
+   }
 
-/* Handle */
-::-webkit-scrollbar-thumb {
-   background: rgba(123, 123, 123,0.5);
-   border-radius: 10px;
-}
+   /* Track */
+   ::-webkit-scrollbar-track {
+      box-shadow: transparent;
+      border-radius: 10px;
+   }
+
+   /* Handle */
+   ::-webkit-scrollbar-thumb {
+      background: rgba(123, 123, 123, 0.5);
+      border-radius: 10px;
+   }
 
 
    .design-dialog-wrapper {
