@@ -9,6 +9,7 @@
 
 .mat-typography {
     display: flex;
+    flex-wrap: wrap-reverse;
     gap: 46px;
 
     h4 {
