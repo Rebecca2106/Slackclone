@@ -46,7 +46,6 @@ export class FireauthService {
       .collection('users', ref => ref.where('uid', '==', uid))
       .valueChanges({ idField: 'docID' })
       .subscribe(async (user: any) => {
-        console.log(user ,"if",user.length);
         if (user.length > 0) {
           this.user = new User(user[0]);
           // console.log(this.user)
@@ -189,7 +188,11 @@ export class FireauthService {
         this.updateTimestamp();
         clearInterval(this.interval2);
       }
+<<<<<<< HEAD
     }, 60 * 1000);
+=======
+    }, 10000);
+>>>>>>> b66d148db757b293bb655feb5810ad4338a82c51
   }
 
   updateTimestamp() {

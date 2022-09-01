@@ -58,13 +58,17 @@ export class FirebaseMainService {
         return 0;
       } else {
         if (result.onlineState) {
-          if (this.fs.user.lastTimeOnline != null) {
-            if (result.lastTimeOnline.toMillis() < this.fs.user.lastTimeOnline.toMillis() - 60000) {
-              return 0;
-            } else {
-              return 1;
-            }
-          } else {
+
+          if (this.fs.user.lastTimeOnline != null || result.lastTimeOnline != null) {
+            try {
+              if (result.lastTimeOnline.toMillis() < this.fs.user.lastTimeOnline.toMillis() - 60000) {
+                return 0;
+              } else {
+                return 1;
+              }
+            } catch (err) { }
+          }
+          else {
             return 0;
           }
         } else {
