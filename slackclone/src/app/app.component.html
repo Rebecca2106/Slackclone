@@ -26,8 +26,7 @@
         <label  id="example-radio-group-label"><b class="headline">Pick your favorite color: </b></label>
 
         <div class="small">
-          <div class="content">
-          <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
+          <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group content"
             [(ngModel)]="favoriteColor">
             <div class="onecolor" *ngFor="let color of colors; let i=index">
               <img class="small_preview" src="{{images[i]}}">
@@ -42,7 +41,7 @@
         </div>
         </div>
 
-      </div>
+    
     </mat-sidenav-container>
   </div>
   <router-outlet></router-outlet>
