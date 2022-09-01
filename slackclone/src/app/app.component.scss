@@ -162,10 +162,28 @@ mat-radio-group {
 
    .material-icons {
       cursor: pointer;
-      width: 100%;
-      display: flex;
-      justify-content: flex-end;
+      position: absolute;
+      right: 25px;
+      top: 4px
    }
+
+   
+::-webkit-scrollbar {
+   width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+   box-shadow: transparent;
+   border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+   background: rgba(123, 123, 123,0.5);
+   border-radius: 10px;
+}
+
 
    .design-dialog-wrapper {
       z-index: 4;
