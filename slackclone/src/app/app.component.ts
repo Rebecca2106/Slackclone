@@ -58,9 +58,7 @@ export class AppComponent {
 
     onSetTheme() {
       this.overlayContainer.getContainerElement().classList.remove(this.theme);
-      console.log(this.theme)
       this.overlayContainer.getContainerElement().classList.add(this.selectedTheme +'-theme'+ this.favoriteColor);
-      console.log(this.selectedTheme +'-theme'+ this.favoriteColor)
       this.componentCssClass = this.selectedTheme +'-theme'+ this.favoriteColor;
       this.theme = this.selectedTheme+'-theme'+this.favoriteColor;
 
@@ -76,7 +74,4 @@ export class AppComponent {
       localStorage.setItem('color', colorAsText)
     }
 
-    testingFunction(test) {
-      console.log("ich funze", test);
-    }
   }
