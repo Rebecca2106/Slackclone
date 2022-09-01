@@ -6,80 +6,258 @@
     overflow-x: hidden;
 }
 
-.sidebar_wrapper{
+.sidebar_wrapper {
     position: absolute;
     height: 100%;
     box-sizing: border-box;
-    display: flex; 
+    display: flex;
     z-index: 3;
 }
 
-.z_index_10{
+.z_index_10 {
     z-index: 10 !important;
 }
 
-.z_index_5{
+.z_index_5 {
     z-index: 5 !important;
 }
 
-.d_flex_start{
+.d_flex_start {
     display: flex;
-    justify-content:flex-start ;
+    justify-content: flex-start;
 }
 
-.d_flex_end{
+.d_flex_end {
     display: flex;
-    justify-content:flex-end ;
+    justify-content: flex-end;
 }
 
-.resize_bar{
+.resize_bar {
     height: 100%;
     background-color: transparent;
     cursor: col-resize;
-    span{
+
+    span {
         height: 100%;
     }
 }
 
-.resize_bar:hover{
-    span{
-        background: rgb(255,255,255);
-background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(0,255,223,1) 50%, rgba(255,255,255,0) 100%);
+.resize_bar:hover {
+    span {
+
+        background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, #36c5f0 50%, rgba(255, 255, 255, 0) 100%);
     }
 }
 
-.resize_bar_bgcolor{
-    span{
-        background: rgb(255,255,255);
-background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(0,255,223,1) 50%, rgba(255,255,255,0) 100%);
+.resize_bar_bgcolor {
+    span {
+
+        background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, #36c5f0 50%, rgba(255, 255, 255, 0) 100%);
     }
 }
 
-.chat_main_wrapper{
+.chat_main_wrapper {
     position: relative;
     flex: auto;
 }
 
-.side_component_wrapper{
+.side_component_wrapper {
     width: 100%;
 }
 
-.pos_abs{
+.pos_abs {
     position: absolute;
     left: 0;
     z-index: 3;
 }
 
-.pos_abs_right{
+.pos_abs_right {
     position: absolute;
     right: 0;
     z-index: 3;
 }
 
-.transition{
+.transition {
     transition: all 100ms ease-in-out;
 }
 
-.d_none{
+.d_none {
     display: none;
+}
+
+.animation_outer_wrapper{
+    z-index: 90;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh !important;
+    width: 100vw !important; 
+    display: block;
+    animation: opacity_change 2200ms forwards ease-in-out, hideAnimation 0s forwards ease-in 2200ms;
+}
+
+
+.animation_wrapper {
+    height: 100% !important;
+    width: 100% !important;
+    opacity: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@keyframes hideAnimation {
+    to {
+        display: none !important;
+        z-index: -100;
+    }
+}
+
+@keyframes opacity_change {
+    0% {
+        opacity: 1;
+    }
+
+    70% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+
+
+
+.second_logoWrapper {
+    animation: second_mainRotate 1000ms forwards ease-in-out;
+    height: 250px;
+    width: 250px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    transform: rotate(45deg);
+}
+
+.second_quarterWrapper {
+    position: relative;
+    height: 50%;
+    width: 50%;
+}
+
+.second_mainLineWrapper {
+    animation: second_mainlineOuterBallToLine 500ms forwards ease-out;
+    animation-delay: 1000ms;
+    position: absolute;
+    right: 50%;
+    bottom: 50%;
+    height: 25%;
+    width: 25%;
+}
+
+.second_mainLine {
+    border-radius: 150px;
+    height: 100%;
+    width: 100%;
+}
+
+
+.second_sideLineWrapper {
+    animation: second_sidelineOuterBallToLine 500ms forwards ease-in-out;
+    animation-delay: 1000ms;
+    position: absolute;
+    bottom: 50%;
+    right: 50%;
+    height: 25%;
+    width: 25%;
+}
+
+.second_sideLine {
+
+    border-radius: 150px;
+    height: 100%;
+    width: 100%;
+}
+
+.second_bgColorBlue {
+    background-color: #36C5F0;
+}
+
+.second_bgColorRed {
+    background-color: #E01E5A;
+}
+
+.second_bgColorGreen {
+    background-color: #2EB67D;
+}
+
+.second_bgColorYellow {
+    background-color: #ECB22E;
+}
+
+.second_transform90 {
+    transform: rotate(90deg);
+}
+
+.second_transform180 {
+    transform: rotate(180deg);
+}
+
+.second_transform270 {
+    transform: rotate(270deg);
+}
+
+
+@keyframes second_sidelineOuterBallToLine {
+    0% {
+        bottom: 50%;
+        right: 50%;
+        height: 25%;
+    }
+
+    50% {
+        bottom: 0%;
+        right: 0%;
+        height: 25%;
+    }
+
+    100% {
+        bottom: 0%;
+        right: 0%;
+        height: 80%;
+    }
+}
+
+
+@keyframes second_mainlineOuterBallToLine {
+    0% {
+        bottom: 50%;
+        right: 50%;
+        width: 25%;
+    }
+
+    50% {
+        bottom: 0%;
+        right: 0%;
+        width: 25%;
+    }
+
+    100% {
+        bottom: 0%;
+        right: 0%;
+        width: 100%;
+    }
+}
+
+
+
+@keyframes second_mainRotate {
+    0% {
+        transform: rotate(45deg);
+    }
+
+    100% {
+        transform: rotate(765deg);
+    }
 }
