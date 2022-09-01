@@ -39,7 +39,7 @@ export class ProfileDialogComponent implements OnInit {
       .doc(this.docID)
       .update(this.user.toJSON())
       .then(() => {
-        this.dialogRef.close();
+          this.dialogRef.close();
       })
   }
 
@@ -54,7 +54,7 @@ export class ProfileDialogComponent implements OnInit {
     task.snapshotChanges().pipe(
       finalize(() => { // Execute when the observable completes
         fileRef.getDownloadURL().subscribe(downloadURL => {
-          this.user.image = downloadURL;        
+          this.user.image = downloadURL;
           this.isUploading = false;
         });
       })
@@ -62,7 +62,7 @@ export class ProfileDialogComponent implements OnInit {
   };
 
   deleteImage() {
-    const filePath = this.user.image;    
+    const filePath = this.user.image;
     const fileRef = this.storage.refFromURL(filePath);
 
     fileRef.delete().pipe(
@@ -71,14 +71,14 @@ export class ProfileDialogComponent implements OnInit {
         this.user.image = '';
         this.saveImage();
       })
-      ).subscribe();
+    ).subscribe();
   }
 
   saveImage() {
     this.firestore
       .collection('users')
       .doc(this.docID)
-      .update({"image": ''});
+      .update({ "image": '' });
   }
 
 }
