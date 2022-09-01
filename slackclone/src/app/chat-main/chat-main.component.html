@@ -5,7 +5,9 @@
             <p>{{this.fcctService.midContent.header}}</p>
         </div>
         <div class="messages_wrapper">
-            <div *ngIf="this.fcctService.midContent.messages.length == 0">nothing in here</div>
+            <div class="logo-centered" *ngIf="this.fcctService.midContent.messages.length == 0">
+                <img src="./assets/img/logo.png" alt="LOGO">
+            </div>
             <div *ngFor="let message of this.fcctService.midContent.messages" class="message">
                 <div *ngIf="message.thread.length == 0" class="start_thread_icon_wrapper">
                     <div (click)="this.fcctService.openThread(message.timestamp)" class="start_thread_icon">
@@ -28,7 +30,7 @@
                     </div>
 
                     <div *ngIf="message.thread.length != 0" class="thread_link"
-                        (click)="this.fcctService.openThread(message.timestamp)">{{ message.thread.length }} Antworten
+                        (click)="this.fcctService.openThread(message.timestamp)">{{ message.thread.length }} Answer(s)
                     </div>
                 </div>
             </div>

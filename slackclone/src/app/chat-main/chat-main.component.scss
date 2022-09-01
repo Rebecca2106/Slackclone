@@ -26,6 +26,11 @@
 .messages_wrapper {
     max-height: calc(100% - 66px);
     overflow: hidden;
+
+    .logo-centered{
+        display: flex;
+        justify-content: center;
+    }
 }
 
 .messages_wrapper:hover {
