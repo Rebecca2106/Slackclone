@@ -1,4 +1,42 @@
 <mat-sidenav-container>
+    <mat-sidenav-container class="animation_outer_wrapper">
+        <div class="animation_wrapper">
+            <div class="second_logoWrapper">
+                <div class="second_quarterWrapper">
+                    <div class="second_mainLineWrapper">
+                        <div class="second_mainLine second_bgColorRed"></div>
+                    </div>
+                    <div class="second_sideLineWrapper">
+                        <div class="second_sideLine second_bgColorRed"></div>
+                    </div>
+                </div>
+                <div class="second_quarterWrapper second_transform90">
+                    <div class="second_mainLineWrapper">
+                        <div class="second_mainLine second_bgColorBlue"></div>
+                    </div>
+                    <div class="second_sideLineWrapper">
+                        <div class="second_sideLine second_bgColorBlue"></div>
+                    </div>
+                </div>
+                <div class="second_quarterWrapper second_transform270">
+                    <div class="second_mainLineWrapper">
+                        <div class="second_mainLine second_bgColorGreen"></div>
+                    </div>
+                    <div class="second_sideLineWrapper">
+                        <div class="second_sideLine second_bgColorGreen"></div>
+                    </div>
+                </div>
+                <div class="second_quarterWrapper second_transform180">
+                    <div class="second_mainLineWrapper">
+                        <div class="second_mainLine second_bgColorYellow"></div>
+                    </div>
+                    <div class="second_sideLineWrapper">
+                        <div class="second_sideLine second_bgColorYellow"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-sidenav-container>
     <app-header></app-header>
     <div *ngIf="fs.user" class="chat-flex" (mouseup)="stopResize()" (mousemove)="onResizing($event)">
         <app-sidebar class="sidebar_wrapper z_index_10"

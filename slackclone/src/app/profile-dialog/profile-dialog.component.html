@@ -46,5 +46,5 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
     <button mat-button mat-dialog-close>Cancel</button>
-    <button mat-button [disabled]="!user.fullname" (click)="saveProfile()" cdkFocusInitial color="green">Save</button>
+    <button *ngIf="user" mat-button [disabled]="!user.fullname"    (click)="saveProfile()" color="green">Save</button>
 </mat-dialog-actions>
