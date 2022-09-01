@@ -9,6 +9,12 @@
     .material-icons {
         color: mat.get-color-from-palette($primary-palette);
     }
+
+    .profile_wrapper {
+        border-left: {
+            color: mat.get-color-from-palette($primary-palette) !important;
+        }
+    }
     
 
     .element_header {
