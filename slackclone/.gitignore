@@ -13,7 +13,6 @@ node_modules/*
 node_modules/tinymce/*
 !node_modules/tinymce/skins/
 
-
 npm-debug.log
 yarn-error.log
 
@@ -52,5 +51,10 @@ Thumbs.db
 *-debug.log
 .runtimeconfig.json
 
+<<<<<<< HEAD
+=======
+
+#don´t ignore
+>>>>>>> d74e3f0d3459883ecd6d697cd326df3e1d87e8a7
 
 
