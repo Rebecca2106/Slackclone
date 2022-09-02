@@ -47,5 +47,5 @@ Thumbs.db
 .runtimeconfig.json
 
 #don´t ignore
-!.node_modules/tinymce/skins/*
+!/node_modules/tinymce/skins/*
 
