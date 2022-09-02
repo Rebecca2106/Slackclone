@@ -33,6 +33,7 @@ export class AppComponent {
     if (themeAsText){
       this.selectedTheme= JSON.parse(themeAsText)
     }
+    this.uiService.mode=this.selectedTheme;
 
     this.onSetTheme()
   }
@@ -42,7 +43,8 @@ export class AppComponent {
   radioChangeHandler(event: any) {
       this.selectedTheme = event.value;
       this.onSetTheme();
-      this.saveTheme()
+      this.saveTheme();
+      this.uiService.mode=this.selectedTheme;
     }
 
     radioChangeColor(event: any) {

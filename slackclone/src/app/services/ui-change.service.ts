@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { DSAKeyPairKeyObjectOptions } from 'crypto';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ export class UiChangeService {
   showDesign: boolean = false;
   image: string;
   showImg: boolean = false;
+  mode:string= 'dark';
 
   constructor(private firestore: AngularFirestore) {
     document.addEventListener('mouseup', () => {
