@@ -28,9 +28,6 @@
 
             <hr>
 
-            <div class="logo-centered" *ngIf="this.fcctService.rightContent.messages.length == 0">
-                <img src="./assets/img/logo.png" alt="LOGO">
-            </div>
             <div *ngFor="let message of this.fcctService.rightContent.messages" class="message">
                 <div class="profilpicture">
                     <img *ngIf="this.fb.getUserFromList(message.creator).image" class="avatar" src="{{this.fb.getUserFromList(message.creator).image}}">
