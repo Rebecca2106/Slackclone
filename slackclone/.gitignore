@@ -7,10 +7,11 @@
 /bazel-out
 
 # Node
+!node_modules/
 node_modules/*
-!node_modules/tinymce/*
+!node_modules/tinymce/
 node_modules/tinymce/*
-!node_modules/tinymce/skins/*
+!node_modules/tinymce/skins/
 
 
 npm-debug.log
