@@ -42,7 +42,7 @@
             </div>
         </div>
     </div>
-    <div *ngIf="this.uiService.mode=='dark' && this.fcctService.midContent.type != '' " class="editor"
+    <div *ngIf="this.uiService.mode=='dark' && this.fcctService.midContent.type != ''" class="editor"
         [ngStyle]="{'bottom': messageImages.length != 0 ? '86px' : '0px'}">
         <editor [(ngModel)]="noteText"
             apiKey="tcf6s96vi3ln7h1sgtod2tzjhnfnrgsypmimricsl27j6wc9" [init]="{

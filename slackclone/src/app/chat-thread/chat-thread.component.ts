@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild, NO_ERRORS_SCHEMA } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { UiChangeService } from '../services/ui-change.service';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { FireauthService } from '../services/fireauth.service';
@@ -29,12 +29,17 @@ export class ChatThreadComponent implements OnInit {
   uploadData = "";
   filepathID: string;
   lastLengthMessages = 0;
+  editorLoaded = false;
 
 
-  constructor(public channelService: FirebaseChannelService, public chatService: FirebaseChatService, public fsMain: FirebaseMainService, public sanitizer: DomSanitizer, public fcctService: FirebaseChannelChatThreadService, public uiService: UiChangeService, private storage: AngularFireStorage, public fs: FireauthService, private firestore: AngularFirestore, public fb: FirebaseMainService) {
+  constructor(private ref: ChangeDetectorRef, public channelService: FirebaseChannelService, public chatService: FirebaseChatService, public fsMain: FirebaseMainService, public sanitizer: DomSanitizer, public fcctService: FirebaseChannelChatThreadService, public uiService: UiChangeService, private storage: AngularFireStorage, public fs: FireauthService, private firestore: AngularFirestore, public fb: FirebaseMainService) {
   }
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
   ngOnInit(): void {
+  }
+
+  ngAfterContentChecked() {
+    this.ref.detectChanges();
   }
 
   scrollToBottom(): void {
@@ -44,6 +49,7 @@ export class ChatThreadComponent implements OnInit {
         this.lastLengthMessages = this.fcctService.rightContent.messages.length;
       }
     } catch (err) { }
+    this.editorLoaded = true;
   }
 
   createUniquefilepathID(event) {

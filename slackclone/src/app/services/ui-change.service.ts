@@ -14,6 +14,7 @@ export class UiChangeService {
   image: string;
   showImg: boolean = false;
   mode:string= 'dark';
+  editorLoaded: boolean = false;
 
   constructor(private firestore: AngularFirestore) {
     document.addEventListener('mouseup', () => {
