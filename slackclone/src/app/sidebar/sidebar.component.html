@@ -56,7 +56,7 @@
                             <div *ngIf="this.fb.getUserOnlineStatus(getOtherUsersNames(chat.members))>1"
                                 class="members-badge">{{this.fb.getUserOnlineStatus(getOtherUsersNames(chat.members))}}</div>
                         </div>
-                        <div class="elipse">{{this.fb.getUserFromList(getOtherUsersNames(chat.members)).fullname}}
+                        <div class="elipse">{{this.fb.getUserNamesFromList(getOtherUsersNames(chat.members))}}
                         </div>
                         <div class="material-icons hide" (click)="this.chatService.deleteDM(chat.docID)">delete</div>
                     </div>

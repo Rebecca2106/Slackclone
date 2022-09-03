@@ -1,14 +1,17 @@
 <mat-sidenav-container class="chat-main-wrapper">
     <div class="chat-main"
         [ngStyle]="{'height': messageImages.length != 0 ? 'calc(100% - 286px)' : 'calc(100% - 200px)'}">
-        <div class="element_header" [ngStyle]="{'border-bottom': '2px solid'}">
-            <p>{{this.fcctService.midContent.header}}</p>
+        <div *ngIf="this.fcctService.midContent.type == 'chat'" class="element_header" [ngStyle]="{'border-bottom': '2px solid'}">
+            <p>Chat: {{this.fb.getUserNamesFromList(getOtherUsersNames(this.fcctService.midContent.members))}}</p>
+        </div>
+        <div *ngIf="this.fcctService.midContent.type == 'channel'" class="element_header" [ngStyle]="{'border-bottom': '2px solid'}">
+            <p>Channel: {{this.fcctService.midContent.header}}</p>
         </div>
         <div class="logo-centered" *ngIf="this.fcctService.midContent.messages.length == 0">
             <img src="./assets/img/logo.png" alt="LOGO">
         </div>
-        <div class="messages_wrapper">
-            <div *ngFor="let message of this.fcctService.midContent.messages" class="message">
+        <div class="messages_wrapper" #scrollMe>
+            <div *ngFor="let message of this.fcctService.midContent.messages;let last = last" class="message">
                 <div *ngIf="message.thread.length == 0" class="start_thread_icon_wrapper">
                     <div (click)="this.fcctService.openThread(message.timestamp)" class="start_thread_icon">
                         open Thread
@@ -25,7 +28,7 @@
                         <h4>{{this.fsMain.getUserFromList(message.creator).fullname}}</h4>
                         <h5>{{message.timestamp.toMillis() | date:'medium'}}</h5>
                     </div>
-                    <div [innerHtml]="message.message"></div>
+                    <div class="message_text_content" [innerHtml]="message.message"></div>
                     <div class="message-img-container">
                         <img *ngFor="let img of message.images" class="message-img" src={{img}} width="auto"
                             height="150" (click)="this.uiService.imagePopup(img)">
@@ -35,12 +38,13 @@
                         (click)="this.fcctService.openThread(message.timestamp)">{{ message.thread.length }} Answer(s)
                     </div>
                 </div>
+                <span *ngIf='last'>{{scrollToBottom()}}</span>
             </div>
         </div>
     </div>
     <div *ngIf="this.uiService.mode=='dark' && this.fcctService.midContent.type != '' " class="editor"
         [ngStyle]="{'bottom': messageImages.length != 0 ? '86px' : '0px'}">
-        <editor [(ngModel)]="noteText" (onChange)="logChange()"
+        <editor [(ngModel)]="noteText"
             apiKey="tcf6s96vi3ln7h1sgtod2tzjhnfnrgsypmimricsl27j6wc9" [init]="{
         height: 200,
         menubar: false,
@@ -62,7 +66,7 @@
 
     <div *ngIf="this.uiService.mode=='light' && this.fcctService.midContent.type != '' " class="editor"
         [ngStyle]="{'bottom': messageImages.length != 0 ? '86px' : '0px'}">
-        <editor [(ngModel)]="noteText" (onChange)="logChange()"
+        <editor [(ngModel)]="noteText"
             apiKey="tcf6s96vi3ln7h1sgtod2tzjhnfnrgsypmimricsl27j6wc9" [init]="{
         height: 200,
         menubar: false,

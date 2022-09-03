@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { Message } from 'src/models/message.class';
@@ -31,6 +31,7 @@ export class ChatMainComponent implements OnInit {
   newContent = "";
   currentUploadImage: string;
   uploadData = "";
+  lastLengthMessages = 0;
 
   constructor(public fsMain: FirebaseMainService ,public sanitizer: DomSanitizer, public fcctService: FirebaseChannelChatThreadService, public channelService: FirebaseChannelService, public chatService: FirebaseChatService, public uiService: UiChangeService, private storage: AngularFireStorage, public fs: FireauthService, private firestore: AngularFirestore, public fb: FirebaseMainService) {
   }
@@ -39,11 +40,8 @@ export class ChatMainComponent implements OnInit {
     return this.messageImages.length != 0
   }
 
+  @ViewChild('scrollMe') private myScrollContainer: ElementRef;
   ngOnInit(): void {
-  }
-
-  logChange() {
-    console.log(this.noteText);
   }
 
   createUniquefilepathID(event) {
@@ -121,5 +119,24 @@ export class ChatMainComponent implements OnInit {
         this.messageImages.splice(i,1);
       })
       ).subscribe();
+  }
+
+  getOtherUsersNames(list){
+    let filteredlist = []        
+    list.forEach(element => {
+      if(element.uid != this.fs.user.uid){
+        filteredlist.push(element.uid);        
+      }
+    });
+    return filteredlist;
+  }
+
+  scrollToBottom(): void {
+    try {
+      if (this.fcctService.midContent.messages.length > this.lastLengthMessages) {
+        this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+        this.lastLengthMessages = this.fcctService.midContent.messages.length;
+      }
+    } catch (err) { }
   }
 }

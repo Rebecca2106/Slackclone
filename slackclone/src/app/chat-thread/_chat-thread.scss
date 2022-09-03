@@ -23,6 +23,17 @@
 }
 
 
+.message_text_content{
+    width: 90%;
+    a{
+        word-break: break-all;
+    }
+    p{
+        word-break: break-all;
+    }
+}
+
+
 @mixin theme($theme) {
     $color-config: mat.get-color-config($theme);
 

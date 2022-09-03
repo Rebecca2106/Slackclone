@@ -63,7 +63,7 @@ export class FirebaseChannelChatThreadService {
     header: "",
     type: "",
     messages: [],
-
+    members:[],
   }
 
   openChat(chat){
@@ -72,19 +72,19 @@ export class FirebaseChannelChatThreadService {
     }
     this.currentChatChannel = chat;
     //console.log(this.currentChatChannel);
-    
+    this.midContent.members = chat.members;
     this.setContent(chat.docID, "chat", chat.messages);
-    this.setHeader("chat", chat.docID);
+    this.setHeader(chat.docID);
   }
 
   openChannel(channel){
     this.currentChatChannel = channel;
     this.setContent(channel.docID, "channel", channel.messages);
-    this.setHeader("channel", channel.docID);
+    this.setHeader(channel.title);
   }
 
-  setHeader(type, mainline){
-      this.midContent.header = `${type}: ${mainline}`;
+  setHeader(mainline){
+      this.midContent.header = `${mainline}`;
   }
 
   setContent(docID, type, messages){

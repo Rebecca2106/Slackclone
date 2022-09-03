@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, NO_ERRORS_SCHEMA } from '@angular/core';
 import { UiChangeService } from '../services/ui-change.service';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { FireauthService } from '../services/fireauth.service';
@@ -28,24 +28,24 @@ export class ChatThreadComponent implements OnInit {
   currentUploadImage: string;
   uploadData = "";
   filepathID: string;
+  lastLengthMessages = 0;
 
 
-  constructor( public channelService: FirebaseChannelService, public chatService: FirebaseChatService,public fsMain: FirebaseMainService ,public sanitizer: DomSanitizer, public fcctService: FirebaseChannelChatThreadService, public uiService: UiChangeService, private storage: AngularFireStorage, public fs: FireauthService, private firestore: AngularFirestore, public fb: FirebaseMainService) { 
+  constructor(public channelService: FirebaseChannelService, public chatService: FirebaseChatService, public fsMain: FirebaseMainService, public sanitizer: DomSanitizer, public fcctService: FirebaseChannelChatThreadService, public uiService: UiChangeService, private storage: AngularFireStorage, public fs: FireauthService, private firestore: AngularFirestore, public fb: FirebaseMainService) {
   }
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
   ngOnInit(): void {
   }
 
-  logChange() {
-    console.log(this.noteText);
-  }
-
   scrollToBottom(): void {
     try {
+      if (this.fcctService.rightContent.messages.length > this.lastLengthMessages) {
         this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
-    } catch(err) { }                 
-}
-  
+        this.lastLengthMessages = this.fcctService.rightContent.messages.length;
+      }
+    } catch (err) { }
+  }
+
   createUniquefilepathID(event) {
     this.filepathID = `${event.timeStamp}${event.target.files[0].size}`;
     this.filepathID = this.filepathID.replaceAll('.', '');
@@ -65,7 +65,6 @@ export class ChatThreadComponent implements OnInit {
         fileRef.getDownloadURL().subscribe(downloadURL => {
           this.messageImages.push(downloadURL);
           this.currentUploadImage = downloadURL;
-          console.log('messageImages', this.messageImages);
           this.isUploading = false;
         });
       })
@@ -86,8 +85,6 @@ export class ChatThreadComponent implements OnInit {
   }
 
   addMessage() {
-    console.log('dd');
-    
     if (this.fcctService.rightContent.type == 'chat' || this.fcctService.rightContent.type == 'channel') {
 
       let message = new Message();
@@ -100,14 +97,13 @@ export class ChatThreadComponent implements OnInit {
       if (this.fcctService.rightContent.type == 'channel') {
         this.channelService.updateChannelThreadMessages(this.fcctService.rightContent.msgTimeStamp, this.fcctService.rightContent.docID, this.fcctService.rightContent.messages);
       } else {
-        this.chatService.updateChatThreadMessages(this.fcctService.rightContent.msgTimeStamp,this.fcctService.rightContent.docID, this.fcctService.rightContent.messages);
+        this.chatService.updateChatThreadMessages(this.fcctService.rightContent.msgTimeStamp, this.fcctService.rightContent.docID, this.fcctService.rightContent.messages);
       }
       this.clearInput();
     }
-    this.scrollToBottom();
   }
 
   deleteImg(i) {
-    this.messageImages.splice(i,1);
+    this.messageImages.splice(i, 1);
   }
 }

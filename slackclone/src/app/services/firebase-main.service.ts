@@ -50,6 +50,19 @@ export class FirebaseMainService {
     return result;
   }
 
+  getUserNamesFromList(list) {
+    let result = [];
+    list.forEach(element => {
+      if(element != this.fs.user.uid){
+        let usr = this.getUserFromList(element);
+        if(usr){
+          result.push(usr.fullname);
+        } 
+      }
+    });
+    return result;
+  }
+
   getUserOnlineStatus(id) {
     if (id.length == 1) {
 
