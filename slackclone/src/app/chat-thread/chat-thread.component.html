@@ -66,20 +66,7 @@
       }">
         </editor>
     </div>
-    <div class="upload-wrapper" *ngIf="messageImages.length != 0">
-        <div class="upload-img-area" *ngFor="let url of messageImages; index as i">
-            <div class="image-container"><img src={{url}} width="62" height="62">
-                <div class="cancel material-icons" (click)="deleteImg(i)">cancel</div>
-            </div>
-        </div>
-        <img *ngIf="isUploading" src="./assets/img/spinner.jpg" width="auto" height="62">
-    </div>
-    <div class="message-controller ">
-        <input style="display: none" type="file" accept=".png,.jpg" #fileInput (change)="upload($event)" />
-        <div class="control-upload-img material-icons" (click)="fileInput.click()">upload</div>
-        <button class="control-send-msg material-icons" [class.dirty]="!noteText && !messageImages[0] || isUploading"
-            (click)="addMessage()" [disabled]="!noteText && !messageImages[0] || isUploading">send</button>
-    </div>
+
 
     <div *ngIf="this.uiService.mode=='dark'" class="editor" [ngStyle]="{'bottom': messageImages.length != 0 ? '86px' : '0px'}">
         <editor [(ngModel)]="noteText" (onChange)="logChange()"
@@ -101,7 +88,7 @@
       }">
         </editor>
     </div>
-    <div class="upload-wrapper" *ngIf="messageImages.length != 0">
+    <div class="upload-wrapper" *ngIf="messageImages.length != 0" [ngStyle]="{'background-color': this.uiService.mode=='light'  ? 'white' : '#212121'}">
         <div class="upload-img-area" *ngFor="let url of messageImages; index as i">
             <div class="image-container"><img src={{url}} width="62" height="62">
                 <div class="cancel material-icons" (click)="deleteImg(i)">cancel</div>
@@ -109,10 +96,11 @@
         </div>
         <img *ngIf="isUploading" src="./assets/img/spinner.jpg" width="auto" height="62">
     </div>
-    <div class="message-controller ">
+    <div class="message-controller " [ngStyle]="{'background-color': this.uiService.mode=='light'  ? 'white' : '#212121'}"
+    *ngIf="this.fcctService.midContent.type != '' ">
         <input style="display: none" type="file" accept=".png,.jpg" #fileInput (change)="upload($event)" />
         <div class="control-upload-img material-icons" (click)="fileInput.click()">upload</div>
         <button class="control-send-msg material-icons" [class.dirty]="!noteText && !messageImages[0] || isUploading"
             (click)="addMessage()" [disabled]="!noteText && !messageImages[0] || isUploading">send</button>
     </div>
-</mat-sidenav-container>
+</mat-sidenav-container>   
