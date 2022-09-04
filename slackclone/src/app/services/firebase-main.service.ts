@@ -60,7 +60,8 @@ export class FirebaseMainService {
         } 
       }
     });
-    return result;
+    let resJoined = result.join(", ");
+    return resJoined;
   }
 
   getUserOnlineStatus(id) {
