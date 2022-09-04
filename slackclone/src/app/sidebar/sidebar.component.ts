@@ -58,7 +58,6 @@ export class SidebarComponent implements OnInit {
       width: '350px',
       data: { docID: id },
     });
-    console.log('ID', id);
   }
 
   openChatDialog(): void {
