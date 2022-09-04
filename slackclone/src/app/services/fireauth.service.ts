@@ -23,10 +23,12 @@ export class FireauthService {
   docID: string;
   interval: any;
   interval2: any;
+  userCreated = false;
 
   constructor(public auth: AngularFireAuth, public router: Router, private _SnackBar: MatSnackBar, private firestore: AngularFirestore) {
     const auth1 = getAuth();
-    onAuthStateChanged(auth1, (user1) => {4
+    onAuthStateChanged(auth1, (user1) => {
+      4
       if (!user1) {
         this.router.navigate(['login']);
         this.loggedIn = false;
@@ -41,20 +43,29 @@ export class FireauthService {
 
 
   checkUser(uid: string, email: string) {
-    console.log('checkUser')
     this.userSub = this.firestore
       .collection('users', ref => ref.where('uid', '==', uid))
       .valueChanges({ idField: 'docID' })
-      .subscribe(async (user: any) => {
-        if (user.length > 0) {
-          this.user = new User(user[0]);
-          this.docID = user[0].docID;
-          this.router.navigate(['']);          
-
-        } else {
-          await this.addUser(uid, email);
+      .subscribe((user: any) => {
+        if (!this.userCreated) {
+          this.checkUserDetails(user, uid, email);
         }
       })
+  }
+
+  async checkUserDetails(user, uid, email) {
+
+    if (user.length > 0) {
+      this.user = new User(user[0]);
+      this.docID = user[0].docID;
+      this.router.navigate(['']);
+
+    } else {
+      this.userCreated = true;
+      await this.addUser(uid, email);
+      this.userCreated = false;
+    }
+
   }
 
   async addUser(uid: string, email: string) {

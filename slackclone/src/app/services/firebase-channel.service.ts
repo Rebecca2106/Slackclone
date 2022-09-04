@@ -26,7 +26,6 @@ export class FirebaseChannelService {
 
 
   subscribeChannels() {
-    console.log('subscribe channe')
     this.firestore
       .collection('channels', ref => ref.orderBy("title"))
       .valueChanges({ idField: 'docID' })

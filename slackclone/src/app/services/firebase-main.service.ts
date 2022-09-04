@@ -95,7 +95,6 @@ export class FirebaseMainService {
 
 
   userCorrect(element, id) {
-    console.log(element.uid, id);
     return element.uid == id;
   }
 
