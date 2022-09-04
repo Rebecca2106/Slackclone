@@ -34,7 +34,6 @@ export class ChannelEditDialogComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    //this.fb.getAllUsersOrderedByFullname();
     this.getChannelData();
   }
 

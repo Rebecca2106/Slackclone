@@ -34,8 +34,6 @@ export class SidebarComponent implements OnInit {
     this.chatService.subscribeChats();
   }
 
-
-  //weg?
   getOtherUsersNames(list){
     let filteredlist = []        
     list.forEach(element => {

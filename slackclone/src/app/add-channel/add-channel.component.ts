@@ -34,7 +34,6 @@ export class AddChannelComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    //this.fb.getAllUsersOrderedByFullname();
     this.setOwnUserToMembers();
   }
 

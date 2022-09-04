@@ -17,10 +17,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
   }
-
-
 
   openStateDialog() {
     const dialog = this.dialog.open(StatusDialogComponent);

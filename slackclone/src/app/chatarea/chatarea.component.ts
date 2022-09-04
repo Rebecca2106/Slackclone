@@ -43,9 +43,6 @@ export class ChatareaComponent implements OnInit {
     this.fs.triggerUpdateLastTimeOnline(); 
   }
 
-
-
-
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     this.screenWidth = event.target.innerWidth; 
