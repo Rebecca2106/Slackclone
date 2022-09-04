@@ -104,7 +104,6 @@ export class FirebaseMainService {
       .valueChanges()
       .subscribe((users: any) => {
         this.allmembers = users;
-        //console.log(this.allmembers);
       })
   }
 

@@ -62,9 +62,7 @@ export class FirebaseChannelService {
           this.showedMembers = [];
           this.channelDetails = channel;
           channel.members.forEach(async e => {
-            // console.log('Member-ID', e.uid);
             let result = await this.fb.getUserFromId(e.uid);
-            console.log(result)
             this.showedMembers.push(result);
           });
           resolve(this.showedMembers);

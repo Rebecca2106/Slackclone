@@ -48,24 +48,16 @@ export class FireauthService {
       .subscribe(async (user: any) => {
         if (user.length > 0) {
           this.user = new User(user[0]);
-          // console.log(this.user)
           this.docID = user[0].docID;
-
           this.router.navigate(['']);          
-        
 
-        } else {  // BLA unnötig oder für signup
-          console.log('User not found!');
+        } else {
           await this.addUser(uid, email);
         }
       })
   }
 
   async addUser(uid: string, email: string) {
-
-    console.log('addUser')
-
-
     this.newUser = new User();
     this.newUser.uid = uid;
     this.checkForMail(email);
@@ -75,7 +67,6 @@ export class FireauthService {
       .collection('users')
       .add(this.newUser.toJSON())
       .then(() => {
-        // console.log('Added new user with UID:', uid);
       });
   }
 
@@ -176,10 +167,6 @@ export class FireauthService {
     this.interval2 = setInterval(() => {
 
       if (!this.user) {
-
-        console.log("wird ausgeführt, wenn this.user nicht verfügbar", this.user);
-        console.log("this.user.lastTimeOnline", this.user.lastTimeOnline);
-
         clearInterval(this.interval2);
         this.setInitalTimeUpdate();
       }
@@ -188,7 +175,7 @@ export class FireauthService {
         this.updateTimestamp();
         clearInterval(this.interval2);
       }
-    }, 60 * 1000);
+    }, 10 * 1000);
   }
 
   updateTimestamp() {
@@ -206,7 +193,6 @@ export class FireauthService {
       .doc(this.docID)
       .update(this.user.toJSON())
       .then(() => {
-        // console.log('updated');
       })
   }
 }

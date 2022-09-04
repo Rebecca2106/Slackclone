@@ -27,8 +27,6 @@ export class FirebaseChatService {
 
     constructor(public fcctService: FirebaseChannelChatThreadService, public fb: FirebaseMainService, private firestore: AngularFirestore, public fs: FireauthService) { }
 
-
-
     ngOnInit(): void {
     }
 
@@ -38,13 +36,10 @@ export class FirebaseChatService {
             .valueChanges({ idField: 'docID' })
             .subscribe((dms: any) => {
                 this.dmCollection = dms.sort(this.compare);
-                // console.log('DM-Coll', this.dmCollection);
-                // console.log('dms', dms);
                 this.updateOpenChat();
                 this.updateOpenChatThread();
             })
     }
-
 
     updateOpenChatThread(){
         if (this.fcctService.rightContent.type == 'chat') {

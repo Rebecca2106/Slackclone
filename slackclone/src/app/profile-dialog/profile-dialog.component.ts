@@ -67,7 +67,6 @@ export class ProfileDialogComponent implements OnInit {
 
     fileRef.delete().pipe(
       finalize(() => { // Execute when the observable completes
-        console.log('image deleted from storage');
         this.user.image = '';
         this.saveImage();
       })

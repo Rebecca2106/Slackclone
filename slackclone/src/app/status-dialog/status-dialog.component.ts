@@ -37,7 +37,6 @@ export class StatusDialogComponent implements OnInit {
     } else {
       this.user.statusText = option;
     }
-    // console.log(this.user.statusText);
     this.saveStatus();
   }
 

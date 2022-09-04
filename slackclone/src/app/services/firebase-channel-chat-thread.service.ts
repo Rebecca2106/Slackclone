@@ -42,7 +42,6 @@ export class FirebaseChannelChatThreadService {
 
   initThreadMessages(timestamp){
     let resultMessage = this.midContent.messages.filter(msg => msg.timestamp == timestamp);
-    console.log("resultMessage: ", resultMessage);
     this.rightContent.messages = resultMessage[0].thread;
     this.currentThreadMessage = resultMessage[0];
   }
@@ -53,9 +52,6 @@ export class FirebaseChannelChatThreadService {
     this.currentThreadMessage = resultMessage[0];
   }
 
-
-
-  
   currentChatChannel;
 
   midContent = {
@@ -71,7 +67,6 @@ export class FirebaseChannelChatThreadService {
       this.uiService.toggleSidebar();
     }
     this.currentChatChannel = chat;
-    //console.log(this.currentChatChannel);
     this.midContent.members = chat.members;
     this.setContent(chat.docID, "chat", chat.messages);
     this.setHeader(chat.docID);

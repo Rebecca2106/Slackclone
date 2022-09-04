@@ -63,7 +63,6 @@ export class ChatMainComponent implements OnInit {
         fileRef.getDownloadURL().subscribe(downloadURL => {
           this.messageImages.push(downloadURL);
           this.currentUploadImage = downloadURL;
-          console.log('messageImages', this.messageImages);
           this.isUploading = false;
         });
       })
