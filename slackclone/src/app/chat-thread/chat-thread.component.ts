@@ -40,16 +40,18 @@ export class ChatThreadComponent implements OnInit {
 
   ngAfterContentChecked() {
     this.ref.detectChanges();
+    this.editorLoaded = true;
+
   }
 
   scrollToBottom(): void {
+
     try {
       if (this.fcctService.rightContent.messages.length > this.lastLengthMessages) {
         this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
         this.lastLengthMessages = this.fcctService.rightContent.messages.length;
       }
     } catch (err) { }
-    this.editorLoaded = true;
   }
 
   createUniquefilepathID(event) {
