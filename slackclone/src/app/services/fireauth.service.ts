@@ -22,7 +22,6 @@ export class FireauthService {
   isNewUser = false;
   docID: string;
   interval: any;
-  interval2: any;
   userCreated = false;
 
   constructor(public auth: AngularFireAuth, public router: Router, private _SnackBar: MatSnackBar, private firestore: AngularFirestore) {
@@ -40,7 +39,6 @@ export class FireauthService {
     });
 
   }
-
 
   checkUser(uid: string, email: string) {
     this.userSub = this.firestore
@@ -165,8 +163,6 @@ export class FireauthService {
   }
 
   triggerUpdateLastTimeOnline() {
-    this.setInitalTimeUpdate();
-
     this.interval = setInterval(() => {
       if (this.user) {
         this.updateTimestamp();
@@ -174,20 +170,6 @@ export class FireauthService {
     }, 60 * 1000);
   }
 
-  setInitalTimeUpdate() {
-    this.interval2 = setInterval(() => {
-
-      if (!this.user) {
-        clearInterval(this.interval2);
-        this.setInitalTimeUpdate();
-      }
-
-      if (this.user) {
-        this.updateTimestamp();
-        clearInterval(this.interval2);
-      }
-    }, 10 * 1000);
-  }
 
   updateTimestamp() {
     let docRef = this.firestore.collection('users').doc(this.docID);
