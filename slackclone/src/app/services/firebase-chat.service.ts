@@ -10,14 +10,6 @@ import { UiChangeService } from '../services/ui-change.service';
 import { FirebaseMainService } from 'src/app/services/firebase-main.service';
 import { FirebaseChannelChatThreadService } from 'src/app/services/firebase-channel-chat-thread.service';
 
-// import firebase from 'firebase/app';
-
-
-
-
-
-
-
 @Injectable({
     providedIn: 'root'
 })
@@ -93,7 +85,7 @@ export class FirebaseChatService {
             .collection('dms')
             .add(this.chat.toJSON())
             .then(() => {
-                console.log('Chat created.');
+                // console.log('Chat created.');
             })
             .catch(() => {
                 console.log('Error while saving Chat.');
@@ -106,7 +98,7 @@ export class FirebaseChatService {
             .doc(id)
             .delete()
             .then(() => {
-                console.log('Chat deleted.');
+                // console.log('Chat deleted.');
             })
             .catch(() => {
                 console.log('Error while deleting chat.');

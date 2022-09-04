@@ -131,7 +131,7 @@ export class ChannelEditDialogComponent implements OnInit, OnDestroy {
       .doc(this.data.docID)
       .update(this.channel.toJSON())
       .then(() => {
-        console.log('Channel updated.');
+        // console.log('Channel updated.');
       })
       .catch(() => {
         console.log('Error while updating channel.');
@@ -144,7 +144,7 @@ export class ChannelEditDialogComponent implements OnInit, OnDestroy {
     .doc(this.data.docID)
     .delete()
     .then(() => {
-      console.log('Channel deleted.');
+      // console.log('Channel deleted.');
       this.dialogRef.close();
     })
     .catch(() => {

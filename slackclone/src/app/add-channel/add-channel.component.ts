@@ -110,7 +110,7 @@ export class AddChannelComponent implements OnInit, OnDestroy {
       .collection('channels')
       .add(this.channel.toJSON())
       .then(() => {
-        console.log('Channel created.');
+        // console.log('Channel created.');
       })
       .catch(() => {
         console.log('Error while saving channel.');
