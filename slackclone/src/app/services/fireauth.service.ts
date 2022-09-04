@@ -170,7 +170,6 @@ export class FireauthService {
     }, 60 * 1000);
   }
 
-
   updateTimestamp() {
     let docRef = this.firestore.collection('users').doc(this.docID);
 
