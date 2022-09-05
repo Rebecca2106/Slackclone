@@ -22,7 +22,6 @@ export class FireauthService {
   isNewUser = false;
   docID: string;
   interval: any;
-  userCreated = false;
 
   constructor(public auth: AngularFireAuth, public router: Router, private _SnackBar: MatSnackBar, private firestore: AngularFirestore) {
     const auth1 = getAuth();
