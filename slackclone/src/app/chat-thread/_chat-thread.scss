@@ -6,29 +6,67 @@
 
     $primary-palette: map.get($color-config, 'primary');
 
-    .thread-main-wrapper{
+    .thread-main-wrapper {
         border-left: {
             color: mat.get-color-from-palette($primary-palette) !important;
         }
     }
 
-    .thread_link{
+    .thread_link {
         color: mat.get-color-from-palette($primary-palette) !important;
     }
 
-    a{
-        color: mat.get-color-from-palette($primary-palette) !important; 
+    a {
+        color: mat.get-color-from-palette($primary-palette) !important;
     }
 
 }
 
+.message-body {
 
-.message_text_content{
-    
-    a{
+    pre {
+        white-space: pre-wrap;
+        /* Since CSS 2.1 */
+        white-space: -moz-pre-wrap;
+        /* Mozilla, since 1999 */
+        white-space: -pre-wrap;
+        /* Opera 4-6 */
+        white-space: -o-pre-wrap;
+        /* Opera 7 */
+        word-wrap: break-word;
+        /* Internet Explorer 5.5+ */
+    }
+
+    a {
         word-break: break-word;
     }
-    p{
+
+    p {
+        word-break: break-word;
+    }
+}
+
+
+.message_text_content {
+
+    pre {
+        white-space: pre-wrap;
+        /* Since CSS 2.1 */
+        white-space: -moz-pre-wrap;
+        /* Mozilla, since 1999 */
+        white-space: -pre-wrap;
+        /* Opera 4-6 */
+        white-space: -o-pre-wrap;
+        /* Opera 7 */
+        word-wrap: break-word;
+        /* Internet Explorer 5.5+ */
+    }
+
+    a {
+        word-break: break-word;
+    }
+
+    p {
         word-break: break-word;
     }
 }
