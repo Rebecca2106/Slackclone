@@ -12,6 +12,8 @@ import { FireauthService } from 'src/app/services/fireauth.service';
 
 
 export class LoginComponent {
+  guestemail='kontakt@rebeccahaeckl.com';
+  guestpassword='Guestlogin';
   hide = true;
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),

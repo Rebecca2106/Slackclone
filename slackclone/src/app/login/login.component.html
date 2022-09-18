@@ -8,14 +8,14 @@
                     <div>
                         <mat-form-field appearance="outline">
                             <mat-label>Enter your email</mat-label>
-                            <input matInput placeholder="example@example.com" formControlName="email" required>
+                            <input matInput placeholder="example@example.com" [ngModel]="guestemail" formControlName="email" required>
                             <mat-error *ngIf="loginForm.get('email')">{{getLoginErrorMessage()}}</mat-error>
                         </mat-form-field>
                     </div>
                     <div>
                         <mat-form-field appearance="outline">
                             <mat-label>Enter your password</mat-label>
-                            <input matInput [type]="hide ? 'password' : 'text'" formControlName="pwd" required>
+                            <input matInput [type]="hide ? 'password' : 'text'" formControlName="pwd" [ngModel]="guestpassword" required>
                             <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
                                 [attr.aria-pressed]="hide">
                                 <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
