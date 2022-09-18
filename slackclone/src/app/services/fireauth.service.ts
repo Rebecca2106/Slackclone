@@ -22,6 +22,8 @@ export class FireauthService {
   isNewUser = false;
   docID: string;
   interval: any;
+  isGuest = false;
+
 
   constructor(public auth: AngularFireAuth, public router: Router, private _SnackBar: MatSnackBar, private firestore: AngularFirestore) {
     const auth1 = getAuth();
@@ -66,6 +68,7 @@ export class FireauthService {
     this.newUser = new User();
     this.newUser.uid = uid;
     this.checkForMail(email);
+    this.checkForGuest();
     this.checkForNewUser();
 
     await this.firestore
@@ -86,6 +89,29 @@ export class FireauthService {
       this.newUser.fullname = this.newUsername;
       this.newUsername = '';
       this.isNewUser = false;
+    }
+  }
+
+  
+  checkForGuest() {
+    if (this.isGuest) {
+      this.newUser.fullname = 'Guest';
+      this.isGuest = false;
+    }
+  }
+
+  async loginGuest() {
+    debugger
+    try {
+      let resp = await this.auth.signInAnonymously();
+      if (resp.user) {
+        this.isGuest = true;
+        this.authUserData = resp.user;
+        this.router.navigate(['']);
+      }
+    }
+    catch (error) {
+      this.openErrorBar(error);
     }
   }
 

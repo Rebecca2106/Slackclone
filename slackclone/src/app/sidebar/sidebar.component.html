@@ -48,7 +48,7 @@
                                 width="100%" src="{{this.fb.getUserFromList(getOtherUsersNames(chat.members)).image}}"
                                 alt="" srcset="">
                             <img *ngIf="!this.fb.getUserFromList(getOtherUsersNames(chat.members)).image" height="100%"
-                                width="100%" src="/assets/img/avatar.png" alt="" srcset="">
+                                width="100%" src="^../../assets/img/avatar.png" alt="" srcset="">
                             <div *ngIf="this.fb.getUserOnlineStatus(getOtherUsersNames(chat.members))==1"
                                 class="dot-active"></div>
                             <div *ngIf="this.fb.getUserOnlineStatus(getOtherUsersNames(chat.members))==0"

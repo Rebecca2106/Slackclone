@@ -1,14 +1,14 @@
 {
+  "projects": {
+    "default": "slackclone-6a779"
+  },
   "targets": {
-    "slackwebclone": {
+    "slackclone-6a779": {
       "hosting": {
         "slackclone": [
-          "slackwebclone"
+          "slackclone-6a779"
         ]
       }
     }
-  },
-  "projects": {
-    "default": "slackwebclone"
   }
 }

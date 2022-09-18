@@ -29,13 +29,19 @@
             "assets": [
               "src/favicon.png",
               "src/assets",
-              { "glob": "**/*", "input": "node_modules/tinymce", "output": "/tinymce/" }
+              {
+                "glob": "**/*",
+                "input": "node_modules/tinymce",
+                "output": "/tinymce/"
+              }
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss"
             ],
-            "scripts": ["node_modules/tinymce/tinymce.min.js"]
+            "scripts": [
+              "node_modules/tinymce/tinymce.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -113,8 +119,8 @@
             "prerender": false,
             "ssr": false,
             "browserTarget": "slackclone:build:production",
-            "firebaseProject": "slackwebclone",
-            "firebaseHostingSite": "slackwebclone"
+            "firebaseProject": "slackclone-6a779",
+            "firebaseHostingSite": "slackclone-6a779"
           }
         }
       }

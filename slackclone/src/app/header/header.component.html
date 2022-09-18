@@ -10,7 +10,7 @@
         <div class="preview-image-wrapper">
             <img *ngIf="fs.user.image; let url" [src]="url" [matMenuTriggerFor]="menu" class="userImg padding-6"
                 (click)="connectFB()">
-            <img *ngIf="!fs.user.image" src="/assets/img/avatar.png" [matMenuTriggerFor]="menu"
+            <img *ngIf="!fs.user.image" src="^../../assets/img/avatar.png" [matMenuTriggerFor]="menu"
                 class="userImg padding-6" (click)="connectFB()">
             <span *ngIf="fs.user.onlineState" class="dot-active"></span>
             <span *ngIf="!fs.user.onlineState" class="dot-away"></span>

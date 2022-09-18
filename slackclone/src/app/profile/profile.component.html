@@ -12,7 +12,7 @@
     
     
     <img *ngIf="fs.user.image; let url" [src]="url" class="img_profile">
-    <img *ngIf="!fs.user.image" src="/assets/img/avatar.png" class="img_profile">
+    <img *ngIf="!fs.user.image" src="^../../assets/img/avatar.png" class="img_profile">
 
     <h1>{{ fs.user.fullname }}</h1>
 
