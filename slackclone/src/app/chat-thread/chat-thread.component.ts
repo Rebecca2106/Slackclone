@@ -34,8 +34,14 @@ export class ChatThreadComponent implements OnInit {
 
   constructor(private ref: ChangeDetectorRef, public channelService: FirebaseChannelService, public chatService: FirebaseChatService, public fsMain: FirebaseMainService, public sanitizer: DomSanitizer, public fcctService: FirebaseChannelChatThreadService, public uiService: UiChangeService, private storage: AngularFireStorage, public fs: FireauthService, private firestore: AngularFirestore, public fb: FirebaseMainService) {
   }
+
+  load = false;
+
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
   ngOnInit(): void {
+    setTimeout(() => {
+      this.load = true;
+    }, 500);
   }
 
   ngAfterContentChecked() {
